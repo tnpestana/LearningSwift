@@ -10,8 +10,7 @@ import UIKit
 
 class ViewController: UIViewController
 {
-    @IBOutlet weak var txtStoryline: UITextView!
-    
+    @IBOutlet weak var lblStoryline: UILabel!
     @IBOutlet weak var btnAnswer1: UIButton!
     @IBOutlet weak var btnAnswer2: UIButton!
 
@@ -23,7 +22,7 @@ class ViewController: UIViewController
     {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        txtStoryline.text = storyline.story1
+        lblStoryline.text = storyline.story1
         btnAnswer1.setTitle(storyline.answer1a, for: [])
         btnAnswer2.setTitle(storyline.answer1b, for: [])
     }
@@ -67,7 +66,7 @@ class ViewController: UIViewController
     func retry()
     {
         storyIndex = 1
-        txtStoryline.text = storyline.story1
+        lblStoryline.text = storyline.story1
         btnAnswer1.setTitle(storyline.answer1a, for: [])
         btnAnswer2.setTitle(storyline.answer1b, for: [])
         btnAnswer2.isHidden = false
@@ -76,7 +75,7 @@ class ViewController: UIViewController
     func story2()
     {
         storyIndex = 2
-        txtStoryline.text = storyline.story2
+        lblStoryline.text = storyline.story2
         btnAnswer1.setTitle(storyline.answer2a, for: [])
         btnAnswer2.setTitle(storyline.answer2b, for: [])
     }
@@ -84,7 +83,7 @@ class ViewController: UIViewController
     func story3()
     {
         storyIndex = 3
-        txtStoryline.text = storyline.story3
+        lblStoryline.text = storyline.story3
         btnAnswer1.setTitle(storyline.answer3a, for: [])
         btnAnswer2.setTitle(storyline.answer3b, for: [])
     }
@@ -92,7 +91,7 @@ class ViewController: UIViewController
     func story4()
     {
         storyIndex = 4
-        txtStoryline.text = storyline.story4
+        lblStoryline.text = storyline.story4
         btnAnswer1.setTitle(retryString, for: [])
         btnAnswer2.isHidden = true
     }
@@ -100,7 +99,7 @@ class ViewController: UIViewController
     func story5()
     {
         storyIndex = 5
-        txtStoryline.text = storyline.story5
+        lblStoryline.text = storyline.story5
         btnAnswer1.setTitle(retryString, for: [])
         btnAnswer2.isHidden = true
     }
@@ -108,7 +107,7 @@ class ViewController: UIViewController
     func story6()
     {
         storyIndex = 6
-        txtStoryline.text = storyline.story6
+        lblStoryline.text = storyline.story6
         btnAnswer1.setTitle(retryString, for: [])
         btnAnswer2.isHidden = true
     }

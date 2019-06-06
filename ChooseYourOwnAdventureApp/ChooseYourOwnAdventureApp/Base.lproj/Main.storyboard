@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,21 +15,46 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ChooseYourOwnAdventureApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="zqv-gl-Fus">
-                                <rect key="frame" x="64" y="76" width="286" height="754"/>
+                                <rect key="frame" x="64" y="84" width="247" height="519"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="q0W-q3-f6J">
-                                        <rect key="frame" x="0.0" y="0.0" width="286" height="662"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ef9-HC-6kS">
+                                        <rect key="frame" x="0.0" y="0.0" width="247" height="427"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uvi-CB-7q4">
+                                                <rect key="frame" x="0.0" y="0.0" width="247" height="427"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="23H-cw-oDP">
+                                                        <rect key="frame" x="0.0" y="0.0" width="247" height="427"/>
+                                                        <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="23H-cw-oDP" firstAttribute="leading" secondItem="uvi-CB-7q4" secondAttribute="leading" id="7Ew-tE-mge"/>
+                                                    <constraint firstItem="23H-cw-oDP" firstAttribute="top" secondItem="uvi-CB-7q4" secondAttribute="top" id="aCq-DU-Mu7"/>
+                                                    <constraint firstAttribute="trailing" secondItem="23H-cw-oDP" secondAttribute="trailing" id="sLn-QW-c3w"/>
+                                                    <constraint firstAttribute="bottom" secondItem="23H-cw-oDP" secondAttribute="bottom" id="z7i-B3-smp"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="uvi-CB-7q4" firstAttribute="top" secondItem="ef9-HC-6kS" secondAttribute="top" id="Vjq-fC-Twv"/>
+                                            <constraint firstItem="uvi-CB-7q4" firstAttribute="width" secondItem="ef9-HC-6kS" secondAttribute="width" id="WeV-WG-yLU"/>
+                                            <constraint firstAttribute="bottom" secondItem="uvi-CB-7q4" secondAttribute="bottom" id="Y9b-iB-DqL"/>
+                                            <constraint firstItem="uvi-CB-7q4" firstAttribute="height" secondItem="ef9-HC-6kS" secondAttribute="height" id="Zxi-04-tUS"/>
+                                            <constraint firstItem="uvi-CB-7q4" firstAttribute="leading" secondItem="ef9-HC-6kS" secondAttribute="leading" id="oJg-YG-XPS"/>
+                                            <constraint firstAttribute="trailing" secondItem="uvi-CB-7q4" secondAttribute="trailing" id="okj-96-dd3"/>
+                                        </constraints>
+                                    </scrollView>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ZYU-Re-mpi">
-                                        <rect key="frame" x="0.0" y="678" width="286" height="30"/>
+                                        <rect key="frame" x="0.0" y="443" width="247" height="30"/>
                                         <state key="normal" title="Button">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -38,7 +63,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="RPp-po-9lZ">
-                                        <rect key="frame" x="0.0" y="724" width="286" height="30"/>
+                                        <rect key="frame" x="0.0" y="489" width="247" height="30"/>
                                         <state key="normal" title="Button">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -52,25 +77,23 @@
                                     <constraint firstAttribute="trailing" secondItem="ZYU-Re-mpi" secondAttribute="trailing" id="PZn-uK-Kjj"/>
                                     <constraint firstAttribute="trailing" secondItem="RPp-po-9lZ" secondAttribute="trailing" id="cTS-En-4AO"/>
                                     <constraint firstItem="RPp-po-9lZ" firstAttribute="leading" secondItem="zqv-gl-Fus" secondAttribute="leading" id="eJQ-bt-gnI"/>
-                                    <constraint firstAttribute="trailing" secondItem="q0W-q3-f6J" secondAttribute="trailing" id="elB-tR-prm"/>
-                                    <constraint firstItem="q0W-q3-f6J" firstAttribute="leading" secondItem="zqv-gl-Fus" secondAttribute="leading" id="oHo-KV-Iqa"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.54117647058823526" green="0.65098039215686276" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.54117647058823526" green="0.65098039215686276" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="zqv-gl-Fus" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="6nM-mK-W0U"/>
+                            <constraint firstItem="zqv-gl-Fus" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="64" id="6nM-mK-W0U"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zqv-gl-Fus" secondAttribute="trailing" constant="64" id="MIK-dZ-HSo"/>
                             <constraint firstItem="zqv-gl-Fus" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="64" id="X01-17-u05"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zqv-gl-Fus" secondAttribute="bottom" constant="32" id="izf-3I-9yY"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zqv-gl-Fus" secondAttribute="bottom" constant="64" id="izf-3I-9yY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="btnAnswer1" destination="ZYU-Re-mpi" id="fcJ-E7-9ZO"/>
                         <outlet property="btnAnswer2" destination="RPp-po-9lZ" id="y6M-Qq-Xa9"/>
-                        <outlet property="txtStoryline" destination="q0W-q3-f6J" id="UQH-Ec-7Js"/>
+                        <outlet property="lblStoryline" destination="23H-cw-oDP" id="5Eq-dW-dtx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
