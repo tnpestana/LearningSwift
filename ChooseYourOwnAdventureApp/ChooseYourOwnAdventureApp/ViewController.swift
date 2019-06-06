@@ -35,59 +35,82 @@ class ViewController: UIViewController
         case 1:
             if sender.tag == 1
             {
-                storyIndex = 3
-                txtStoryline.text = storyline.story3
-                btnAnswer1.setTitle(storyline.answer3a, for: [])
-                btnAnswer2.setTitle(storyline.answer3b, for: [])
+                story3()
             }
             else
             {
-                storyIndex = 2
-                txtStoryline.text = storyline.story2
-                btnAnswer1.setTitle(storyline.answer2a, for: [])
-                btnAnswer2.setTitle(storyline.answer2b, for: [])
+                story2()
             }
         case 2:
             if sender.tag == 1
             {
-                storyIndex = 3
-                txtStoryline.text = storyline.story3
-                btnAnswer1.setTitle(storyline.answer3a, for: [])
-                btnAnswer2.setTitle(storyline.answer3b, for: [])
+                story3()
             }
             else
             {
-                storyIndex = 4
-                txtStoryline.text = storyline.story4
-                btnAnswer1.setTitle(retryString, for: [])
-                btnAnswer2.isHidden = true
+                story4()
             }
-            break
         case 3:
             if sender.tag == 1
             {
-                storyIndex = 6
-                txtStoryline.text = storyline.story6
-                btnAnswer1.setTitle(retryString, for: [])
-                btnAnswer2.isHidden = true
+                story6()
             }
             else
             {
-                storyIndex = 5
-                txtStoryline.text = storyline.story5
-                btnAnswer1.setTitle(retryString, for: [])
-                btnAnswer2.isHidden = true
+                story5()
             }
-            break
         default:
-            storyIndex = 1
-            txtStoryline.text = storyline.story1
-            btnAnswer1.setTitle(storyline.answer1a, for: [])
-            btnAnswer2.setTitle(storyline.answer1b, for: [])
-            btnAnswer2.isHidden = false
+            retry()
         }
-        
-        
+    }
+    
+    func retry()
+    {
+        storyIndex = 1
+        txtStoryline.text = storyline.story1
+        btnAnswer1.setTitle(storyline.answer1a, for: [])
+        btnAnswer2.setTitle(storyline.answer1b, for: [])
+        btnAnswer2.isHidden = false
+    }
+    
+    func story2()
+    {
+        storyIndex = 2
+        txtStoryline.text = storyline.story2
+        btnAnswer1.setTitle(storyline.answer2a, for: [])
+        btnAnswer2.setTitle(storyline.answer2b, for: [])
+    }
+    
+    func story3()
+    {
+        storyIndex = 3
+        txtStoryline.text = storyline.story3
+        btnAnswer1.setTitle(storyline.answer3a, for: [])
+        btnAnswer2.setTitle(storyline.answer3b, for: [])
+    }
+    
+    func story4()
+    {
+        storyIndex = 4
+        txtStoryline.text = storyline.story4
+        btnAnswer1.setTitle(retryString, for: [])
+        btnAnswer2.isHidden = true
+    }
+    
+    func story5()
+    {
+        storyIndex = 5
+        txtStoryline.text = storyline.story5
+        btnAnswer1.setTitle(retryString, for: [])
+        btnAnswer2.isHidden = true
+    }
+    
+    func story6()
+    {
+        storyIndex = 6
+        txtStoryline.text = storyline.story6
+        btnAnswer1.setTitle(retryString, for: [])
+        btnAnswer2.isHidden = true
     }
 }
 
