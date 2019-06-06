@@ -58,11 +58,11 @@
 			children = (
 				59D1748E22A9949A00943634 /* AppDelegate.swift */,
 				59D1749022A9949A00943634 /* ViewController.swift */,
+				59D174A022A9998800943634 /* Storyline.swift */,
 				59D1749222A9949A00943634 /* Main.storyboard */,
 				59D1749522A9949B00943634 /* Assets.xcassets */,
 				59D1749722A9949B00943634 /* LaunchScreen.storyboard */,
 				59D1749A22A9949B00943634 /* Info.plist */,
-				59D174A022A9998800943634 /* Storyline.swift */,
 			);
 			path = ChooseYourOwnAdventureApp;
 			sourceTree = "<group>";
