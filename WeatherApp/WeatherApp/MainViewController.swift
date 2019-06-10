@@ -25,6 +25,8 @@ class MainViewController: UIViewController
     
     let locationManager = CLLocationManager()
     
+    var weatherDataModel = WeatherDataModel()
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -41,10 +43,9 @@ class MainViewController: UIViewController
             { (response) in
                 if response.result.isSuccess
                 {
-                    print("success")
+                    print("Successfuly fetched weather data.")
                     let weatherJSON: JSON = JSON(response.result.value!)
-                    
-                    print(weatherJSON)
+                    self.updateWeatherData(json: weatherJSON)
                 }
                 else
                 {
@@ -52,6 +53,19 @@ class MainViewController: UIViewController
                     self.lblLocation.text = self.CONNECTION_ISSUES
                 }
             }
+    }
+    
+    func updateWeatherData(json: JSON)
+    {
+        let city = json["name"].string! + ", " + json["sys"]["country"].string!
+        weatherDataModel.city = city
+        print("location: \(city)")
+        lblLocation.text = city
+        
+        let temperature = json["main"]["temp"].double! - 273.15 // convert kelvin to celcius
+        weatherDataModel.temperature = temperature
+        print("temperature: \(String(format: "%.2f", temperature))º")
+        lblTemperature.text = String(format: "%.2f", temperature) + "º"
     }
 }
 
