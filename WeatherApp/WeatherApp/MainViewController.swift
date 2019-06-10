@@ -57,15 +57,23 @@ class MainViewController: UIViewController
     
     func updateWeatherData(json: JSON)
     {
-        let city = json["name"].string! + ", " + json["sys"]["country"].string!
+        // concatenate city and country
+        let city = json["name"].stringValue + ", " + json["sys"]["country"].stringValue
         weatherDataModel.city = city
         print("location: \(city)")
         lblLocation.text = city
         
-        let temperature = json["main"]["temp"].double! - 273.15 // convert kelvin to celcius
+        // convert kelvin to celcius
+        let temperature = json["main"]["temp"].doubleValue - 273.15
         weatherDataModel.temperature = temperature
         print("temperature: \(String(format: "%.2f", temperature))º")
-        lblTemperature.text = String(format: "%.2f", temperature) + "º"
+        lblTemperature.text = String(format: "%.1f", temperature) + "º"
+        
+        let condition = json["weather"][0]["main"].stringValue
+        let id = json["weather"][0]["id"].intValue
+        weatherDataModel.condition = id
+        print("condition: \(id) - \(condition)")
+        imgWeather.image = weatherDataModel.getWeatherIcon(id: id)
     }
 }
 
