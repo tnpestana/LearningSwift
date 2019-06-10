@@ -23,8 +23,9 @@ class MainViewController: UIViewController
     let LOCATION_UNAVAILABLE = "Location Unavailable"
     let CONNECTION_ISSUES = "Connection Issues"
     
-    let locationManager = CLLocationManager()
+    let changeLocationSegueId = "goToGetWeather"
     
+    let locationManager = CLLocationManager()
     var weatherDataModel = WeatherDataModel()
     
     override func viewDidLoad()
@@ -35,6 +36,20 @@ class MainViewController: UIViewController
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == changeLocationSegueId
+        {
+            let destination = segue.destination as! ChangeLocationViewController
+            destination.delegate = self
+        }
+    }
+    
+    @IBAction func changeLocation(_ sender: Any)
+    {
+        performSegue(withIdentifier: changeLocationSegueId, sender: self)
     }
     
     func getWeatherData(url: String, parameters: [String: String])
@@ -57,7 +72,6 @@ class MainViewController: UIViewController
     
     func updateWeatherData(json: JSON)
     {
-        // concatenate city and country
         let city = json["name"].stringValue + ", " + json["sys"]["country"].stringValue
         weatherDataModel.city = city
         print("location: \(city)")
@@ -99,5 +113,14 @@ extension MainViewController: CLLocationManagerDelegate
     {
         print(error)
         lblLocation.text = LOCATION_UNAVAILABLE
+    }
+}
+
+extension MainViewController: ChangeLocationDelegate
+{
+    func newLocationChosen(city: String)
+    {
+        let params: [String : String] = ["q": city, "appid": API_KEY]
+        getWeatherData(url: WEATHER_URL, parameters: params)
     }
 }
