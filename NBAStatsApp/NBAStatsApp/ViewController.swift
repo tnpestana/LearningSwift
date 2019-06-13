@@ -15,68 +15,64 @@ class ViewController: UIViewController
     
     @IBOutlet weak var tableTeams: UITableView!
     
-    let API_KEY = "c0c4fb5811mshd575afce09783fep109758jsna6fb51f722aa"
     
-    let API_ENDPOIT = "https://api-nba-v1.p.rapidapi.com/"
-    let STANDINGS_ENDPOINT = "standings/standard/2018/"
-    let TEAM_ID_ENDPOINT = "teams/teamId/"
-
-    let headers: HTTPHeaders = ["X-RapidAPI-Key" : "c0c4fb5811mshd575afce09783fep109758jsna6fb51f722aa"]
     
     var standings: StandingsDataModel?
+    let teamCellId = "teamCell"
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        fetchStandings()
-            {
-                for i in 0...self.standings!.teams.count - 1
-                {
-                    self.fetchTeamInfo(index: i, onComplete:
-                        { team in
-                            print("ID: \(team.teamId!), Team: \(team.fullName!)")
-                        })
-                    
-                }
-            }
-    }
-    
-    func fetchStandings(onComplete: @escaping () -> () )
-    {
-        Alamofire.request(API_ENDPOIT + STANDINGS_ENDPOINT, method: .get, headers: headers).responseJSON
-            { (response) in
-                if response.result.isSuccess
-                {
-                    print("succeeded")
-                    let standingsJSON: JSON = JSON(response.result.value!)
-                    self.standings = StandingsDataModel(json: standingsJSON)
-                    onComplete()
-                }
-                else
-                {
-                    print("failed")
-                }
+        getUpdatedStandings
+        {
+            self.tableTeams.delegate = self
+            self.tableTeams.dataSource = self
+            self.tableTeams.reloadData()
         }
     }
     
-    func fetchTeamInfo(index: Int, onComplete: @escaping (TeamDataModel) -> ())
+    func getUpdatedStandings(onComplete: @escaping () -> ())
     {
-        let team  = standings!.teams[index]
-        let url = API_ENDPOIT + TEAM_ID_ENDPOINT + team.teamId!
-        Alamofire.request(url, method: .get, headers: headers).responseJSON(completionHandler:
-            { (response) in
-                if response.result.isSuccess
-                {
-                    let teamJSON = JSON(response.result.value!)
-                    team.fillInfo(json: teamJSON, teamId: Int(team.teamId!)!)
-                    onComplete(team)
-                }
-                else
-                {
-                    print("failed")
-                }
-            })
+        Networking().fetchStandings()
+        { standings in
+            self.standings = standings
+            for i in (0...self.standings!.teams.count - 1)
+            {
+                Networking().fetchTeamInfo(standings: self.standings!, index: i, onComplete:
+                { team in
+                    print("ID: \(String(format: "%02d", team.teamId!)), Team: \(team.fullName!)")
+                    self.standings?.teams[i] = team
+                    
+                    if i == self.standings!.teams.count - 1
+                    {
+                        self.standings?.teams.reverse()
+                        self.tableTeams.delegate = self
+                        self.tableTeams.dataSource = self
+                        self.tableTeams.reloadData()
+                    }
+                })
+            }
+        }
     }
 }
 
+extension ViewController: UITableViewDelegate, UITableViewDataSource
+{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return self.standings!.teams.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCell(withIdentifier: teamCellId) as! TeamCell
+        cell.lbl.text = "\(String(format: "%02d", indexPath.row + 1)) - \(standings!.teams[indexPath.row].fullName!)"
+        return cell
+    }
+}
+
+class TeamCell: UITableViewCell
+{
+    @IBOutlet weak var lbl: UILabel!
+}
