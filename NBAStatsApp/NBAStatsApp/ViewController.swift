@@ -15,8 +15,6 @@ class ViewController: UIViewController
     
     @IBOutlet weak var tableTeams: UITableView!
     
-    
-    
     var standings: StandingsDataModel?
     let teamCellId = "teamCell"
     
@@ -67,7 +65,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: teamCellId) as! TeamCell
-        cell.lbl.text = "\(String(format: "%02d", indexPath.row + 1)) - \(standings!.teams[indexPath.row].fullName!)"
+        cell.lbl.text = "\(String(format: "%02d", indexPath.row + 1)). \(standings!.teams[indexPath.row].fullName!)"
+        cell.imgLogo.image = standings!.teams[indexPath.row].logo
+
         return cell
     }
 }
@@ -75,4 +75,5 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource
 class TeamCell: UITableViewCell
 {
     @IBOutlet weak var lbl: UILabel!
+    @IBOutlet weak var imgLogo: UIImageView!
 }

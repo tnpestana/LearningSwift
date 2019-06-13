@@ -40,13 +40,13 @@ class Networking
     func fetchTeamInfo(standings: StandingsDataModel, index: Int, onComplete: @escaping (TeamDataModel) -> ())
     {
         let team  = standings.teams[index]
-        let url = API_ENDPOIT + TEAM_ID_ENDPOINT + team.teamId!
+        let url = API_ENDPOIT + TEAM_ID_ENDPOINT + String(team.teamId!)
         Alamofire.request(url, method: .get, headers: headers).responseJSON(completionHandler:
             { (response) in
                 if response.result.isSuccess
                 {
                     let teamJSON = JSON(response.result.value!)
-                    team.fillInfo(json: teamJSON, teamId: Int(team.teamId!)!)
+                    team.fillInfo(json: teamJSON, teamId: team.teamId!)
                     onComplete(team)
                 }
                 else

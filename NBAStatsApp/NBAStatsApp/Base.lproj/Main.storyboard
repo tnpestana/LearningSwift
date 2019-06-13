@@ -22,28 +22,38 @@
                                 <rect key="frame" x="0.0" y="113" width="414" height="749"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="teamCell" id="FQF-XU-gyB" customClass="TeamCell" customModule="NBAStatsApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="teamCell" rowHeight="63" id="FQF-XU-gyB" customClass="TeamCell" customModule="NBAStatsApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FQF-XU-gyB" id="15e-PN-bmW">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="62.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Standing: 13 | Team: 1 - Atlanta Hawks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHi-bY-EZI">
-                                                    <rect key="frame" x="32" y="8" width="350" height="27.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13 - Atlanta Hawks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHi-bY-EZI">
+                                                    <rect key="frame" x="32" y="21" width="305" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mNE-8Z-Bzu">
+                                                    <rect key="frame" x="353" y="11" width="41" height="41"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="mNE-8Z-Bzu" secondAttribute="height" multiplier="1:1" id="DCV-hs-TFA"/>
+                                                        <constraint firstAttribute="width" constant="41" id="I6X-u0-Ij4"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="lHi-bY-EZI" secondAttribute="trailing" constant="32" id="RZ1-id-MOh"/>
-                                                <constraint firstItem="lHi-bY-EZI" firstAttribute="top" secondItem="15e-PN-bmW" secondAttribute="top" constant="8" id="fi7-VQ-zNO"/>
+                                                <constraint firstItem="mNE-8Z-Bzu" firstAttribute="leading" secondItem="lHi-bY-EZI" secondAttribute="trailing" constant="16" id="5fr-UO-Z9x"/>
+                                                <constraint firstItem="lHi-bY-EZI" firstAttribute="centerY" secondItem="15e-PN-bmW" secondAttribute="centerY" id="FCZ-wZ-lit"/>
+                                                <constraint firstItem="mNE-8Z-Bzu" firstAttribute="bottom" secondItem="15e-PN-bmW" secondAttribute="bottomMargin" id="TQe-6V-4PZ"/>
                                                 <constraint firstItem="lHi-bY-EZI" firstAttribute="leading" secondItem="15e-PN-bmW" secondAttribute="leading" constant="32" id="jYr-Ms-jb8"/>
-                                                <constraint firstAttribute="bottom" secondItem="lHi-bY-EZI" secondAttribute="bottom" constant="8" id="tZ8-DY-lfC"/>
+                                                <constraint firstItem="mNE-8Z-Bzu" firstAttribute="trailing" secondItem="15e-PN-bmW" secondAttribute="trailingMargin" id="qu0-V0-5RR"/>
+                                                <constraint firstItem="mNE-8Z-Bzu" firstAttribute="top" secondItem="15e-PN-bmW" secondAttribute="topMargin" id="xfh-QB-ZOL"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="imgLogo" destination="mNE-8Z-Bzu" id="tFg-7L-uRq"/>
                                             <outlet property="lbl" destination="lHi-bY-EZI" id="WzE-SH-3d7"/>
                                         </connections>
                                     </tableViewCell>

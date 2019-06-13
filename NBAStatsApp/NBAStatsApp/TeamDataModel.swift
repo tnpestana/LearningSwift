@@ -11,16 +11,16 @@ import SwiftyJSON
 
 class TeamDataModel
 {
-    var teamId: String?
+    var teamId: Int?
     var winPercentage: Double?
     var fullName: String?
     var shortName: String?
     var logoPath: String?
-    var standing: String?
+    var logo: UIImage?
     
     init(json: JSON)
     {
-        teamId = json["teamId"].stringValue
+        teamId = json["teamId"].intValue
         winPercentage = json["winPercentage"].doubleValue
     }
     
@@ -29,6 +29,11 @@ class TeamDataModel
         fullName = json["api"]["teams"][0]["fullName"].stringValue
         shortName = json["api"]["teams"][0]["shortName"].stringValue
         logoPath = json["api"]["teams"][0]["logo"].stringValue
+        let url = URL(string: self.logoPath!)
+        if let data = try? Data(contentsOf: url!)
+        {
+            self.logo = UIImage(data: data)
+        }
     }
 }
 
