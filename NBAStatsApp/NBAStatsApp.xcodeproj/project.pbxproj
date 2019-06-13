@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		595A91FA22B282C9006BC003 /* TeamDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595A91F922B282C9006BC003 /* TeamDataModel.swift */; };
 		59AE67B322AEDFF700B7E1ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AE67B222AEDFF700B7E1ED /* AppDelegate.swift */; };
 		59AE67B522AEDFF700B7E1ED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AE67B422AEDFF700B7E1ED /* ViewController.swift */; };
 		59AE67B822AEDFF700B7E1ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59AE67B622AEDFF700B7E1ED /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		595A91F922B282C9006BC003 /* TeamDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDataModel.swift; sourceTree = "<group>"; };
 		59AE67AF22AEDFF700B7E1ED /* NBAStatsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NBAStatsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59AE67B222AEDFF700B7E1ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59AE67B422AEDFF700B7E1ED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -46,7 +48,6 @@
 				7502167351AA4A68942EBF5F /* Pods-NBAStatsApp.debug.xcconfig */,
 				8428C3CD307C5613139B0069 /* Pods-NBAStatsApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -77,6 +78,7 @@
 				59AE67B922AEDFF800B7E1ED /* Assets.xcassets */,
 				59AE67BB22AEDFF800B7E1ED /* LaunchScreen.storyboard */,
 				59AE67BE22AEDFF800B7E1ED /* Info.plist */,
+				595A91F922B282C9006BC003 /* TeamDataModel.swift */,
 			);
 			path = NBAStatsApp;
 			sourceTree = "<group>";
@@ -205,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59AE67B522AEDFF700B7E1ED /* ViewController.swift in Sources */,
+				595A91FA22B282C9006BC003 /* TeamDataModel.swift in Sources */,
 				59AE67B322AEDFF700B7E1ED /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
