@@ -12,6 +12,7 @@ import SwiftyJSON
 class TeamDataModel
 {
     var teamId: String?
+    var winPercentage: Double?
     var fullName: String?
     var shortName: String?
     var logoPath: String?
@@ -20,6 +21,7 @@ class TeamDataModel
     init(json: JSON)
     {
         teamId = json["teamId"].stringValue
+        winPercentage = json["winPercentage"].doubleValue
     }
     
     func fillInfo(json: JSON, teamId: Int)

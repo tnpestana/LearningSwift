@@ -46,7 +46,7 @@ class ViewController: UIViewController
                     
                     if i == self.standings!.teams.count - 1
                     {
-                        self.standings?.teams.reverse()
+                        self.standings?.teams.sort(by: { $0.winPercentage! > $1.winPercentage! })
                         self.tableTeams.delegate = self
                         self.tableTeams.dataSource = self
                         self.tableTeams.reloadData()
