@@ -14,7 +14,7 @@ class ViewController: UIViewController
     @IBOutlet weak var lblPriceValue: UILabel!
     @IBOutlet weak var pickerCurrency: UIPickerView!
     
-    var currencyArray: [String]?
+    var currencyArray: [String] = ["AUD", "BRL", "CAD", "CNY", "EUR", "GBP", "HKD", "IDR", "ILS", "INR", "JPY", "MXN", "NOK", "NZD", "PLN", "RON", "RUB", "SEK", "SGD", "USD", "ZAR"]
     
     override func viewDidLoad()
     {
@@ -34,17 +34,20 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
     {
-        return currencyArray!.count
+        return currencyArray.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
     {
-        return currencyArray![row]
+        return currencyArray[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
-        print(row)
+        Networking().getBtcValue(currency: currencyArray[row], onComplete:
+        { value in
+            self.lblPriceValue.text = "\(value) \(self.currencyArray[row])"
+        })
     }
 }
 

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		591E896922B5249D00254AEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 591E896722B5249D00254AEC /* Main.storyboard */; };
 		591E896B22B5249E00254AEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 591E896A22B5249E00254AEC /* Assets.xcassets */; };
 		591E896E22B5249E00254AEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 591E896C22B5249E00254AEC /* LaunchScreen.storyboard */; };
+		59BC6B5822B52B6A002D4418 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BC6B5722B52B6A002D4418 /* Networking.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		591E896A22B5249E00254AEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		591E896D22B5249E00254AEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		591E896F22B5249E00254AEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		59BC6B5722B52B6A002D4418 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		6B9677A298EB5AA89E17FCFC /* Pods-BitcoinPriceTrackerApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitcoinPriceTrackerApp.release.xcconfig"; path = "Target Support Files/Pods-BitcoinPriceTrackerApp/Pods-BitcoinPriceTrackerApp.release.xcconfig"; sourceTree = "<group>"; };
 		B17B4FC3CC689282435E8AB4 /* Pods_BitcoinPriceTrackerApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BitcoinPriceTrackerApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE71E44ECED8C3B8954C69E5 /* Pods-BitcoinPriceTrackerApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BitcoinPriceTrackerApp.debug.xcconfig"; path = "Target Support Files/Pods-BitcoinPriceTrackerApp/Pods-BitcoinPriceTrackerApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 			children = (
 				591E896322B5249D00254AEC /* AppDelegate.swift */,
 				591E896522B5249D00254AEC /* ViewController.swift */,
+				59BC6B5722B52B6A002D4418 /* Networking.swift */,
 				591E896722B5249D00254AEC /* Main.storyboard */,
 				591E896A22B5249E00254AEC /* Assets.xcassets */,
 				591E896C22B5249E00254AEC /* LaunchScreen.storyboard */,
@@ -85,7 +88,6 @@
 				BE71E44ECED8C3B8954C69E5 /* Pods-BitcoinPriceTrackerApp.debug.xcconfig */,
 				6B9677A298EB5AA89E17FCFC /* Pods-BitcoinPriceTrackerApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -204,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59BC6B5822B52B6A002D4418 /* Networking.swift in Sources */,
 				591E896622B5249D00254AEC /* ViewController.swift in Sources */,
 				591E896422B5249D00254AEC /* AppDelegate.swift in Sources */,
 			);
