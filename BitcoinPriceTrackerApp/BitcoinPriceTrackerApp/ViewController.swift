@@ -15,6 +15,7 @@ class ViewController: UIViewController
     @IBOutlet weak var pickerCurrency: UIPickerView!
     
     var currencyArray: [String] = ["AUD", "BRL", "CAD", "CNY", "EUR", "GBP", "HKD", "IDR", "ILS", "INR", "JPY", "MXN", "NOK", "NZD", "PLN", "RON", "RUB", "SEK", "SGD", "USD", "ZAR"]
+    var currencySymbols: [String] = ["A$", "R$", "C$", "¥", "€", "£", "HKD$", "Rp", "₪", "₹", "¥", "Mex$", "kr", "$", "zł", "lei", "₽", "kr", "S$", "$", "R"]
     
     override func viewDidLoad()
     {
@@ -22,6 +23,16 @@ class ViewController: UIViewController
         
         pickerCurrency.delegate = self
         pickerCurrency.dataSource = self
+        
+        updateCurrency(index: 0)
+    }
+    
+    func updateCurrency(index: Int)
+    {
+        Networking().getBtcValue(currency: currencyArray[index], onComplete:
+            { value in
+                self.lblPriceValue.text = "\(self.currencySymbols[index]) \(value)"
+        })
     }
 }
 
@@ -44,10 +55,7 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
-        Networking().getBtcValue(currency: currencyArray[row], onComplete:
-        { value in
-            self.lblPriceValue.text = "\(value) \(self.currencyArray[row])"
-        })
+        updateCurrency(index: row)
     }
 }
 
