@@ -17,7 +17,8 @@ class ChatMessageTableViewCell: UITableViewCell
     override func awakeFromNib()
     {
         super.awakeFromNib()
-        // Initialization code
+        
+        self.selectionStyle = .none
         
         viewMessage.layer.cornerRadius = 6
 //        imgSender.image = UIImage(named: "default_user")?.withRenderingMode(.alwaysTemplate)
@@ -27,8 +28,5 @@ class ChatMessageTableViewCell: UITableViewCell
     override func setSelected(_ selected: Bool, animated: Bool)
     {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-    
 }
