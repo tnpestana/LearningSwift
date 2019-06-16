@@ -7,16 +7,32 @@
 //
 
 import UIKit
+import Firebase
 
-class ChatViewController: UIViewController {
+class ChatViewController: UIViewController
+{
 
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.navigationItem.hidesBackButton = true
     }
     
-
+    @IBAction func logOutTapped(_ sender: Any)
+    {
+        do
+        {
+            try Auth.auth().signOut()
+            
+            navigationController?.popToRootViewController(animated: true)
+        }
+        catch
+        {
+            print("signout failed")
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

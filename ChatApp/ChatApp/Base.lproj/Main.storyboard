@@ -162,7 +162,7 @@
             </objects>
             <point key="canvasLocation" x="926" y="459"/>
         </scene>
-        <!--Chat View Controller-->
+        <!--Chat-->
         <scene sceneID="dYq-Fq-CAo">
             <objects>
                 <viewController id="e1O-m5-AoQ" customClass="ChatViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -172,6 +172,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="ciT-Yu-YnN"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Chat" id="IDI-8F-W1w">
+                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="OBg-q6-2I1">
+                            <connections>
+                                <action selector="logOutTapped:" destination="e1O-m5-AoQ" id="LRN-ev-Z5l"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TBN-ab-JnY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
