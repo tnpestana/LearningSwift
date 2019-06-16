@@ -10,7 +10,7 @@ import UIKit
 
 extension UIViewController
 {
-    func showErrorAlert(message: String)
+    func showAlert(message: String)
     {
         print("error: \(message)")
         let alert = UIAlertController(title: "Error",

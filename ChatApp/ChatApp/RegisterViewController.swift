@@ -39,7 +39,7 @@ class RegisterViewController: UIViewController
         { (user, error) in
             if let error = error
             {
-                Utils().showErrorAlert(error: error)
+                self.showAlert(message: error.localizedDescription)
             }
             else
             {

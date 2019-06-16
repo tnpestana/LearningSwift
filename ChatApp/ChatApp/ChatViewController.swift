@@ -12,6 +12,8 @@ import Firebase
 class ChatViewController: UIViewController
 {
 
+    
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -29,7 +31,7 @@ class ChatViewController: UIViewController
         }
         catch
         {
-            Utils().showErrorAlert(error: error)
+            self.showAlert(message: error.localizedDescription)
         }
     }
     

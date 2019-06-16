@@ -37,7 +37,7 @@ class LoginViewController: UIViewController
         { (result, error) in
             if let error = error
             {
-                Utils().showErrorAlert(error: error)
+                self.showAlert(message: error.localizedDescription)
             }
             else
             {
