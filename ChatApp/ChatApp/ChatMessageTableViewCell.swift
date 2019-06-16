@@ -22,9 +22,9 @@ class ChatMessageTableViewCell: UITableViewCell
         
         self.selectionStyle = .none
         
-        viewMessage.layer.cornerRadius = 6
-//        imgSender.image = UIImage(named: "default_user")?.withRenderingMode(.alwaysTemplate)
-//        imgSender.tintColor = UIColor(red: 138, green: 166, blue: 255, alpha: 0) // hex: #8AA6FF
+        viewMessage.layer.cornerRadius = 7
+        imgSender.image = UIImage(named: "default_user")?.withRenderingMode(.alwaysTemplate)
+        imgSender.tintColor = UIColor(rgb: 0x8AA6FF, alphaVal: 1.0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool)

@@ -47,13 +47,18 @@ class ChatViewController: UIViewController
     
     @IBAction func sendTapped(_ sender: Any)
     {
+        guard let body = txtNewMessage.text else
+        {
+            return
+        }
+        
         txtNewMessage.endEditing(true)
         txtNewMessage.isEnabled = false
         btnSend.isEnabled = false
         
         let messagesDB = Database.database().reference().child("Messages")
         let messageDictionary = ["Sender" : Auth.auth().currentUser?.email,
-                                 "Body" : txtNewMessage.text]
+                                 "Body" : body]
         
         messagesDB.childByAutoId().setValue(messageDictionary)
         { (error, reference) in
@@ -128,8 +133,8 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource
                 cell.stackMain.insertArrangedSubview(myView, at: 1)
                 cell.stackMain.setNeedsLayout()
             }
-            
-            cell.viewMessage.backgroundColor = .green
+            cell.imgSender.tintColor = UIColor(rgb: 0x80BB8A, alphaVal: 1.0)
+            cell.viewMessage.backgroundColor = UIColor(rgb: 0x80BB8A, alphaVal: 1.0)
         }
         
         return cell
@@ -156,3 +161,5 @@ extension ChatViewController: UITextFieldDelegate
         }
     }
 }
+
+
