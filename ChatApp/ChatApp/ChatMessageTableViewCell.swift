@@ -10,8 +10,10 @@ import UIKit
 
 class ChatMessageTableViewCell: UITableViewCell
 {
+    @IBOutlet weak var stackMain: UIStackView!
     @IBOutlet weak var viewMessage: UIView!
     @IBOutlet weak var lblMessage: UILabel!
+    @IBOutlet weak var viewSender: UIView!
     @IBOutlet weak var imgSender: UIImageView!
     
     override func awakeFromNib()

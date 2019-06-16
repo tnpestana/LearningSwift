@@ -118,10 +118,19 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource
     {
         let cell =  tableView.dequeueReusableCell(withIdentifier: chatMessageCellId) as! ChatMessageTableViewCell
         cell.lblMessage.text = messageArray[indexPath.row].body
-        
-//        if messageArray[indexPath.row].sender == Auth.auth().currentUser?.email
-//        {
-//        }
+        if messageArray[indexPath.row].sender == Auth.auth().currentUser?.email
+        {
+            if let myView = cell.stackMain.subviews.first {
+                cell.stackMain.removeArrangedSubview(myView)
+                cell.stackMain.setNeedsLayout()
+                cell.stackMain.layoutIfNeeded()
+                
+                cell.stackMain.insertArrangedSubview(myView, at: 1)
+                cell.stackMain.setNeedsLayout()
+            }
+            
+            cell.viewMessage.backgroundColor = .green
+        }
         
         return cell
     }
