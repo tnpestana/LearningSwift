@@ -7,13 +7,47 @@
 //
 
 import UIKit
+import Firebase
 
-class RegisterViewController: UIViewController {
-
-    override func viewDidLoad() {
+class RegisterViewController: UIViewController
+{
+    @IBOutlet weak var txtEmail: UITextField!
+    @IBOutlet weak var txtPassword: UITextField!
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func registerTapped(_ sender: Any)
+    {
+        guard let email = txtEmail.text else
+        {
+            print("E-mail input is empty")
+            return
+        }
+        
+        guard let password = txtPassword.text else
+        {
+            print("Password input is empty")
+            return
+        }
+        
+        Auth.auth().createUser(withEmail: email, password: password)
+        { (user, error) in
+            if let error = error
+            {
+                print("error: \(error.localizedDescription)")
+            }
+            else
+            {
+                print("registration successful")
+                
+                self.performSegue(withIdentifier: "goToChat", sender: self)
+            }
+        }
     }
     
 

@@ -89,7 +89,7 @@
                                         <rect key="frame" x="0.0" y="46" width="350" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJM-pJ-xd5">
                                         <rect key="frame" x="0.0" y="92" width="350" height="30"/>
@@ -132,11 +132,14 @@
                                         <rect key="frame" x="0.0" y="46" width="350" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Muc-1I-5JW">
                                         <rect key="frame" x="0.0" y="92" width="350" height="30"/>
                                         <state key="normal" title="Register"/>
+                                        <connections>
+                                            <action selector="registerTapped:" destination="MKl-NG-g5U" eventType="touchUpInside" id="ASw-jU-kE5"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -149,10 +152,30 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yeZ-Nu-TiU"/>
                     </view>
+                    <connections>
+                        <outlet property="txtEmail" destination="pmU-eU-76C" id="deA-Xm-VaE"/>
+                        <outlet property="txtPassword" destination="xvn-G8-Gx0" id="qgN-iQ-vc4"/>
+                        <segue destination="e1O-m5-AoQ" kind="show" identifier="goToChat" id="egx-5g-mzy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VYK-Rv-rFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="926" y="459"/>
+        </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="dYq-Fq-CAo">
+            <objects>
+                <viewController id="e1O-m5-AoQ" customClass="ChatViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hA5-BI-dHC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="ciT-Yu-YnN"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TBN-ab-JnY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1649" y="94"/>
         </scene>
     </scenes>
 </document>
