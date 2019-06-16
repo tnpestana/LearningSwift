@@ -94,6 +94,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJM-pJ-xd5">
                                         <rect key="frame" x="0.0" y="92" width="350" height="30"/>
                                         <state key="normal" title="Login"/>
+                                        <connections>
+                                            <action selector="loginTapped:" destination="bKE-og-Yvq" eventType="touchUpInside" id="kLc-gy-GZo"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -106,6 +109,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5jd-ir-wjP"/>
                     </view>
+                    <connections>
+                        <outlet property="txtEmail" destination="9MV-ns-EPz" id="0pg-N0-Mit"/>
+                        <outlet property="txtPassword" destination="N8R-Oz-jQl" id="i4q-rJ-qEu"/>
+                        <segue destination="e1O-m5-AoQ" kind="show" identifier="goToChat" id="DvI-dp-VSo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hgP-hN-Roe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -185,4 +193,7 @@
             <point key="canvasLocation" x="1649" y="94"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="DvI-dp-VSo"/>
+    </inferredMetricsTieBreakers>
 </document>

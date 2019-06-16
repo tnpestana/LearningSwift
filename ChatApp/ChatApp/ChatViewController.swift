@@ -29,7 +29,7 @@ class ChatViewController: UIViewController
         }
         catch
         {
-            print("signout failed")
+            Utils().showErrorAlert(error: error)
         }
     }
     
