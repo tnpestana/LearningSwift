@@ -220,13 +220,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="mu5-8s-N7W" firstAttribute="trailing" secondItem="ciT-Yu-YnN" secondAttribute="trailing" id="BRb-Gl-7Ss"/>
-                            <constraint firstItem="sjG-cQ-6qg" firstAttribute="leading" secondItem="ciT-Yu-YnN" secondAttribute="leading" id="Khq-Jw-b1W"/>
-                            <constraint firstItem="mu5-8s-N7W" firstAttribute="top" secondItem="ciT-Yu-YnN" secondAttribute="top" id="L54-BP-5Aw"/>
-                            <constraint firstItem="sjG-cQ-6qg" firstAttribute="trailing" secondItem="ciT-Yu-YnN" secondAttribute="trailing" id="NO2-Ph-Aqq"/>
-                            <constraint firstItem="ciT-Yu-YnN" firstAttribute="bottom" secondItem="sjG-cQ-6qg" secondAttribute="bottom" id="heA-HX-2hZ"/>
-                            <constraint firstItem="mu5-8s-N7W" firstAttribute="leading" secondItem="ciT-Yu-YnN" secondAttribute="leading" id="k3r-1T-kM4"/>
-                            <constraint firstItem="sjG-cQ-6qg" firstAttribute="top" secondItem="mu5-8s-N7W" secondAttribute="bottom" id="zSD-OF-1e9"/>
+                            <constraint firstItem="mu5-8s-N7W" firstAttribute="leading" secondItem="ciT-Yu-YnN" secondAttribute="leading" id="FQa-7V-tq4"/>
+                            <constraint firstItem="sjG-cQ-6qg" firstAttribute="trailing" secondItem="ciT-Yu-YnN" secondAttribute="trailing" id="L0J-QK-OaS"/>
+                            <constraint firstItem="sjG-cQ-6qg" firstAttribute="top" secondItem="mu5-8s-N7W" secondAttribute="bottom" id="eyr-Tw-gLN"/>
+                            <constraint firstItem="mu5-8s-N7W" firstAttribute="trailing" secondItem="ciT-Yu-YnN" secondAttribute="trailing" id="fls-e2-l7F"/>
+                            <constraint firstItem="sjG-cQ-6qg" firstAttribute="bottom" secondItem="ciT-Yu-YnN" secondAttribute="bottom" id="gnj-mw-MLM"/>
+                            <constraint firstItem="sjG-cQ-6qg" firstAttribute="leading" secondItem="ciT-Yu-YnN" secondAttribute="leading" id="vnZ-ht-A6G"/>
+                            <constraint firstItem="mu5-8s-N7W" firstAttribute="top" secondItem="ciT-Yu-YnN" secondAttribute="top" id="zmn-4L-5TZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ciT-Yu-YnN"/>
                     </view>
@@ -238,7 +238,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="bottomConstraintSendMessage" destination="heA-HX-2hZ" id="idR-Pk-igN"/>
+                        <outlet property="bottomConstraintSendMessage" destination="gnj-mw-MLM" id="kf4-Ks-DmJ"/>
                         <outlet property="btnSend" destination="TbE-wH-z1l" id="9ht-d9-Jej"/>
                         <outlet property="tableMessages" destination="mu5-8s-N7W" id="OI3-91-sg8"/>
                         <outlet property="txtNewMessage" destination="EUE-iT-w6m" id="SGP-dh-4u0"/>
@@ -251,6 +251,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="DvI-dp-VSo"/>
+        <segue reference="egx-5g-mzy"/>
     </inferredMetricsTieBreakers>
 </document>

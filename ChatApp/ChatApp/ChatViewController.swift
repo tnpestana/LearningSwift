@@ -39,6 +39,7 @@ class ChatViewController: UIViewController
         
         //txtNewMessage.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @objc func handleKeyboardNotification(notification: Notification)
@@ -46,29 +47,22 @@ class ChatViewController: UIViewController
         if let userInfo = notification.userInfo
         {
             let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
-            print(keyboardFrame.height)
+            let isKeyboardShowing = (notification.name == UIResponder.keyboardWillShowNotification)
             
             UIView.animate(withDuration: 0.5)
             {
-                self.bottomConstraintSendMessage.constant = keyboardFrame.height - UIApplication.shared.keyWindow!.safeAreaInsets.bottom
+                self.bottomConstraintSendMessage.constant = isKeyboardShowing ? (-keyboardFrame.height + UIApplication.shared.keyWindow!.safeAreaInsets.bottom) : 0
                 self.view.layoutIfNeeded()
             }
-        }
-    }
-    
-    func hideKeyboard()
-    {
-        UIView.animate(withDuration: 0.5)
-        {
-            self.bottomConstraintSendMessage.constant = 0
-            self.txtNewMessage.resignFirstResponder()
-            self.view.layoutIfNeeded()
+            
+//            let indexPath = IndexPath(item: self.messageArray.count - 1, section: 0)
+//            self.tableMessages.scrollToRow(at: indexPath, at: .bottom, animated: true)
         }
     }
     
     @objc func tableViewTapped()
     {
-        hideKeyboard()
+        txtNewMessage.resignFirstResponder()
     }
     
     @IBAction func sendTapped(_ sender: Any)
@@ -94,8 +88,8 @@ class ChatViewController: UIViewController
             {
                 self.txtNewMessage.text = ""
                 self.txtNewMessage.isEnabled = true
+                self.txtNewMessage.resignFirstResponder()
                 self.btnSend.isEnabled = true
-                self.hideKeyboard()
             }
         }
     }
