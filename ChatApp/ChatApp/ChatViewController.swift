@@ -49,14 +49,18 @@ class ChatViewController: UIViewController
             let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
             let isKeyboardShowing = (notification.name == UIResponder.keyboardWillShowNotification)
             
-            UIView.animate(withDuration: 0.5)
-            {
-                self.bottomConstraintSendMessage.constant = isKeyboardShowing ? (-keyboardFrame.height + UIApplication.shared.keyWindow!.safeAreaInsets.bottom) : 0
-                self.view.layoutIfNeeded()
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear, animations:
+                {
+                    self.bottomConstraintSendMessage.constant = isKeyboardShowing ? (-keyboardFrame.height + UIApplication.shared.keyWindow!.safeAreaInsets.bottom) : 0
+                    self.view.layoutIfNeeded()
+                })
+            { (completed) in
+                if self.messageArray.count - 1 > 0
+                {
+                    let indexPath = IndexPath(item: self.messageArray.count - 1, section: 0)
+                    self.tableMessages.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                }
             }
-            
-//            let indexPath = IndexPath(item: self.messageArray.count - 1, section: 0)
-//            self.tableMessages.scrollToRow(at: indexPath, at: .bottom, animated: true)
         }
     }
     

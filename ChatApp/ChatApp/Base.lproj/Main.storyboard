@@ -185,17 +185,24 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sjG-cQ-6qg">
                                 <rect key="frame" x="0.0" y="816" width="414" height="46"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ONV-CP-3tV">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
+                                        <color key="backgroundColor" red="0.0" green="0.27883623903645832" blue="0.58464558919270837" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="f92-gu-1hv"/>
+                                        </constraints>
+                                    </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="nZ9-9r-AO8">
-                                        <rect key="frame" x="16" y="8" width="382" height="30"/>
+                                        <rect key="frame" x="16" y="9" width="382" height="29"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EUE-iT-w6m">
-                                                <rect key="frame" x="0.0" y="0.0" width="296" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="296" height="29"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TbE-wH-z1l">
-                                                <rect key="frame" x="312" y="0.0" width="70" height="30"/>
+                                                <rect key="frame" x="312" y="0.0" width="70" height="29"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="70" id="fEp-3M-7i5"/>
                                                 </constraints>
@@ -210,9 +217,12 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ONV-CP-3tV" secondAttribute="trailing" id="F7M-gF-Kpe"/>
+                                    <constraint firstItem="ONV-CP-3tV" firstAttribute="top" secondItem="sjG-cQ-6qg" secondAttribute="top" id="Kz8-ND-MAq"/>
                                     <constraint firstAttribute="trailing" secondItem="nZ9-9r-AO8" secondAttribute="trailing" constant="16" id="OER-3P-wtL"/>
-                                    <constraint firstItem="nZ9-9r-AO8" firstAttribute="top" secondItem="sjG-cQ-6qg" secondAttribute="top" constant="8" id="T66-JY-hOG"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="nZ9-9r-AO8" secondAttribute="bottom" constant="8" id="aeV-Bh-cpi"/>
+                                    <constraint firstItem="ONV-CP-3tV" firstAttribute="leading" secondItem="sjG-cQ-6qg" secondAttribute="leading" id="alG-6H-5oW"/>
+                                    <constraint firstItem="nZ9-9r-AO8" firstAttribute="top" secondItem="ONV-CP-3tV" secondAttribute="bottom" constant="8" id="f4I-34-3RX"/>
                                     <constraint firstAttribute="height" constant="46" id="mgY-Ao-T5H"/>
                                     <constraint firstItem="nZ9-9r-AO8" firstAttribute="leading" secondItem="sjG-cQ-6qg" secondAttribute="leading" constant="16" id="neN-x7-i1f"/>
                                 </constraints>
