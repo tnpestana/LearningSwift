@@ -21,10 +21,15 @@ class ChatMessageTableViewCell: UITableViewCell
         super.awakeFromNib()
         
         self.selectionStyle = .none
+        viewMessage.layer.borderWidth = 1
+        viewMessage.layer.borderColor = UIColor(rgb: 0x007AFF, alphaVal: 1.0).cgColor
+        viewMessage.layer.cornerRadius = 15
+        viewMessage.backgroundColor = .white
         
-        viewMessage.layer.cornerRadius = 7
         imgSender.image = UIImage(named: "default_user")?.withRenderingMode(.alwaysTemplate)
-        imgSender.tintColor = UIColor(rgb: 0x8AA6FF, alphaVal: 1.0)
+        imgSender.tintColor = UIColor(rgb: 0x007AFF/*0x8AA6FF*/, alphaVal: 1.0)
+        
+        lblMessage.textColor = .black
     }
 
     override func setSelected(_ selected: Bool, animated: Bool)

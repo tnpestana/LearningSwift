@@ -13,7 +13,7 @@ class ChatViewController: UIViewController
 {
     @IBOutlet weak var tableMessages: UITableView!
     @IBOutlet weak var viewSendMessage: UIView!
-    @IBOutlet weak var heightViewSendMessage: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraintSendMessage: NSLayoutConstraint!
     @IBOutlet weak var txtNewMessage: UITextField!
     @IBOutlet weak var btnSend: UIButton!
     
@@ -37,20 +37,44 @@ class ChatViewController: UIViewController
         tableMessages.isUserInteractionEnabled = true
         tableMessages.addGestureRecognizer(tapGesture)
         
-        txtNewMessage.delegate = self
+        //txtNewMessage.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    @objc func handleKeyboardNotification(notification: Notification)
+    {
+        if let userInfo = notification.userInfo
+        {
+            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+            print(keyboardFrame.height)
+            
+            UIView.animate(withDuration: 0.5)
+            {
+                self.bottomConstraintSendMessage.constant = keyboardFrame.height - UIApplication.shared.keyWindow!.safeAreaInsets.bottom
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    func hideKeyboard()
+    {
+        UIView.animate(withDuration: 0.5)
+        {
+            self.bottomConstraintSendMessage.constant = 0
+            self.txtNewMessage.resignFirstResponder()
+            self.view.layoutIfNeeded()
+        }
     }
     
     @objc func tableViewTapped()
     {
-        txtNewMessage.endEditing(true)
+        hideKeyboard()
     }
     
     @IBAction func sendTapped(_ sender: Any)
     {
-        guard let body = txtNewMessage.text else
-        {
-            return
-        }
+        guard let body = txtNewMessage.text else { return }
+        if body.isEmpty { return }
         
         txtNewMessage.endEditing(true)
         txtNewMessage.isEnabled = false
@@ -71,6 +95,7 @@ class ChatViewController: UIViewController
                 self.txtNewMessage.text = ""
                 self.txtNewMessage.isEnabled = true
                 self.btnSend.isEnabled = true
+                self.hideKeyboard()
             }
         }
     }
@@ -133,33 +158,10 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource
                 cell.stackMain.insertArrangedSubview(myView, at: 1)
                 cell.stackMain.setNeedsLayout()
             }
-            cell.imgSender.tintColor = UIColor(rgb: 0x80BB8A, alphaVal: 1.0)
-            cell.viewMessage.backgroundColor = UIColor(rgb: 0x80BB8A, alphaVal: 1.0)
+            cell.lblMessage.textColor = .white
+            cell.viewMessage.backgroundColor = UIColor(rgb: 0x007AFF, alphaVal: 1.0)
         }
         
         return cell
     }
 }
-
-extension ChatViewController: UITextFieldDelegate
-{
-    func textFieldDidBeginEditing(_ textField: UITextField)
-    {
-        UIView.animate(withDuration: 0.5)
-        {
-            self.heightViewSendMessage.constant = 308
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField)
-    {
-        UIView.animate(withDuration: 0.5)
-        {
-            self.heightViewSendMessage.constant = 46
-            self.view.layoutIfNeeded()
-        }
-    }
-}
-
-
