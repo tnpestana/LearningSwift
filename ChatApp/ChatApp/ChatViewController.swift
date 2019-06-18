@@ -19,14 +19,18 @@ class ChatViewController: UIViewController
     
     var messageArray: [Message] = []
     let chatMessageCellId: String =  "ChatMessageTableViewCell"
+    let userMessageCellId: String = "UserMessageCellId"
+    var currentUser: String!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
 
         self.navigationItem.hidesBackButton = true
+        currentUser = Auth.auth().currentUser?.email
         
         tableMessages.register(UINib(nibName: "ChatMessageTableViewCell", bundle: nil), forCellReuseIdentifier: chatMessageCellId)
+        tableMessages.register(UINib(nibName: "UserMessageTableViewCell", bundle: nil), forCellReuseIdentifier: userMessageCellId)
         tableMessages.delegate = self
         tableMessages.dataSource = self
         tableMessages.separatorStyle = .none
@@ -144,9 +148,17 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell =  tableView.dequeueReusableCell(withIdentifier: chatMessageCellId) as! ChatMessageTableViewCell
-        cell.setup(message: messageArray[indexPath.row])
-        
-        return cell
+        if currentUser == messageArray[indexPath.row].sender
+        {
+            let cell =  tableView.dequeueReusableCell(withIdentifier: userMessageCellId) as! UserMessageTableViewCell
+            cell.setup(message: messageArray[indexPath.row])
+            return cell
+        }
+        else
+        {
+            let cell =  tableView.dequeueReusableCell(withIdentifier: chatMessageCellId) as! ChatMessageTableViewCell
+            cell.setup(message: messageArray[indexPath.row])
+            return cell
+        }
     }
 }
