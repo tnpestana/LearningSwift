@@ -13,7 +13,7 @@ class ToDoListViewController: UIViewController
     
     @IBOutlet weak var todoTable: UITableView!
 
-    let array = ["do shit", "make plans", "put in work"]
+    var array = ["do shit", "make plans", "put in work"]
     
     override func viewDidLoad()
     {
@@ -21,6 +21,32 @@ class ToDoListViewController: UIViewController
         
         todoTable.delegate = self
         todoTable.dataSource = self
+    }
+    
+    @IBAction func addItemTapped(_ sender: Any)
+    {
+        let alert = UIAlertController(title: "Add new item", message: nil, preferredStyle: .alert)
+        
+        var textField = UITextField()
+        
+        alert.addTextField()
+        { (alertTextField) in
+            alertTextField.placeholder = "Create new item"
+            textField = alertTextField
+        }
+        
+        let action = UIAlertAction(title: "ok", style: .default)
+        { (action) in
+            if !textField.text!.isEmpty
+            {
+                self.array.append(textField.text!)
+                self.todoTable.reloadData()
+            }
+        }
+        alert.addAction(action)
+        
+        
+        present(alert, animated: true, completion: nil)
     }
 }
 
