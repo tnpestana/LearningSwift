@@ -77,6 +77,15 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
         
         todoTable.deselectRow(at: indexPath, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
+    {
+        if editingStyle == .delete
+        {
+            array.remove(at: indexPath.row)
+            todoTable.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
 }
 
 class TodoTableCell: UITableViewCell
