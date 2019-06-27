@@ -12,8 +12,9 @@ class ToDoListViewController: UIViewController
 {
     
     @IBOutlet weak var todoTable: UITableView!
-
-    var array = ["do shit", "make plans", "put in work"]
+    
+    let defaults = UserDefaults()
+    var array: [String] = []
     
     override func viewDidLoad()
     {
@@ -21,6 +22,11 @@ class ToDoListViewController: UIViewController
         
         todoTable.delegate = self
         todoTable.dataSource = self
+        
+        if let items = defaults.array(forKey: "todoArray") as? [String]
+        {
+            array = items
+        }
     }
     
     @IBAction func addItemTapped(_ sender: Any)
@@ -40,6 +46,7 @@ class ToDoListViewController: UIViewController
             if !textField.text!.isEmpty
             {
                 self.array.append(textField.text!)
+                self.defaults.set(self.array, forKey: "todoArray")
                 self.todoTable.reloadData()
             }
         }
@@ -84,6 +91,7 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
         {
             array.remove(at: indexPath.row)
             todoTable.deleteRows(at: [indexPath], with: .fade)
+            self.defaults.set(self.array, forKey: "todoArray")
         }
     }
 }
