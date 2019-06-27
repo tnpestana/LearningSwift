@@ -8,20 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		59C2116422C172A400E246E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C2116322C172A400E246E0 /* AppDelegate.swift */; };
-		59C2116622C172A400E246E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C2116522C172A400E246E0 /* ViewController.swift */; };
-		59C2116922C172A400E246E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59C2116722C172A400E246E0 /* Main.storyboard */; };
+		59C2116622C172A400E246E0 /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C2116522C172A400E246E0 /* ToDoListViewController.swift */; };
 		59C2116B22C172A500E246E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59C2116A22C172A500E246E0 /* Assets.xcassets */; };
 		59C2116E22C172A500E246E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59C2116C22C172A500E246E0 /* LaunchScreen.storyboard */; };
+		59C2117622C17AE000E246E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59C2117522C17AE000E246E0 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		59C2116022C172A400E246E0 /* ToDoListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59C2116322C172A400E246E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		59C2116522C172A400E246E0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		59C2116822C172A400E246E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		59C2116522C172A400E246E0 /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
 		59C2116A22C172A500E246E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		59C2116D22C172A500E246E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		59C2116F22C172A500E246E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		59C2117522C17AE000E246E0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,10 +55,10 @@
 			isa = PBXGroup;
 			children = (
 				59C2116322C172A400E246E0 /* AppDelegate.swift */,
-				59C2116522C172A400E246E0 /* ViewController.swift */,
-				59C2116722C172A400E246E0 /* Main.storyboard */,
+				59C2116522C172A400E246E0 /* ToDoListViewController.swift */,
 				59C2116A22C172A500E246E0 /* Assets.xcassets */,
 				59C2116C22C172A500E246E0 /* LaunchScreen.storyboard */,
+				59C2117522C17AE000E246E0 /* Main.storyboard */,
 				59C2116F22C172A500E246E0 /* Info.plist */,
 			);
 			path = ToDoListApp;
@@ -122,9 +122,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59C2117622C17AE000E246E0 /* Main.storyboard in Resources */,
 				59C2116E22C172A500E246E0 /* LaunchScreen.storyboard in Resources */,
 				59C2116B22C172A500E246E0 /* Assets.xcassets in Resources */,
-				59C2116922C172A400E246E0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,7 +135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59C2116622C172A400E246E0 /* ViewController.swift in Sources */,
+				59C2116622C172A400E246E0 /* ToDoListViewController.swift in Sources */,
 				59C2116422C172A400E246E0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,14 +143,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		59C2116722C172A400E246E0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				59C2116822C172A400E246E0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		59C2116C22C172A500E246E0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
