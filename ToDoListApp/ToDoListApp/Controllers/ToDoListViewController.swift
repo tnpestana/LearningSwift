@@ -14,6 +14,7 @@ class ToDoListViewController: UIViewController
     @IBOutlet weak var todoTable: UITableView!
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("TodoItems.plist")
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var array: [TodoItem] = []
     
     override func viewDidLoad()
@@ -25,7 +26,7 @@ class ToDoListViewController: UIViewController
         todoTable.delegate = self
         todoTable.dataSource = self
         
-        loadData()
+        //loadData()
     }
     
     @IBAction func addItemTapped(_ sender: Any)
@@ -44,7 +45,10 @@ class ToDoListViewController: UIViewController
         { (action) in
             if !textField.text!.isEmpty
             {
-                let newItem = TodoItem(message: textField.text)
+                
+                let newItem = TodoItem(context: self.context)
+                newItem.message = textField.text!
+                newItem.done = false
                 self.array.append(newItem)
                 self.saveData()
                 self.todoTable.reloadData()
@@ -60,8 +64,7 @@ class ToDoListViewController: UIViewController
         let encoder = PropertyListEncoder()
         do
         {
-            let data = try encoder.encode(array)
-            try data.write(to: dataFilePath!)
+            try context.save()
         }
         catch
         {
@@ -69,21 +72,21 @@ class ToDoListViewController: UIViewController
         }
     }
     
-    func loadData()
-    {
-        if let data = try? Data(contentsOf: dataFilePath!)
-        {
-            let decoder = PropertyListDecoder()
-            do
-            {
-                array = try decoder.decode([TodoItem].self, from: data)
-            }
-            catch
-            {
-                print(error.localizedDescription)
-            }
-        }
-    }
+//    func loadData()
+//    {
+//        if let data = try? Data(contentsOf: dataFilePath!)
+//        {
+//            let decoder = PropertyListDecoder()
+//            do
+//            {
+//                array = try decoder.decode([TodoItem].self, from: data)
+//            }
+//            catch
+//            {
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
 }
 
 extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
@@ -98,15 +101,15 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
         let cell = todoTable.dequeueReusableCell(withIdentifier: "idCell") as! TodoTableCell
         let item = array[indexPath.row]
         cell.todoLbl.text = item.message
-        cell.accessoryType = item.isChecked ? .checkmark : .none
+        cell.accessoryType = item.done ? .checkmark : .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         let item = array[indexPath.row]
-        item.isChecked = !item.isChecked
-        todoTable.cellForRow(at: indexPath)?.accessoryType = item.isChecked ? .checkmark : .none
+        item.done = !item.done
+        todoTable.cellForRow(at: indexPath)?.accessoryType = item.done ? .checkmark : .none
         saveData()
         todoTable.deselectRow(at: indexPath, animated: true)
     }
