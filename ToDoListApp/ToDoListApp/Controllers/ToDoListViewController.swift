@@ -13,22 +13,19 @@ class ToDoListViewController: UIViewController
     
     @IBOutlet weak var todoTable: UITableView!
     
-    let defaults = UserDefaults.standard
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("TodoItems.plist")
     var array: [TodoItem] = []
-    
-    let todoItemsKey = "todoItemsList"
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
+        print(dataFilePath!)
+        
         todoTable.delegate = self
         todoTable.dataSource = self
         
-        if let items = defaults.array(forKey: todoItemsKey) as? [TodoItem]
-        {
-            array = items
-        }
+        loadData()
     }
     
     @IBAction func addItemTapped(_ sender: Any)
@@ -49,14 +46,43 @@ class ToDoListViewController: UIViewController
             {
                 let newItem = TodoItem(message: textField.text)
                 self.array.append(newItem)
-                //self.defaults.set(self.array, forKey: self.todoItemsKey)
+                self.saveData()
                 self.todoTable.reloadData()
             }
         }
         alert.addAction(action)
         
-        
         present(alert, animated: true, completion: nil)
+    }
+    
+    func saveData()
+    {
+        let encoder = PropertyListEncoder()
+        do
+        {
+            let data = try encoder.encode(array)
+            try data.write(to: dataFilePath!)
+        }
+        catch
+        {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func loadData()
+    {
+        if let data = try? Data(contentsOf: dataFilePath!)
+        {
+            let decoder = PropertyListDecoder()
+            do
+            {
+                array = try decoder.decode([TodoItem].self, from: data)
+            }
+            catch
+            {
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
@@ -81,7 +107,7 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
         let item = array[indexPath.row]
         item.isChecked = !item.isChecked
         todoTable.cellForRow(at: indexPath)?.accessoryType = item.isChecked ? .checkmark : .none
-        //self.defaults.set(self.array, forKey: todoItemsKey)
+        saveData()
         todoTable.deselectRow(at: indexPath, animated: true)
     }
     
@@ -91,7 +117,7 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
         {
             array.remove(at: indexPath.row)
             todoTable.deleteRows(at: [indexPath], with: .fade)
-            //self.defaults.set(self.array, forKey: todoItemsKey)
+            saveData()
         }
     }
 }

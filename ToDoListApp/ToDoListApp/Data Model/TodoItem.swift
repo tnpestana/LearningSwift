@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TodoItem
+class TodoItem: Encodable, Decodable
 {
     var message: String!
     var isChecked: Bool = false
