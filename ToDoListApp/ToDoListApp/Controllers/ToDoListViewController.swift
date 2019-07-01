@@ -13,8 +13,10 @@ class ToDoListViewController: UIViewController
     
     @IBOutlet weak var todoTable: UITableView!
     
-    let defaults = UserDefaults()
-    var array: [String] = []
+    let defaults = UserDefaults.standard
+    var array: [TodoItem] = []
+    
+    let todoItemsKey = "todoItemsList"
     
     override func viewDidLoad()
     {
@@ -23,7 +25,7 @@ class ToDoListViewController: UIViewController
         todoTable.delegate = self
         todoTable.dataSource = self
         
-        if let items = defaults.array(forKey: "todoArray") as? [String]
+        if let items = defaults.array(forKey: todoItemsKey) as? [TodoItem]
         {
             array = items
         }
@@ -41,12 +43,13 @@ class ToDoListViewController: UIViewController
             textField = alertTextField
         }
         
-        let action = UIAlertAction(title: "ok", style: .default)
+        let action = UIAlertAction(title: "OK", style: .default)
         { (action) in
             if !textField.text!.isEmpty
             {
-                self.array.append(textField.text!)
-                self.defaults.set(self.array, forKey: "todoArray")
+                let newItem = TodoItem(message: textField.text)
+                self.array.append(newItem)
+                //self.defaults.set(self.array, forKey: self.todoItemsKey)
                 self.todoTable.reloadData()
             }
         }
@@ -67,21 +70,18 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = todoTable.dequeueReusableCell(withIdentifier: "idCell") as! TodoTableCell
-        cell.todoLbl.text = array[indexPath.row]
+        let item = array[indexPath.row]
+        cell.todoLbl.text = item.message
+        cell.accessoryType = item.isChecked ? .checkmark : .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        if todoTable.cellForRow(at: indexPath)?.accessoryType == .checkmark
-        {
-            todoTable.cellForRow(at: indexPath)?.accessoryType = .none
-        }
-        else
-        {
-            todoTable.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        }
-        
+        let item = array[indexPath.row]
+        item.isChecked = !item.isChecked
+        todoTable.cellForRow(at: indexPath)?.accessoryType = item.isChecked ? .checkmark : .none
+        //self.defaults.set(self.array, forKey: todoItemsKey)
         todoTable.deselectRow(at: indexPath, animated: true)
     }
     
@@ -91,7 +91,7 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
         {
             array.remove(at: indexPath.row)
             todoTable.deleteRows(at: [indexPath], with: .fade)
-            self.defaults.set(self.array, forKey: "todoArray")
+            //self.defaults.set(self.array, forKey: todoItemsKey)
         }
     }
 }
