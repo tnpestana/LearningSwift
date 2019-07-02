@@ -127,13 +127,16 @@ extension ToDoListViewController: UISearchBarDelegate
 {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
     {
-        let request: NSFetchRequest<TodoItem> = TodoItem.fetchRequest()
-        request.predicate = NSPredicate(format: "message CONTAINS %@", searchBar.text!)
-        request.sortDescriptors = [NSSortDescriptor(key: "message", ascending: true)]
-        
-        loadData(with: request)
-        
-        todoTable.reloadData()
+        if !searchBar.text!.isEmpty
+        {
+            let request: NSFetchRequest<TodoItem> = TodoItem.fetchRequest()
+            request.predicate = NSPredicate(format: "message CONTAINS[cd] %@", searchBar.text!)
+            request.sortDescriptors = [NSSortDescriptor(key: "message", ascending: true)]
+            
+            loadData(with: request)
+            
+            todoTable.reloadData()
+        }
     }
 }
 
