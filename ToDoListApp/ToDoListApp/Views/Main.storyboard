@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Category View Controller-->
+        <!--Categories-->
         <scene sceneID="68R-Ig-IE8">
             <objects>
                 <viewController id="5y5-Xp-q2M" customClass="CategoryViewController" customModule="ToDoListApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -59,7 +59,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="w7U-E2-yUy"/>
                     </view>
-                    <navigationItem key="navigationItem" id="lzn-HE-iB5">
+                    <navigationItem key="navigationItem" title="Categories" id="lzn-HE-iB5">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="u70-fc-Lwg">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -76,7 +76,7 @@
             </objects>
             <point key="canvasLocation" x="1013.0434782608696" y="116.51785714285714"/>
         </scene>
-        <!--To Do-->
+        <!--To do-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ToDoListViewController" customModule="ToDoListApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -130,7 +130,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="To Do" id="h3a-yQ-mDT">
+                    <navigationItem key="navigationItem" title="To do" id="h3a-yQ-mDT">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="F9w-Q0-ADA">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
