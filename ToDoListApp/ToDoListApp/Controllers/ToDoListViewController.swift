@@ -7,13 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 class ToDoListViewController: UIViewController
 {
     
     @IBOutlet weak var todoTable: UITableView!
     
-    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("TodoItems.plist")
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var array: [TodoItem] = []
     
@@ -21,12 +21,12 @@ class ToDoListViewController: UIViewController
     {
         super.viewDidLoad()
         
-        print(dataFilePath!)
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
         todoTable.delegate = self
         todoTable.dataSource = self
         
-        //loadData()
+        loadData()
     }
     
     @IBAction func addItemTapped(_ sender: Any)
@@ -61,7 +61,6 @@ class ToDoListViewController: UIViewController
     
     func saveData()
     {
-        let encoder = PropertyListEncoder()
         do
         {
             try context.save()
@@ -72,21 +71,18 @@ class ToDoListViewController: UIViewController
         }
     }
     
-//    func loadData()
-//    {
-//        if let data = try? Data(contentsOf: dataFilePath!)
-//        {
-//            let decoder = PropertyListDecoder()
-//            do
-//            {
-//                array = try decoder.decode([TodoItem].self, from: data)
-//            }
-//            catch
-//            {
-//                print(error.localizedDescription)
-//            }
-//        }
-//    }
+    func loadData()
+    {
+        let request: NSFetchRequest<TodoItem> = TodoItem.fetchRequest()
+        do
+        {
+            array = try context.fetch(request)
+        }
+        catch
+        {
+            print(error.localizedDescription)
+        }
+    }
 }
 
 extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
