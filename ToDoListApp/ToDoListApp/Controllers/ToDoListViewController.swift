@@ -11,8 +11,8 @@ import CoreData
 
 class ToDoListViewController: UIViewController
 {
-    
     @IBOutlet weak var todoTable: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var array: [TodoItem] = []
@@ -25,6 +25,8 @@ class ToDoListViewController: UIViewController
         
         todoTable.delegate = self
         todoTable.dataSource = self
+        
+        searchBar.delegate = self
         
         loadData()
     }
@@ -71,9 +73,8 @@ class ToDoListViewController: UIViewController
         }
     }
     
-    func loadData()
+    func loadData(with request: NSFetchRequest<TodoItem> = TodoItem.fetchRequest())
     {
-        let request: NSFetchRequest<TodoItem> = TodoItem.fetchRequest()
         do
         {
             array = try context.fetch(request)
@@ -119,6 +120,18 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
             todoTable.deleteRows(at: [indexPath], with: .fade)
             saveData()
         }
+    }
+}
+
+extension ToDoListViewController: UISearchBarDelegate
+{
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
+    {
+        let request: NSFetchRequest<TodoItem> = TodoItem.fetchRequest()
+        request.predicate = NSPredicate(format: "message CONTAINS %@", searchBar.text!)
+        request.sortDescriptors = [NSSortDescriptor(key: "message", ascending: true)]
+        
+        loadData(with: request)
     }
 }
 
