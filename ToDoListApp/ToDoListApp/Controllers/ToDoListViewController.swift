@@ -132,6 +132,8 @@ extension ToDoListViewController: UISearchBarDelegate
         request.sortDescriptors = [NSSortDescriptor(key: "message", ascending: true)]
         
         loadData(with: request)
+        
+        todoTable.reloadData()
     }
 }
 
