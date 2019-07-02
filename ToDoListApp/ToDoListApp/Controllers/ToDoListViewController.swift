@@ -16,6 +16,13 @@ class ToDoListViewController: UIViewController
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var array: [TodoItem] = []
+    var selectedCategory: Category?
+    {
+        didSet
+        {
+            loadData()
+        }
+    }
     
     override func viewDidLoad()
     {
@@ -28,7 +35,7 @@ class ToDoListViewController: UIViewController
         
         searchBar.delegate = self
         
-        loadData()
+        //loadData()
     }
     
     @IBAction func addItemTapped(_ sender: Any)
@@ -51,6 +58,7 @@ class ToDoListViewController: UIViewController
                 let newItem = TodoItem(context: self.context)
                 newItem.message = textField.text!
                 newItem.done = false
+                newItem.parentCategory =  self.selectedCategory
                 self.array.append(newItem)
                 self.saveData()
                 self.todoTable.reloadData()
@@ -73,8 +81,19 @@ class ToDoListViewController: UIViewController
         }
     }
     
-    func loadData(with request: NSFetchRequest<TodoItem> = TodoItem.fetchRequest())
+    func loadData(with request: NSFetchRequest<TodoItem> = TodoItem.fetchRequest(), predicate: NSPredicate? = nil)
     {
+        let categoryPredicate = NSPredicate(format: "parentCategory.title MATCHES %@", selectedCategory!.title!)
+        
+        if let additionalPredicate = predicate
+        {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
+        }
+        else
+        {
+            request.predicate = categoryPredicate
+        }
+        
         do
         {
             array = try context.fetch(request)
