@@ -114,6 +114,7 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
     {
         if editingStyle == .delete
         {
+            context.delete(array[indexPath.row])
             array.remove(at: indexPath.row)
             todoTable.deleteRows(at: [indexPath], with: .fade)
             saveData()
