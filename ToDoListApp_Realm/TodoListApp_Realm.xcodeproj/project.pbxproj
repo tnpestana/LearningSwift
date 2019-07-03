@@ -19,7 +19,7 @@
 /* Begin PBXFileReference section */
 		5950FABC22CBF70F006C9DC8 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		5992C38A22CAAECE00BAF201 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
-		59C2116022C172A400E246E0 /* ToDoListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		59C2116022C172A400E246E0 /* TodoListApp_Realm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoListApp_Realm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59C2116322C172A400E246E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59C2116522C172A400E246E0 /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
 		59C2116A22C172A500E246E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 		59C2115722C172A300E246E0 = {
 			isa = PBXGroup;
 			children = (
-				59C2116222C172A400E246E0 /* ToDoListApp */,
+				59C2116222C172A400E246E0 /* TodoListApp_Realm */,
 				59C2116122C172A400E246E0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -84,12 +84,12 @@
 		59C2116122C172A400E246E0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				59C2116022C172A400E246E0 /* ToDoListApp.app */,
+				59C2116022C172A400E246E0 /* TodoListApp_Realm.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		59C2116222C172A400E246E0 /* ToDoListApp */ = {
+		59C2116222C172A400E246E0 /* TodoListApp_Realm */ = {
 			isa = PBXGroup;
 			children = (
 				59C2116F22C172A500E246E0 /* Info.plist */,
@@ -99,15 +99,15 @@
 				5992C38722CAA37E00BAF201 /* Views */,
 				5992C38822CAA39900BAF201 /* Supporting Files */,
 			);
-			path = ToDoListApp;
+			path = TodoListApp_Realm;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		59C2115F22C172A400E246E0 /* ToDoListApp */ = {
+		59C2115F22C172A400E246E0 /* TodoListApp_Realm */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 59C2117222C172A500E246E0 /* Build configuration list for PBXNativeTarget "ToDoListApp" */;
+			buildConfigurationList = 59C2117222C172A500E246E0 /* Build configuration list for PBXNativeTarget "TodoListApp_Realm" */;
 			buildPhases = (
 				59C2115C22C172A400E246E0 /* Sources */,
 				59C2115D22C172A400E246E0 /* Frameworks */,
@@ -117,9 +117,9 @@
 			);
 			dependencies = (
 			);
-			name = ToDoListApp;
+			name = TodoListApp_Realm;
 			productName = ToDoListApp;
-			productReference = 59C2116022C172A400E246E0 /* ToDoListApp.app */;
+			productReference = 59C2116022C172A400E246E0 /* TodoListApp_Realm.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -137,7 +137,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 59C2115B22C172A400E246E0 /* Build configuration list for PBXProject "ToDoListApp" */;
+			buildConfigurationList = 59C2115B22C172A400E246E0 /* Build configuration list for PBXProject "TodoListApp_Realm" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -150,7 +150,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				59C2115F22C172A400E246E0 /* ToDoListApp */,
+				59C2115F22C172A400E246E0 /* TodoListApp_Realm */,
 			);
 		};
 /* End PBXProject section */
@@ -316,12 +316,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6QB7F9QKR9;
-				INFOPLIST_FILE = ToDoListApp/Info.plist;
+				INFOPLIST_FILE = TodoListApp_Realm/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tiagopestana.ToDoListApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tiagopestana.TodoListApp-Realm";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -334,12 +334,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6QB7F9QKR9;
-				INFOPLIST_FILE = ToDoListApp/Info.plist;
+				INFOPLIST_FILE = TodoListApp_Realm/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tiagopestana.ToDoListApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tiagopestana.TodoListApp-Realm";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -349,7 +349,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		59C2115B22C172A400E246E0 /* Build configuration list for PBXProject "ToDoListApp" */ = {
+		59C2115B22C172A400E246E0 /* Build configuration list for PBXProject "TodoListApp_Realm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				59C2117022C172A500E246E0 /* Debug */,
@@ -358,7 +358,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		59C2117222C172A500E246E0 /* Build configuration list for PBXNativeTarget "ToDoListApp" */ = {
+		59C2117222C172A500E246E0 /* Build configuration list for PBXNativeTarget "TodoListApp_Realm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				59C2117322C172A500E246E0 /* Debug */,

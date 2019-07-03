@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:ToDoListApp.xcodeproj">
+      location = "self:/Users/tiagopestana/Documents/Swift/SwiftUdemyBootcamp/ToDoListApp_Realm/TodoListApp_Realm.xcodeproj">
    </FileRef>
 </Workspace>
