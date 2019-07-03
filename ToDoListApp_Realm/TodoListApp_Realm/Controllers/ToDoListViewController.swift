@@ -11,6 +11,7 @@ import CoreData
 
 class ToDoListViewController: UIViewController
 {
+    @IBOutlet weak var navbarItem: UINavigationItem!
     @IBOutlet weak var todoTable: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -30,12 +31,12 @@ class ToDoListViewController: UIViewController
         
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
+        navbarItem.title = selectedCategory?.title
+        
         todoTable.delegate = self
         todoTable.dataSource = self
         
         searchBar.delegate = self
-        
-        //loadData()
     }
     
     @IBAction func addItemTapped(_ sender: Any)
