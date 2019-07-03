@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5915B80822CD451600BAFDF5 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5915B80722CD451600BAFDF5 /* Data.swift */; };
 		5950FABD22CBF70F006C9DC8 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5950FABC22CBF70F006C9DC8 /* CategoryViewController.swift */; };
 		5992C38B22CAAECE00BAF201 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5992C38922CAAECE00BAF201 /* DataModel.xcdatamodeld */; };
 		59C2116422C172A400E246E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C2116322C172A400E246E0 /* AppDelegate.swift */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		195F023CB172C2179575F3CF /* Pods-TodoListApp_Realm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoListApp_Realm.release.xcconfig"; path = "Target Support Files/Pods-TodoListApp_Realm/Pods-TodoListApp_Realm.release.xcconfig"; sourceTree = "<group>"; };
 		474C460E9505540C1A62C79F /* Pods-TodoListApp_Realm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoListApp_Realm.debug.xcconfig"; path = "Target Support Files/Pods-TodoListApp_Realm/Pods-TodoListApp_Realm.debug.xcconfig"; sourceTree = "<group>"; };
+		5915B80722CD451600BAFDF5 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		5950FABC22CBF70F006C9DC8 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		5992C38A22CAAECE00BAF201 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		59C2116022C172A400E246E0 /* TodoListApp_Realm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoListApp_Realm.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,7 +52,6 @@
 				474C460E9505540C1A62C79F /* Pods-TodoListApp_Realm.debug.xcconfig */,
 				195F023CB172C2179575F3CF /* Pods-TodoListApp_Realm.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -67,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				5992C38922CAAECE00BAF201 /* DataModel.xcdatamodeld */,
+				5915B80722CD451600BAFDF5 /* Data.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -243,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5950FABD22CBF70F006C9DC8 /* CategoryViewController.swift in Sources */,
+				5915B80822CD451600BAFDF5 /* Data.swift in Sources */,
 				59C2116622C172A400E246E0 /* ToDoListViewController.swift in Sources */,
 				5992C38B22CAAECE00BAF201 /* DataModel.xcdatamodeld in Sources */,
 				59C2116422C172A400E246E0 /* AppDelegate.swift in Sources */,
