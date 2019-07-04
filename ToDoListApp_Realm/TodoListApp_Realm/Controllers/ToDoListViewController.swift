@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class ToDoListViewController: UIViewController
 {
@@ -15,12 +15,13 @@ class ToDoListViewController: UIViewController
     @IBOutlet weak var todoTable: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var array: [Item] = []
+    let realm = try! Realm()
+    var items: Results<Item>?
     var selectedCategory: Category?
     {
         didSet
         {
-            //loadData()
+            loadItems()
         }
     }
     
@@ -54,13 +55,25 @@ class ToDoListViewController: UIViewController
         { (action) in
             if !textField.text!.isEmpty
             {
+                if let category = self.selectedCategory
+                {
+                    do
+                    {
+                        try self.realm.write
+                        {
+                            let newItem = Item()
+                            newItem.message = textField.text!
+                            category.items.append(newItem)
+                            self.save(item: newItem)
+                            
+                        }
+                    }
+                    catch
+                    {
+                        print(error.localizedDescription)
+                    }
+                }
                 
-                let newItem = Item()
-                newItem.message = textField.text!
-                newItem.done = false
-                self.selectedCategory?.items.append(newItem)
-                self.array.append(newItem)
-                self.saveData()
                 self.todoTable.reloadData()
             }
         }
@@ -69,66 +82,41 @@ class ToDoListViewController: UIViewController
         present(alert, animated: true, completion: nil)
     }
     
-//    func saveData()
-//    {
-//        do
-//        {
-//            try context.save()
-//        }
-//        catch
-//        {
-//            print(error.localizedDescription)
-//        }
-//    }
+    func save(item: Item)
+    {
+        
+    }
     
-//    func loadData(with request: NSFetchRequest<TodoItem> = TodoItem.fetchRequest(), predicate: NSPredicate? = nil)
-//    {
-//        let categoryPredicate = NSPredicate(format: "parentCategory.title MATCHES %@", selectedCategory!.title!)
-//
-//        if let additionalPredicate = predicate
-//        {
-//            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
-//        }
-//        else
-//        {
-//            request.predicate = categoryPredicate
-//        }
-//
-//        do
-//        {
-//            array = try context.fetch(request)
-//        }
-//        catch
-//        {
-//            print(error.localizedDescription)
-//        }
-//    }
+    func loadItems()
+    {
+        items = selectedCategory?.items.sorted(byKeyPath: "message", ascending: true)
+    }
 }
 
 extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return array.count
+        return items?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = todoTable.dequeueReusableCell(withIdentifier: "idCell") as! TodoTableCell
-        let item = array[indexPath.row]
-        cell.todoLbl.text = item.message
-        cell.accessoryType = item.done ? .checkmark : .none
+        let item = items?[indexPath.row]
+        cell.todoLbl.text = item?.message
+        cell.accessoryType = (item?.done ?? false) ? .checkmark : .none
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
-        let item = array[indexPath.row]
-        item.done = !item.done
-        todoTable.cellForRow(at: indexPath)?.accessoryType = item.done ? .checkmark : .none
-        saveData()
-        todoTable.deselectRow(at: indexPath, animated: true)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+//    {
+//        let item = items?[indexPath.row]
+//        item.done = !item.done
+//        todoTable.cellForRow(at: indexPath)?.accessoryType = item.done ? .checkmark : .none
+//        save(item: item)
+//        todoTable.deselectRow(at: indexPath, animated: true)
+//    }
     
 //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
 //    {

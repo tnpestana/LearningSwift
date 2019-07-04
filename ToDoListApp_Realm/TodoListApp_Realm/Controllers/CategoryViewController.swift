@@ -13,9 +13,8 @@ class CategoryViewController: UIViewController
 {
     @IBOutlet weak var categoryTable: UITableView!
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let realm = try! Realm()
-    var array: [Category] = []
+    var categories: Results<Category>?
     let categoryTableCellId = "CategoryTableCell"
     
     override func viewDidLoad()
@@ -25,7 +24,7 @@ class CategoryViewController: UIViewController
         categoryTable.delegate = self
         categoryTable.dataSource = self
         
-        //loadData()
+        loadCategories()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -33,7 +32,7 @@ class CategoryViewController: UIViewController
         let destinationVC = segue.destination as! ToDoListViewController
         if let indexPath = categoryTable.indexPathForSelectedRow
         {
-            destinationVC.selectedCategory = array[indexPath.row]
+            destinationVC.selectedCategory = categories?[indexPath.row]
         }
     }
     
@@ -55,7 +54,6 @@ class CategoryViewController: UIViewController
             {
                 let newCategory = Category()
                 newCategory.title = textField.text!
-                self.array.append(newCategory)
                 self.save(category: newCategory)
                 self.categoryTable.reloadData()
             }
@@ -80,30 +78,23 @@ class CategoryViewController: UIViewController
         }
     }
     
-//    func loadData(with request: NSFetchRequest<Category> = Category.fetchRequest())
-//    {
-//        do
-//        {
-//            array = try context.fetch(request)
-//        }
-//        catch
-//        {
-//            print(error.localizedDescription)
-//        }
-//    }
+    func loadCategories()
+    {
+        categories = realm.objects(Category.self)
+    }
 }
 
 extension CategoryViewController: UITableViewDelegate, UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return array.count
+        return categories?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = categoryTable.dequeueReusableCell(withIdentifier: categoryTableCellId) as! CategoryTableCell
-        cell.titleLbl.text = array[indexPath.row].title
+        cell.titleLbl.text = categories?[indexPath.row].title
         return cell
     }
     
