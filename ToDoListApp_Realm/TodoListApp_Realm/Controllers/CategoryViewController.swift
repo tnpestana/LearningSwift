@@ -78,6 +78,21 @@ class CategoryViewController: UIViewController
         }
     }
     
+    func delete(category: Category)
+    {
+        do
+        {
+            try realm.write
+            {
+                realm.delete(category)
+            }
+        }
+        catch
+        {
+            print(error.localizedDescription)
+        }
+    }
+    
     func loadCategories()
     {
         categories = realm.objects(Category.self)
@@ -104,17 +119,7 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource
         {
             if let category = categories?[indexPath.row]
             {
-                do
-                {
-                    try realm.write
-                    {
-                        realm.delete(category)
-                    }
-                }
-                catch
-                {
-                    print(error.localizedDescription)
-                }
+                delete(category)
             }
             categoryTable.reloadData()
         }
