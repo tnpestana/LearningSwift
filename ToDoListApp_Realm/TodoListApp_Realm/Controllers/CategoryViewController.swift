@@ -7,13 +7,14 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class CategoryViewController: UIViewController
 {
     @IBOutlet weak var categoryTable: UITableView!
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let realm = try! Realm()
     var array: [Category] = []
     let categoryTableCellId = "CategoryTableCell"
     
@@ -24,7 +25,7 @@ class CategoryViewController: UIViewController
         categoryTable.delegate = self
         categoryTable.dataSource = self
         
-        loadData()
+        //loadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -52,10 +53,10 @@ class CategoryViewController: UIViewController
         { (action) in
             if !textField.text!.isEmpty
             {
-                let newCategory = Category(context: self.context)
+                let newCategory = Category()
                 newCategory.title = textField.text!
                 self.array.append(newCategory)
-                self.saveData()
+                self.save(category: newCategory)
                 self.categoryTable.reloadData()
             }
         }
@@ -64,11 +65,14 @@ class CategoryViewController: UIViewController
         present(alert, animated: true, completion: nil)
     }
     
-    func saveData()
+    func save(category: Category)
     {
         do
         {
-            try context.save()
+            try realm.write
+            {
+                realm.add(category)
+            }
         }
         catch
         {
@@ -76,17 +80,17 @@ class CategoryViewController: UIViewController
         }
     }
     
-    func loadData(with request: NSFetchRequest<Category> = Category.fetchRequest())
-    {
-        do
-        {
-            array = try context.fetch(request)
-        }
-        catch
-        {
-            print(error.localizedDescription)
-        }
-    }
+//    func loadData(with request: NSFetchRequest<Category> = Category.fetchRequest())
+//    {
+//        do
+//        {
+//            array = try context.fetch(request)
+//        }
+//        catch
+//        {
+//            print(error.localizedDescription)
+//        }
+//    }
 }
 
 extension CategoryViewController: UITableViewDelegate, UITableViewDataSource
@@ -103,16 +107,16 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
-    {
-        if editingStyle == .delete
-        {
-            context.delete(array[indexPath.row])
-            array.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            saveData()
-        }
-    }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
+//    {
+//        if editingStyle == .delete
+//        {
+//            context.delete(array[indexPath.row])
+//            array.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//            save()
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {

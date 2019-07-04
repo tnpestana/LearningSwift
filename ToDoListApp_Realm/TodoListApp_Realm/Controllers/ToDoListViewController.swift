@@ -15,13 +15,12 @@ class ToDoListViewController: UIViewController
     @IBOutlet weak var todoTable: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var array: [TodoItem] = []
+    var array: [Item] = []
     var selectedCategory: Category?
     {
         didSet
         {
-            loadData()
+            //loadData()
         }
     }
     
@@ -36,7 +35,7 @@ class ToDoListViewController: UIViewController
         todoTable.delegate = self
         todoTable.dataSource = self
         
-        searchBar.delegate = self
+        //searchBar.delegate = self
     }
     
     @IBAction func addItemTapped(_ sender: Any)
@@ -56,10 +55,10 @@ class ToDoListViewController: UIViewController
             if !textField.text!.isEmpty
             {
                 
-                let newItem = TodoItem(context: self.context)
+                let newItem = Item()
                 newItem.message = textField.text!
                 newItem.done = false
-                newItem.parentCategory =  self.selectedCategory
+                self.selectedCategory?.items.append(newItem)
                 self.array.append(newItem)
                 self.saveData()
                 self.todoTable.reloadData()
@@ -70,40 +69,40 @@ class ToDoListViewController: UIViewController
         present(alert, animated: true, completion: nil)
     }
     
-    func saveData()
-    {
-        do
-        {
-            try context.save()
-        }
-        catch
-        {
-            print(error.localizedDescription)
-        }
-    }
+//    func saveData()
+//    {
+//        do
+//        {
+//            try context.save()
+//        }
+//        catch
+//        {
+//            print(error.localizedDescription)
+//        }
+//    }
     
-    func loadData(with request: NSFetchRequest<TodoItem> = TodoItem.fetchRequest(), predicate: NSPredicate? = nil)
-    {
-        let categoryPredicate = NSPredicate(format: "parentCategory.title MATCHES %@", selectedCategory!.title!)
-        
-        if let additionalPredicate = predicate
-        {
-            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
-        }
-        else
-        {
-            request.predicate = categoryPredicate
-        }
-        
-        do
-        {
-            array = try context.fetch(request)
-        }
-        catch
-        {
-            print(error.localizedDescription)
-        }
-    }
+//    func loadData(with request: NSFetchRequest<TodoItem> = TodoItem.fetchRequest(), predicate: NSPredicate? = nil)
+//    {
+//        let categoryPredicate = NSPredicate(format: "parentCategory.title MATCHES %@", selectedCategory!.title!)
+//
+//        if let additionalPredicate = predicate
+//        {
+//            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
+//        }
+//        else
+//        {
+//            request.predicate = categoryPredicate
+//        }
+//
+//        do
+//        {
+//            array = try context.fetch(request)
+//        }
+//        catch
+//        {
+//            print(error.localizedDescription)
+//        }
+//    }
 }
 
 extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
@@ -131,48 +130,48 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
         todoTable.deselectRow(at: indexPath, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
-    {
-        if editingStyle == .delete
-        {
-            context.delete(array[indexPath.row])
-            array.remove(at: indexPath.row)
-            todoTable.deleteRows(at: [indexPath], with: .fade)
-            saveData()
-        }
-    }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
+//    {
+//        if editingStyle == .delete
+//        {
+//            context.delete(array[indexPath.row])
+//            array.remove(at: indexPath.row)
+//            todoTable.deleteRows(at: [indexPath], with: .fade)
+//            saveData()
+//        }
+//    }
 }
 
-extension ToDoListViewController: UISearchBarDelegate
-{
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
-    {
-        if !searchBar.text!.isEmpty
-        {
-            let request: NSFetchRequest<TodoItem> = TodoItem.fetchRequest()
-            request.predicate = NSPredicate(format: "message CONTAINS[cd] %@", searchBar.text!)
-            request.sortDescriptors = [NSSortDescriptor(key: "message", ascending: true)]
-            
-            loadData(with: request)
-            
-            todoTable.reloadData()
-        }
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
-    {
-        if searchBar.text!.count == 0
-        {
-            loadData()
-            todoTable.reloadData()
-            
-            DispatchQueue.main.async
-            {
-                searchBar.resignFirstResponder()
-            }
-        }
-    }
-}
+//extension ToDoListViewController: UISearchBarDelegate
+//{
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
+//    {
+//        if !searchBar.text!.isEmpty
+//        {
+//            let request: NSFetchRequest<TodoItem> = TodoItem.fetchRequest()
+//            request.predicate = NSPredicate(format: "message CONTAINS[cd] %@", searchBar.text!)
+//            request.sortDescriptors = [NSSortDescriptor(key: "message", ascending: true)]
+//
+//            loadData(with: request)
+//
+//            todoTable.reloadData()
+//        }
+//    }
+//
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
+//    {
+//        if searchBar.text!.count == 0
+//        {
+//            loadData()
+//            todoTable.reloadData()
+//
+//            DispatchQueue.main.async
+//            {
+//                searchBar.resignFirstResponder()
+//            }
+//        }
+//    }
+//}
 
 class TodoTableCell: UITableViewCell
 {
