@@ -64,8 +64,6 @@ class ToDoListViewController: UIViewController
                             let newItem = Item()
                             newItem.message = textField.text!
                             category.items.append(newItem)
-                            self.save(item: newItem)
-                            
                         }
                     }
                     catch
@@ -73,18 +71,12 @@ class ToDoListViewController: UIViewController
                         print(error.localizedDescription)
                     }
                 }
-                
                 self.todoTable.reloadData()
             }
         }
         alert.addAction(action)
         
         present(alert, animated: true, completion: nil)
-    }
-    
-    func save(item: Item)
-    {
-        
     }
     
     func loadItems()
@@ -103,20 +95,33 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = todoTable.dequeueReusableCell(withIdentifier: "idCell") as! TodoTableCell
-        let item = items?[indexPath.row]
-        cell.todoLbl.text = item?.message
-        cell.accessoryType = (item?.done ?? false) ? .checkmark : .none
+        if let item = items?[indexPath.row]
+        {
+            cell.todoLbl.text = item.message
+            cell.accessoryType = item.done ? .checkmark : .none
+        }
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-//    {
-//        let item = items?[indexPath.row]
-//        item.done = !item.done
-//        todoTable.cellForRow(at: indexPath)?.accessoryType = item.done ? .checkmark : .none
-//        save(item: item)
-//        todoTable.deselectRow(at: indexPath, animated: true)
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        if let item = items?[indexPath.row]
+        {
+            do
+            {
+                try realm.write
+                {
+                    item.done = !item.done
+                }
+            }
+            catch
+            {
+                print(error.localizedDescription)
+            }
+        }
+        todoTable.reloadData()
+        todoTable.deselectRow(at: indexPath, animated: true)
+    }
     
 //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
 //    {
