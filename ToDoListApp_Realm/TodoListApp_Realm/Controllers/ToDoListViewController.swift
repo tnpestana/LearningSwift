@@ -123,16 +123,27 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
         todoTable.deselectRow(at: indexPath, animated: true)
     }
     
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
-//    {
-//        if editingStyle == .delete
-//        {
-//            context.delete(array[indexPath.row])
-//            array.remove(at: indexPath.row)
-//            todoTable.deleteRows(at: [indexPath], with: .fade)
-//            saveData()
-//        }
-//    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
+    {
+        if editingStyle == .delete
+        {
+            if let item = items?[indexPath.row]
+            {
+                do
+                {
+                    try realm.write
+                    {
+                        realm.delete(item)
+                    }
+                }
+                catch
+                {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        todoTable.reloadData()
+    }
 }
 
 //extension ToDoListViewController: UISearchBarDelegate

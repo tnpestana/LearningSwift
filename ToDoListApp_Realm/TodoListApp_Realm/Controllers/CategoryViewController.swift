@@ -98,16 +98,27 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
-//    {
-//        if editingStyle == .delete
-//        {
-//            context.delete(array[indexPath.row])
-//            array.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//            save()
-//        }
-//    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
+    {
+        if editingStyle == .delete
+        {
+            if let category = categories?[indexPath.row]
+            {
+                do
+                {
+                    try realm.write
+                    {
+                        realm.delete(category)
+                    }
+                }
+                catch
+                {
+                    print(error.localizedDescription)
+                }
+            }
+            categoryTable.reloadData()
+        }
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
