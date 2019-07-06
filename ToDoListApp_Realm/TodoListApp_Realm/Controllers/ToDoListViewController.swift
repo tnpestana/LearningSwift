@@ -36,7 +36,7 @@ class ToDoListViewController: UIViewController
         todoTable.delegate = self
         todoTable.dataSource = self
         
-        //searchBar.delegate = self
+        searchBar.delegate = self
     }
     
     @IBAction func addItemTapped(_ sender: Any)
@@ -146,36 +146,31 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
     }
 }
 
-//extension ToDoListViewController: UISearchBarDelegate
-//{
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
-//    {
-//        if !searchBar.text!.isEmpty
-//        {
-//            let request: NSFetchRequest<TodoItem> = TodoItem.fetchRequest()
-//            request.predicate = NSPredicate(format: "message CONTAINS[cd] %@", searchBar.text!)
-//            request.sortDescriptors = [NSSortDescriptor(key: "message", ascending: true)]
-//
-//            loadData(with: request)
-//
-//            todoTable.reloadData()
-//        }
-//    }
-//
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
-//    {
-//        if searchBar.text!.count == 0
-//        {
-//            loadData()
-//            todoTable.reloadData()
-//
-//            DispatchQueue.main.async
-//            {
-//                searchBar.resignFirstResponder()
-//            }
-//        }
-//    }
-//}
+extension ToDoListViewController: UISearchBarDelegate
+{
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
+    {
+        if !searchBar.text!.isEmpty
+        {
+            items = items?.filter("message CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "message", ascending: true)
+            todoTable.reloadData()
+        }
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
+    {
+        if searchBar.text!.count == 0
+        {
+            loadItems()
+            todoTable.reloadData()
+
+            DispatchQueue.main.async
+            {
+                searchBar.resignFirstResponder()
+            }
+        }
+    }
+}
 
 class TodoTableCell: UITableViewCell
 {
