@@ -13,7 +13,7 @@ class CategoryViewController: UIViewController
 {
     @IBOutlet weak var categoryTable: UITableView!
     
-    let realm = try! Realm()
+    lazy var realm = try! Realm()
     var categories: Results<Category>?
     let categoryTableCellId = "CategoryTableCell"
     

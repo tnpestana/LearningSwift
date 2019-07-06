@@ -15,7 +15,7 @@ class ToDoListViewController: UIViewController
     @IBOutlet weak var todoTable: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    let realm = try! Realm()
+    lazy var realm = try! Realm()
     var items: Results<Item>?
     var selectedCategory: Category?
     {
@@ -63,6 +63,7 @@ class ToDoListViewController: UIViewController
                         {
                             let newItem = Item()
                             newItem.message = textField.text!
+                            newItem.dateCreated = Date()
                             category.items.append(newItem)
                         }
                     }
@@ -152,7 +153,7 @@ extension ToDoListViewController: UISearchBarDelegate
     {
         if !searchBar.text!.isEmpty
         {
-            items = items?.filter("message CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "message", ascending: true)
+            items = items?.filter("message CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "dateCreated", ascending: true)
             todoTable.reloadData()
         }
     }

@@ -15,27 +15,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
+    {
+        let configuration = Realm.Configuration(
+            schemaVersion: 1,
+            migrationBlock:
+            { migration, oldSchemaVersion in
+                if oldSchemaVersion < 1
+                {
+                    // fill old items new date property
+                    let date = Date()
+                    migration.enumerateObjects(ofType: Item.className())
+                    { (_, newObject) in
+                        newObject?["dateCreated"] = date
+                    }
+                }
+            })
         
+        Realm.Configuration.defaultConfiguration = configuration
         print(Realm.Configuration.defaultConfiguration.fileURL ?? "Realm file URL not found.")
-        
-        let data = Person()
-        data.name = "Tiago"
-        data.age = 27
-        
-        do
-        {
-            let realm = try Realm()
-            try realm.write
-            {
-                realm.add(data)
-            }
-        }
-        catch
-        {
-            print(error.localizedDescription)
-        }
+        _ = try! Realm()
         
         return true
     }
