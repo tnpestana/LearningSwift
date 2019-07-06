@@ -95,7 +95,7 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = todoTable.dequeueReusableCell(withIdentifier: "idCell") as! TodoTableCell
+        let cell = todoTable.dequeueReusableCell(withIdentifier: "ItemTableCell") as! TodoTableCell
         if let item = items?[indexPath.row]
         {
             cell.todoLbl.text = item.message
@@ -153,7 +153,7 @@ extension ToDoListViewController: UISearchBarDelegate
     {
         if !searchBar.text!.isEmpty
         {
-            items = items?.filter("message CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "dateCreated", ascending: true)
+            items = items?.filter("message CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "dateCreated", ascending: false)
             todoTable.reloadData()
         }
     }
