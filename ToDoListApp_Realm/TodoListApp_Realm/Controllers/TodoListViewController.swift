@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import SwipeCellKit
+import ChameleonFramework
 
 class TodoListViewController: UIViewController
 {
@@ -141,6 +142,11 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource
         {
             cell.textLabel!.text = item.message
             cell.accessoryType = item.done ? .checkmark : .none
+            if let color = UIColor(hexString: selectedCategory?.color ?? "#FFFFFF")?.darken(byPercentage: CGFloat(indexPath.row) / CGFloat(items!.count))
+            {
+                cell.backgroundColor = color
+                cell.textLabel?.textColor = ContrastColorOf(color, returnFlat: true)
+            }
         }
         return cell
     }
