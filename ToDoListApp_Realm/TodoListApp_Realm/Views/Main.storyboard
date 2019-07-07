@@ -22,30 +22,13 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CategoryTableCell" id="Tqa-Xw-6c2" customClass="CategoryTableCell" customModule="TodoListApp_Realm" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CategoryTableCell" id="Tqa-Xw-6c2" customClass="SwipeTableViewCell" customModule="SwipeCellKit">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Tqa-Xw-6c2" id="tuq-3P-CU8">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Tqa-Xw-6c2" id="tuq-3P-CU8" customClass="SwipeTableViewCell">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ja6-dx-Zzd">
-                                                    <rect key="frame" x="20" y="11" width="374" height="22"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="Ja6-dx-Zzd" firstAttribute="top" secondItem="tuq-3P-CU8" secondAttribute="topMargin" id="EyR-fB-nfB"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Ja6-dx-Zzd" secondAttribute="trailing" id="Rf9-o6-Aba"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="Ja6-dx-Zzd" secondAttribute="bottom" id="pZW-fm-AN2"/>
-                                                <constraint firstItem="Ja6-dx-Zzd" firstAttribute="leading" secondItem="tuq-3P-CU8" secondAttribute="leadingMargin" id="utk-u7-rKf"/>
-                                            </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="titleLbl" destination="Ja6-dx-Zzd" id="n1s-Zc-uDc"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

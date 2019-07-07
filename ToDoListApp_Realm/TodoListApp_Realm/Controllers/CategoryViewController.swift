@@ -109,22 +109,23 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = categoryTable.dequeueReusableCell(withIdentifier: categoryTableCellId) as! CategoryTableCell
-        cell.titleLbl.text = categories?[indexPath.row].title
+        let cell = categoryTable.dequeueReusableCell(withIdentifier: categoryTableCellId) as! SwipeTableViewCell
+        cell.delegate = self
+        cell.textLabel?.text = categories?[indexPath.row].title
         return cell
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
-    {
-        if editingStyle == .delete
-        {
-            if let category = categories?[indexPath.row]
-            {
-                delete(category)
-            }
-            categoryTable.reloadData()
-        }
-    }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
+//    {
+//        if editingStyle == .delete
+//        {
+//            if let category = categories?[indexPath.row]
+//            {
+//                delete(category)
+//            }
+//            categoryTable.reloadData()
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
@@ -132,7 +133,20 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource
     }
 }
 
-class CategoryTableCell: UITableViewCell
+extension CategoryViewController: SwipeTableViewCellDelegate
 {
-    @IBOutlet weak var titleLbl: UILabel!
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]?
+    {
+        guard orientation == .right else { return nil }
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete")
+        { (swipeAction, newIndexPath) in
+            if let category = self.categories?[indexPath.row]
+            {
+                self.delete(category)
+            }
+            self.categoryTable.reloadData()
+        }
+        deleteAction.image = nil
+        return [deleteAction]
+    }
 }
