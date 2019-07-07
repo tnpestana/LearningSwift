@@ -64,6 +64,42 @@ class CategoryViewController: UIViewController
         present(alert, animated: true, completion: nil)
     }
     
+    func edit(category: Category)
+    {
+        let alert = UIAlertController(title: "Edit category", message: nil, preferredStyle: .alert)
+        
+        var textField = UITextField()
+        
+        alert.addTextField()
+            { (alertTextField) in
+                alertTextField.text = category.title
+                textField = alertTextField
+        }
+        
+        let action = UIAlertAction(title: "OK", style: .default)
+        { (action) in
+            if !textField.text!.isEmpty
+            {
+                do
+                {
+                    try self.realm.write
+                    {
+                        category.title = textField.text!
+                    }
+                }
+                catch
+                {
+                    print(error.localizedDescription)
+                }
+                self.categoryTable.reloadData()
+            }
+        }
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
     func save(category: Category)
     {
         do
@@ -139,14 +175,20 @@ extension CategoryViewController: SwipeTableViewCellDelegate
     {
         guard orientation == .right else { return nil }
         let deleteAction = SwipeAction(style: .destructive, title: "Delete")
-        { (swipeAction, newIndexPath) in
+        { _, _ in
             if let category = self.categories?[indexPath.row]
             {
-                self.delete(category)
+                self.delete(category: category)
             }
             self.categoryTable.reloadData()
         }
-        deleteAction.image = nil
-        return [deleteAction]
+        let editAction = SwipeAction(style: .default, title: "Edit")
+        { _, _ in
+            if let category = self.categories?[indexPath.row]
+            {
+                self.edit(category: category)
+            }
+        }
+        return [deleteAction, editAction]
     }
 }
