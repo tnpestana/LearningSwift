@@ -20,12 +20,18 @@ class TodoListViewController: UIViewController
     lazy var realm = try! Realm()
     var items: Results<Item>?
     var categoryColor: UIColor?
+    
     var selectedCategory: Category?
     {
         didSet
         {
             loadItems()
         }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle
+    {
+        return .lightContent
     }
     
     override func viewDidLoad()

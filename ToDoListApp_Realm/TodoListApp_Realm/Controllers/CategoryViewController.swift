@@ -19,6 +19,11 @@ class CategoryViewController: UIViewController
     var categories: Results<Category>?
     let categoryTableCellId = "CategoryTableCell"
     
+    override var preferredStatusBarStyle: UIStatusBarStyle
+    {
+        return .lightContent
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -29,8 +34,8 @@ class CategoryViewController: UIViewController
     
     override func viewWillAppear(_ animated: Bool)
     {
-        self.navigationController?.navigationBar.barTintColor = .black
-        self.navigationController?.navigationBar.tintColor = ContrastColorOf(.black, returnFlat: true)
+        navigationController?.navigationBar.barTintColor = .black
+        navigationController?.navigationBar.tintColor = ContrastColorOf(.black, returnFlat: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -147,8 +152,12 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource
     {
         let cell = categoryTable.dequeueReusableCell(withIdentifier: categoryTableCellId) as! SwipeTableViewCell
         cell.delegate = self
-        cell.backgroundColor = UIColor(hexString: categories?[indexPath.row].color ?? "#FFFFFF")
         cell.textLabel?.text = categories?[indexPath.row].title
+        if let color = UIColor(hexString: categories?[indexPath.row].color ?? "#FFFFFF")
+        {
+            cell.backgroundColor = color
+            cell.textLabel?.textColor = ContrastColorOf(color, returnFlat: true)
+        }
         return cell
     }
     

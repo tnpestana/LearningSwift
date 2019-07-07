@@ -31,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
             })
-        
         Realm.Configuration.defaultConfiguration = configuration
         print(Realm.Configuration.defaultConfiguration.fileURL ?? "Realm file URL not found.")
         _ = try! Realm()
