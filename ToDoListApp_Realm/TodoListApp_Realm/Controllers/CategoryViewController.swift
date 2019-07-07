@@ -27,6 +27,12 @@ class CategoryViewController: UIViewController
         loadCategories()
     }
     
+    override func viewWillAppear(_ animated: Bool)
+    {
+        self.navigationController?.navigationBar.barTintColor = .black
+        self.navigationController?.navigationBar.tintColor = ContrastColorOf(.black, returnFlat: true)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         let destinationVC = segue.destination as! TodoListViewController

@@ -19,6 +19,7 @@ class TodoListViewController: UIViewController
     
     lazy var realm = try! Realm()
     var items: Results<Item>?
+    var categoryColor: UIColor?
     var selectedCategory: Category?
     {
         didSet
@@ -31,6 +32,9 @@ class TodoListViewController: UIViewController
     {
         super.viewDidLoad()
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        categoryColor = UIColor(hexString: selectedCategory?.color ?? "#FFFFFF")
+        self.navigationController?.navigationBar.barTintColor = categoryColor
+        self.navigationController?.navigationBar.tintColor = ContrastColorOf(categoryColor!, returnFlat: true)
         navbarItem.title = selectedCategory?.title
         todoTable.delegate = self
         todoTable.dataSource = self
