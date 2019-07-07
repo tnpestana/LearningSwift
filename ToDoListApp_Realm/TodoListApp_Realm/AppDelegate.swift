@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import RealmSwift
+import ChameleonFramework
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,16 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
         let configuration = Realm.Configuration(
-            schemaVersion: 1,
+            schemaVersion: 2,
             migrationBlock:
             { migration, oldSchemaVersion in
-                if oldSchemaVersion < 1
+                if oldSchemaVersion < 2
                 {
                     // fill old items new date property
-                    let date = Date()
-                    migration.enumerateObjects(ofType: Item.className())
+                    migration.enumerateObjects(ofType: Category.className())
                     { (_, newObject) in
-                        newObject?["dateCreated"] = date
+                        newObject?["color"] = UIColor.randomFlat.hexValue()
                     }
                 }
             })
