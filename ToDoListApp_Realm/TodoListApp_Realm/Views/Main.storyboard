@@ -62,7 +62,7 @@
         <!--To do-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ToDoListViewController" customModule="TodoListApp_Realm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="TodoListViewController" customModule="TodoListApp_Realm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -76,30 +76,13 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ItemTableCell" id="6XS-ud-OXX" customClass="TodoTableCell" customModule="TodoListApp_Realm" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ItemTableCell" id="6XS-ud-OXX" customClass="SwipeTableViewCell" customModule="SwipeCellKit">
                                         <rect key="frame" x="0.0" y="72" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6XS-ud-OXX" id="DQl-ZW-BgI">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05a-h5-ykc">
-                                                    <rect key="frame" x="20" y="11" width="374" height="22"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="05a-h5-ykc" secondAttribute="bottom" id="MWV-at-LM0"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="05a-h5-ykc" secondAttribute="trailing" id="SUr-d4-sTL"/>
-                                                <constraint firstItem="05a-h5-ykc" firstAttribute="leading" secondItem="DQl-ZW-BgI" secondAttribute="leadingMargin" id="jE8-iP-yk3"/>
-                                                <constraint firstItem="05a-h5-ykc" firstAttribute="top" secondItem="DQl-ZW-BgI" secondAttribute="topMargin" id="nQQ-HU-8xK"/>
-                                            </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="todoLbl" destination="05a-h5-ykc" id="8nv-mk-qNU"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

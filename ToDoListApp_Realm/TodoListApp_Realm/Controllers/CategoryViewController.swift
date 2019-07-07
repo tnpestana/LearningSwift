@@ -21,16 +21,14 @@ class CategoryViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
         categoryTable.delegate = self
         categoryTable.dataSource = self
-        
         loadCategories()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        let destinationVC = segue.destination as! ToDoListViewController
+        let destinationVC = segue.destination as! TodoListViewController
         if let indexPath = categoryTable.indexPathForSelectedRow
         {
             destinationVC.selectedCategory = categories?[indexPath.row]
@@ -40,15 +38,12 @@ class CategoryViewController: UIViewController
     @IBAction func addBtnTapped(_ sender: Any)
     {
         let alert = UIAlertController(title: "Add new category", message: nil, preferredStyle: .alert)
-        
         var textField = UITextField()
-        
-        alert.addTextField()
-            { (alertTextField) in
-                alertTextField.placeholder = "Create new category"
-                textField = alertTextField
+        alert.addTextField
+        { (alertTextField) in
+            alertTextField.placeholder = "Create new category"
+            textField = alertTextField
         }
-        
         let action = UIAlertAction(title: "OK", style: .default)
         { (action) in
             if !textField.text!.isEmpty
@@ -60,20 +55,17 @@ class CategoryViewController: UIViewController
             }
         }
         alert.addAction(action)
-        
         present(alert, animated: true, completion: nil)
     }
     
     func edit(category: Category)
     {
         let alert = UIAlertController(title: "Edit category", message: nil, preferredStyle: .alert)
-        
         var textField = UITextField()
-        
-        alert.addTextField()
-            { (alertTextField) in
-                alertTextField.text = category.title
-                textField = alertTextField
+        alert.addTextField
+        { (alertTextField) in
+            alertTextField.text = category.title
+            textField = alertTextField
         }
         
         let action = UIAlertAction(title: "OK", style: .default)
@@ -150,18 +142,6 @@ extension CategoryViewController: UITableViewDelegate, UITableViewDataSource
         cell.textLabel?.text = categories?[indexPath.row].title
         return cell
     }
-    
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
-//    {
-//        if editingStyle == .delete
-//        {
-//            if let category = categories?[indexPath.row]
-//            {
-//                delete(category)
-//            }
-//            categoryTable.reloadData()
-//        }
-//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {

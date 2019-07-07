@@ -8,8 +8,9 @@
 
 import UIKit
 import RealmSwift
+import SwipeCellKit
 
-class ToDoListViewController: UIViewController
+class TodoListViewController: UIViewController
 {
     @IBOutlet weak var navbarItem: UINavigationItem!
     @IBOutlet weak var todoTable: UITableView!
@@ -28,23 +29,17 @@ class ToDoListViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-        
         navbarItem.title = selectedCategory?.title
-        
         todoTable.delegate = self
         todoTable.dataSource = self
-        
         searchBar.delegate = self
     }
     
     @IBAction func addItemTapped(_ sender: Any)
     {
         let alert = UIAlertController(title: "Add new item", message: nil, preferredStyle: .alert)
-        
         var textField = UITextField()
-        
         alert.addTextField()
         { (alertTextField) in
             alertTextField.placeholder = "Create new item"
@@ -76,7 +71,52 @@ class ToDoListViewController: UIViewController
             }
         }
         alert.addAction(action)
-        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func delete(item: Item)
+    {
+        do
+        {
+            try realm.write
+            {
+                realm.delete(item)
+            }
+        }
+        catch
+        {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func edit(item: Item)
+    {
+        let alert = UIAlertController(title: "Edit category", message: nil, preferredStyle: .alert)
+        var textField = UITextField()
+        alert.addTextField()
+        { (alertTextField) in
+                alertTextField.text = item.message
+                textField = alertTextField
+        }
+        let action = UIAlertAction(title: "OK", style: .default)
+        { (action) in
+            if !textField.text!.isEmpty
+            {
+                do
+                {
+                    try self.realm.write
+                    {
+                        item.message = textField.text!
+                    }
+                }
+                catch
+                {
+                    print(error.localizedDescription)
+                }
+                self.todoTable.reloadData()
+            }
+        }
+        alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
     
@@ -86,7 +126,7 @@ class ToDoListViewController: UIViewController
     }
 }
 
-extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
+extension TodoListViewController: UITableViewDelegate, UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
@@ -95,10 +135,11 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = todoTable.dequeueReusableCell(withIdentifier: "ItemTableCell") as! TodoTableCell
+        let cell = todoTable.dequeueReusableCell(withIdentifier: "ItemTableCell") as! SwipeTableViewCell
+        cell.delegate = self
         if let item = items?[indexPath.row]
         {
-            cell.todoLbl.text = item.message
+            cell.textLabel!.text = item.message
             cell.accessoryType = item.done ? .checkmark : .none
         }
         return cell
@@ -123,31 +164,9 @@ extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource
         todoTable.reloadData()
         todoTable.deselectRow(at: indexPath, animated: true)
     }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
-    {
-        if editingStyle == .delete
-        {
-            if let item = items?[indexPath.row]
-            {
-                do
-                {
-                    try realm.write
-                    {
-                        realm.delete(item)
-                    }
-                }
-                catch
-                {
-                    print(error.localizedDescription)
-                }
-            }
-        }
-        todoTable.reloadData()
-    }
 }
 
-extension ToDoListViewController: UISearchBarDelegate
+extension TodoListViewController: UISearchBarDelegate
 {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
     {
@@ -164,7 +183,6 @@ extension ToDoListViewController: UISearchBarDelegate
         {
             loadItems()
             todoTable.reloadData()
-
             DispatchQueue.main.async
             {
                 searchBar.resignFirstResponder()
@@ -173,7 +191,26 @@ extension ToDoListViewController: UISearchBarDelegate
     }
 }
 
-class TodoTableCell: UITableViewCell
+extension TodoListViewController: SwipeTableViewCellDelegate
 {
-    @IBOutlet weak var todoLbl: UILabel!
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]?
+    {
+        guard orientation == .right else { return nil }
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete")
+        { _, _ in
+            if let item = self.items?[indexPath.row]
+            {
+                self.delete(item: item)
+            }
+            self.todoTable.reloadData()
+        }
+        let editAction = SwipeAction(style: .default, title: "Edit")
+        { _, _ in
+            if let item = self.items?[indexPath.row]
+            {
+                self.edit(item: item)
+            }
+        }
+        return [deleteAction, editAction]
+    }
 }
