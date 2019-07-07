@@ -155,6 +155,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource
             if let color = UIColor(hexString: selectedCategory?.color ?? "#FFFFFF")?.darken(byPercentage: CGFloat(indexPath.row) / CGFloat(items!.count))
             {
                 cell.backgroundColor = color
+                cell.tintColor = ContrastColorOf(color, returnFlat: true)
                 cell.textLabel?.textColor = ContrastColorOf(color, returnFlat: true)
             }
         }
