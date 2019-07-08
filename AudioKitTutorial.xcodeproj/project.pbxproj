@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		5987758A22D2962500CDD46D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5987758922D2962500CDD46D /* AppDelegate.swift */; };
-		5987758C22D2962500CDD46D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5987758B22D2962500CDD46D /* ViewController.swift */; };
+		5987758C22D2962500CDD46D /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5987758B22D2962500CDD46D /* PlayerViewController.swift */; };
 		5987758F22D2962500CDD46D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5987758D22D2962500CDD46D /* Main.storyboard */; };
 		5987759122D2962600CDD46D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5987759022D2962600CDD46D /* Assets.xcassets */; };
 		5987759422D2962600CDD46D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5987759222D2962600CDD46D /* LaunchScreen.storyboard */; };
+		5987759C22D3D7AB00CDD46D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5987759B22D3D7AB00CDD46D /* MenuViewController.swift */; };
+		598775A222D3D91900CDD46D /* MicAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598775A122D3D91900CDD46D /* MicAnalysisViewController.swift */; };
 		CA503852A0934E773414CD16 /* Pods_AudioKitTutorial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03187E8AF65704FF979938CA /* Pods_AudioKitTutorial.framework */; };
 /* End PBXBuildFile section */
 
@@ -21,11 +23,13 @@
 		1467B262A2D25EC32068CABB /* Pods-AudioKitTutorial.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioKitTutorial.debug.xcconfig"; path = "Target Support Files/Pods-AudioKitTutorial/Pods-AudioKitTutorial.debug.xcconfig"; sourceTree = "<group>"; };
 		5987758622D2962500CDD46D /* AudioKitTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioKitTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5987758922D2962500CDD46D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5987758B22D2962500CDD46D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5987758B22D2962500CDD46D /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		5987758E22D2962500CDD46D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5987759022D2962600CDD46D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5987759322D2962600CDD46D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5987759522D2962600CDD46D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5987759B22D3D7AB00CDD46D /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		598775A122D3D91900CDD46D /* MicAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicAnalysisViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,13 +74,47 @@
 			isa = PBXGroup;
 			children = (
 				5987758922D2962500CDD46D /* AppDelegate.swift */,
-				5987758B22D2962500CDD46D /* ViewController.swift */,
-				5987758D22D2962500CDD46D /* Main.storyboard */,
-				5987759022D2962600CDD46D /* Assets.xcassets */,
-				5987759222D2962600CDD46D /* LaunchScreen.storyboard */,
 				5987759522D2962600CDD46D /* Info.plist */,
+				598775A022D3D8DD00CDD46D /* Supporting Files */,
+				5987759F22D3D8D700CDD46D /* Model */,
+				5987759E22D3D8CB00CDD46D /* Controller */,
+				5987759D22D3D8C200CDD46D /* View */,
 			);
 			path = AudioKitTutorial;
+			sourceTree = "<group>";
+		};
+		5987759D22D3D8C200CDD46D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5987758D22D2962500CDD46D /* Main.storyboard */,
+				5987759222D2962600CDD46D /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5987759E22D3D8CB00CDD46D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5987758B22D2962500CDD46D /* PlayerViewController.swift */,
+				5987759B22D3D7AB00CDD46D /* MenuViewController.swift */,
+				598775A122D3D91900CDD46D /* MicAnalysisViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5987759F22D3D8D700CDD46D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		598775A022D3D8DD00CDD46D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5987759022D2962600CDD46D /* Assets.xcassets */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		E5CF43E6B1018F548A7A0EE9 /* Pods */ = {
@@ -85,7 +123,6 @@
 				1467B262A2D25EC32068CABB /* Pods-AudioKitTutorial.debug.xcconfig */,
 				114EA8276E011E1CAF1C152F /* Pods-AudioKitTutorial.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -186,7 +223,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5987758C22D2962500CDD46D /* ViewController.swift in Sources */,
+				5987758C22D2962500CDD46D /* PlayerViewController.swift in Sources */,
+				5987759C22D3D7AB00CDD46D /* MenuViewController.swift in Sources */,
+				598775A222D3D91900CDD46D /* MicAnalysisViewController.swift in Sources */,
 				5987758A22D2962500CDD46D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

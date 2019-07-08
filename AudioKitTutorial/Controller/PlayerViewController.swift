@@ -9,10 +9,9 @@
 import UIKit
 import AudioKit
 
-class ViewController: UIViewController
+class PlayerViewController: UIViewController
 {
     let oscillator = AKOscillator()
-    //let mic = AKMicrophone()
         
     override func viewDidLoad()
     {
@@ -33,29 +32,15 @@ class ViewController: UIViewController
         if oscillator.isPlaying
         {
             oscillator.stop()
-            sender.setTitle("Play Sine Wave", for: .normal)
+            sender.setTitle("Play", for: .normal)
         }
         else
         {
             oscillator.amplitude = random(in: 0.5...1)
             oscillator.frequency = random(in: 220...880)
             oscillator.start()
-            sender.setTitle("Stop Sine Wave", for: .normal)
+            sender.setTitle("Stop", for: .normal)
         }
     }
-    
-//    @IBAction func recordAction(_ sender: UIButton)
-//    {
-//        if mic!.isPlaying
-//        {
-//            mic?.stop()
-//            sender.setTitle("Start Recording", for: .normal)
-//        }
-//        else
-//        {
-//            mic?.start()
-//            sender.setTitle("Start Recording", for: .normal)
-//        }
-//    }
 }
 
