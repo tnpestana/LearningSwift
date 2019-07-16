@@ -49,6 +49,12 @@ class MicAnalysisViewController: UIViewController
                              repeats: true)
     }
     
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        do { try AudioKit.stop() }
+        catch { print(error.localizedDescription) }
+    }
+    
     func setupPlot()
     {
         let plot = AKNodeOutputPlot(mic, frame: audioInputPlot.bounds)

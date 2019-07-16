@@ -17,14 +17,15 @@ class PlayerViewController: UIViewController
     {
         super.viewDidLoad()
         AudioKit.output = AKMixer(oscillator)
-        do
-        {
-            try AudioKit.start()
-        }
-        catch
-        {
-            print(error.localizedDescription)
-        }
+        
+        do { try AudioKit.start() }
+        catch { print(error.localizedDescription) }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        do { try AudioKit.stop() }
+        catch { print(error.localizedDescription) }
     }
     
     @IBAction func playAction(_ sender: UIButton)
