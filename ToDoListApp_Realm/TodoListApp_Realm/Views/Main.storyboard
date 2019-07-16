@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ifp-5d-bfC">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CategoryTableCell" id="Tqa-Xw-6c2" customClass="SwipeTableViewCell" customModule="SwipeCellKit">
@@ -37,7 +37,7 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="ifp-5d-bfC" secondAttribute="bottom" id="0Ya-hN-atM"/>
                             <constraint firstItem="ifp-5d-bfC" firstAttribute="trailing" secondItem="w7U-E2-yUy" secondAttribute="trailing" id="T8b-zd-eKn"/>
-                            <constraint firstItem="ifp-5d-bfC" firstAttribute="top" secondItem="w7U-E2-yUy" secondAttribute="top" id="VQQ-Wz-VwI"/>
+                            <constraint firstItem="ifp-5d-bfC" firstAttribute="top" secondItem="jm7-5w-lRC" secondAttribute="top" id="wrN-wu-8Zn"/>
                             <constraint firstItem="ifp-5d-bfC" firstAttribute="leading" secondItem="w7U-E2-yUy" secondAttribute="leading" id="yhM-7e-pct"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="w7U-E2-yUy"/>
@@ -68,7 +68,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZuL-yZ-edX">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="039-aX-jxn">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -92,7 +92,7 @@
                             <constraint firstAttribute="bottom" secondItem="ZuL-yZ-edX" secondAttribute="bottom" id="9iM-Mc-OSJ"/>
                             <constraint firstItem="ZuL-yZ-edX" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="SCW-83-doW"/>
                             <constraint firstItem="ZuL-yZ-edX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="l8d-C1-58f"/>
-                            <constraint firstItem="ZuL-yZ-edX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="vcV-Rx-ZHW"/>
+                            <constraint firstItem="ZuL-yZ-edX" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="vcV-Rx-ZHW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
