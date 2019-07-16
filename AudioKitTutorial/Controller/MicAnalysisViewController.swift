@@ -16,11 +16,15 @@ class MicAnalysisViewController: UIViewController
     @IBOutlet weak var frequencyLbl: UILabel!
     @IBOutlet weak var amplitudeLbl: UILabel!
     @IBOutlet weak var sharpNotesLbl: UILabel!
+    @IBOutlet weak var startBtn: UIButton!
+    @IBOutlet weak var stopBtn: UIButton!
     @IBOutlet var flatNotesLbl: UILabel!
     
     var mic: AKMicrophone?
     var tracker: AKFrequencyTracker?
     var silence: AKBooster?
+    var plot: AKNodeOutputPlot?
+    var timer: Timer?
     var noteFrequencies: [Double] = [16.35, 17.32, 18.35, 19.45, 20.6, 21.83, 23.12, 24.5, 25.96, 27.5, 29.14, 30.87]
     var noteNamesWithSharps: [String] = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"]
     var noteNamesWithFlats: [String] = ["C", "D♭", "D", "E♭", "E", "F", "G♭", "G", "A♭", "A", "B♭", "B"]
@@ -32,21 +36,15 @@ class MicAnalysisViewController: UIViewController
         mic = AKMicrophone()
         tracker = AKFrequencyTracker(mic)
         silence = AKBooster(tracker, gain: 0)
+        stopBtn.isEnabled = false
     }
     
     override func viewDidAppear(_ animated: Bool)
     {
         AudioKit.output = silence
-        
         do { try AudioKit.start() }
         catch { print(error.localizedDescription) }
-        
         setupPlot()
-        Timer.scheduledTimer(timeInterval: 0.1,
-                             target: self,
-                             selector: #selector(updateUI),
-                             userInfo: nil,
-                             repeats: true)
     }
     
     override func viewWillDisappear(_ animated: Bool)
@@ -55,14 +53,37 @@ class MicAnalysisViewController: UIViewController
         catch { print(error.localizedDescription) }
     }
     
+    @IBAction func startButtonPressed(_ sender: Any)
+    {
+        guard timer == nil else { return }
+        timer = Timer.scheduledTimer(timeInterval: 0.1,
+                             target: self,
+                             selector: #selector(updateUI),
+                             userInfo: nil,
+                             repeats: true)
+        plot?.resume()
+        startBtn.isEnabled = false
+        stopBtn.isEnabled = true
+    }
+
+    @IBAction func stopButtonPressed(_ sender: Any)
+    {
+        plot?.pause()
+        timer?.invalidate()
+        timer = nil
+        startBtn.isEnabled = true
+        stopBtn.isEnabled = false
+    }
+    
     func setupPlot()
     {
-        let plot = AKNodeOutputPlot(mic, frame: audioInputPlot.bounds)
-        plot.plotType = .rolling
-        plot.shouldFill = true
-        plot.shouldMirror = true
-        plot.color = .blue
-        audioInputPlot.addSubview(plot)
+        plot = AKNodeOutputPlot(mic, frame: audioInputPlot.bounds)
+        plot?.plotType = .rolling
+        plot?.shouldFill = true
+        plot?.shouldMirror = true
+        plot?.color = .blue
+        plot?.pause()
+        audioInputPlot.addSubview(plot!)
     }
     
     @objc func updateUI()
