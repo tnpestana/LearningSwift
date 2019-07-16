@@ -16,9 +16,9 @@ class MicAnalysisViewController: UIViewController
     @IBOutlet weak var frequencyLbl: UILabel!
     @IBOutlet weak var amplitudeLbl: UILabel!
     @IBOutlet weak var sharpNotesLbl: UILabel!
+    @IBOutlet weak var flatNotesLbl: UILabel!
     @IBOutlet weak var startBtn: UIButton!
     @IBOutlet weak var stopBtn: UIButton!
-    @IBOutlet var flatNotesLbl: UILabel!
     
     var mic: AKMicrophone?
     var tracker: AKFrequencyTracker?
@@ -32,6 +32,10 @@ class MicAnalysisViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        frequencyLbl.text = "0.0"
+        amplitudeLbl.text = "0.0"
+        sharpNotesLbl.text = noteNamesWithSharps[0]
+        flatNotesLbl.text = noteNamesWithFlats[0]
         AKSettings.audioInputEnabled = true
         mic = AKMicrophone()
         tracker = AKFrequencyTracker(mic)
