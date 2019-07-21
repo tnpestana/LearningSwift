@@ -77,6 +77,47 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		59C478A222E4A12300BD5560 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				59F656AF22B6C2E20086A02F /* Message.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		59C478A322E4A12F00BD5560 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				59F6569822B685650086A02F /* LaunchScreen.storyboard */,
+				59F6569322B685640086A02F /* Main.storyboard */,
+				59F656AC22B6B7B00086A02F /* ChatMessageTableViewCell.xib */,
+				59C0AAB122B95E9A007073C8 /* UserMessageTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		59C478A422E4A13500BD5560 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				59F6569122B685640086A02F /* ViewController.swift */,
+				59F656A522B68F390086A02F /* RegisterViewController.swift */,
+				59F656A322B68F2C0086A02F /* LoginViewController.swift */,
+				59F656A722B694050086A02F /* ChatViewController.swift */,
+				59F656AB22B6B7B00086A02F /* ChatMessageTableViewCell.swift */,
+				59C0AAB022B95E9A007073C8 /* UserMessageTableViewCell.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		59C478A522E4A17100BD5560 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				59F6569622B685650086A02F /* Assets.xcassets */,
+				59F656A922B6AFB00086A02F /* Utilities.swift */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		59F6568322B685640086A02F = {
 			isa = PBXGroup;
 			children = (
@@ -98,22 +139,13 @@
 		59F6568E22B685640086A02F /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
-				59F6569622B685650086A02F /* Assets.xcassets */,
 				59F6569B22B685650086A02F /* Info.plist */,
 				59F656A122B686780086A02F /* GoogleService-Info.plist */,
 				59F6568F22B685640086A02F /* AppDelegate.swift */,
-				59F6569822B685650086A02F /* LaunchScreen.storyboard */,
-				59F6569322B685640086A02F /* Main.storyboard */,
-				59F6569122B685640086A02F /* ViewController.swift */,
-				59F656A522B68F390086A02F /* RegisterViewController.swift */,
-				59F656A322B68F2C0086A02F /* LoginViewController.swift */,
-				59F656A722B694050086A02F /* ChatViewController.swift */,
-				59F656A922B6AFB00086A02F /* Utilities.swift */,
-				59F656AF22B6C2E20086A02F /* Message.swift */,
-				59F656AB22B6B7B00086A02F /* ChatMessageTableViewCell.swift */,
-				59F656AC22B6B7B00086A02F /* ChatMessageTableViewCell.xib */,
-				59C0AAB022B95E9A007073C8 /* UserMessageTableViewCell.swift */,
-				59C0AAB122B95E9A007073C8 /* UserMessageTableViewCell.xib */,
+				59C478A522E4A17100BD5560 /* Supporting Files */,
+				59C478A422E4A13500BD5560 /* Controller */,
+				59C478A322E4A12F00BD5560 /* View */,
+				59C478A222E4A12300BD5560 /* Model */,
 			);
 			path = ChatApp;
 			sourceTree = "<group>";
