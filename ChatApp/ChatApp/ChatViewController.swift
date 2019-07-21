@@ -55,7 +55,11 @@ class ChatViewController: UIViewController
             
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear, animations:
                 {
-                    self.bottomConstraintSendMessage.constant = isKeyboardShowing ? (-keyboardFrame.height + UIApplication.shared.keyWindow!.safeAreaInsets.bottom) : 0
+                    if #available(iOS 11.0, *) {
+                        self.bottomConstraintSendMessage.constant = isKeyboardShowing ? (-keyboardFrame.height + UIApplication.shared.keyWindow!.safeAreaInsets.bottom) : 0
+                    } else {
+                        self.bottomConstraintSendMessage.constant = isKeyboardShowing ? (-keyboardFrame.height) : 0
+                    }
                     self.view.layoutIfNeeded()
                 })
             { (completed) in
