@@ -12,6 +12,7 @@ import SVProgressHUD
 
 class RegisterViewController: UIViewController
 {
+    @IBOutlet weak var txtUsername: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     
@@ -35,17 +36,35 @@ class RegisterViewController: UIViewController
         }
         
         SVProgressHUD.show()
-        
         Auth.auth().createUser(withEmail: email, password: password)
         { (user, error) in
             if let error = error
             {
                 self.showAlert(message: error.localizedDescription)
+                SVProgressHUD.dismiss()
             }
             else
             {
                 print("registration successful")
-                SVProgressHUD.dismiss()
+                let usersDictionary = ["Email" : Auth.auth().currentUser?.email,
+                                       "Username" : self.txtUsername.text]
+                let usersDB = Database.database().reference().child("Users")
+                usersDB.childByAutoId().setValue(usersDictionary)
+                { (error, reference) in
+                    if let error = error
+                    {
+                        self.showAlert(message: error.localizedDescription)
+                        SVProgressHUD.dismiss()
+                    }
+                    else
+                    {
+                        self.txtUsername.text = ""
+                        self.txtEmail.text = ""
+                        self.txtPassword.text = ""
+                        self.resignFirstResponder()
+                    }
+                    SVProgressHUD.dismiss()
+                }
                 self.performSegue(withIdentifier: "registerSegue", sender: self)
             }
         }

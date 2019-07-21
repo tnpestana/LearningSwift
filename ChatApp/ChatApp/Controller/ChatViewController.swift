@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 class ChatViewController: UIViewController
 {
@@ -127,6 +128,7 @@ class ChatViewController: UIViewController
     
     func retrieveMessages()
     {
+        SVProgressHUD.show()
         let messagesDB = Database.database().reference().child("Messages")
         messagesDB.observe(.childAdded)
         { (snapshot) in
@@ -140,6 +142,7 @@ class ChatViewController: UIViewController
             
             self.configureTableView()
             self.tableMessages.reloadData()
+            SVProgressHUD.dismiss()
         }
     }
 }
