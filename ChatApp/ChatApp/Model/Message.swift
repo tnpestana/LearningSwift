@@ -10,12 +10,16 @@ import Foundation
 
 class Message
 {
-    internal init(sender: String?, body: String?)
+    var sender: String?
+    var body: String?
+    var date: String?
+    var dateLblHidden: Bool?
+    
+    internal init(sender: String?, body: String?, date: String?)
     {
         self.sender = sender
         self.body = body
+        self.date = date
+        self.dateLblHidden = true
     }
-    
-    var sender: String?
-    var body: String?
 }

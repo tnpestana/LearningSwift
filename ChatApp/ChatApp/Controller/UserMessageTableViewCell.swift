@@ -15,6 +15,7 @@ class UserMessageTableViewCell: UITableViewCell {
     @IBOutlet weak var lblMessage: UILabel!
     @IBOutlet weak var viewSender: UIView!
     @IBOutlet weak var imgSender: UIImageView!
+    @IBOutlet weak var lblDate: UILabel!
     
     override func awakeFromNib()
     {
@@ -31,13 +32,10 @@ class UserMessageTableViewCell: UITableViewCell {
     func setup(message: Message)
     {
         lblMessage.text = message.body
+        lblDate.text = message.date
         viewMessage.backgroundColor = UIColor(rgb: 0x007AFF, alphaVal: 1.0)
         lblMessage.textColor = .white
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool)
-    {
-        super.setSelected(selected, animated: animated)
+        lblDate.isHidden = message.dateLblHidden!
     }
 }
 

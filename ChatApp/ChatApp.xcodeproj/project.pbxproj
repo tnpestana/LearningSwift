@@ -10,7 +10,6 @@
 		59C0AAB222B95E9A007073C8 /* UserMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C0AAB022B95E9A007073C8 /* UserMessageTableViewCell.swift */; };
 		59C0AAB322B95E9A007073C8 /* UserMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59C0AAB122B95E9A007073C8 /* UserMessageTableViewCell.xib */; };
 		59F6569022B685640086A02F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F6568F22B685640086A02F /* AppDelegate.swift */; };
-		59F6569222B685640086A02F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F6569122B685640086A02F /* ViewController.swift */; };
 		59F6569522B685640086A02F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59F6569322B685640086A02F /* Main.storyboard */; };
 		59F6569722B685650086A02F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59F6569622B685650086A02F /* Assets.xcassets */; };
 		59F6569A22B685650086A02F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59F6569822B685650086A02F /* LaunchScreen.storyboard */; };
@@ -31,7 +30,6 @@
 		59C0AAB122B95E9A007073C8 /* UserMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserMessageTableViewCell.xib; sourceTree = "<group>"; };
 		59F6568C22B685640086A02F /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59F6568F22B685640086A02F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		59F6569122B685640086A02F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		59F6569422B685640086A02F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		59F6569622B685650086A02F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		59F6569922B685650086A02F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -99,7 +97,6 @@
 		59C478A422E4A13500BD5560 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				59F6569122B685640086A02F /* ViewController.swift */,
 				59F656A522B68F390086A02F /* RegisterViewController.swift */,
 				59F656A322B68F2C0086A02F /* LoginViewController.swift */,
 				59F656A722B694050086A02F /* ChatViewController.swift */,
@@ -271,7 +268,6 @@
 				59F656AA22B6AFB00086A02F /* Utilities.swift in Sources */,
 				59F656B022B6C2E20086A02F /* Message.swift in Sources */,
 				59F656A422B68F2C0086A02F /* LoginViewController.swift in Sources */,
-				59F6569222B685640086A02F /* ViewController.swift in Sources */,
 				59F6569022B685640086A02F /* AppDelegate.swift in Sources */,
 				59C0AAB222B95E9A007073C8 /* UserMessageTableViewCell.swift in Sources */,
 				59F656A822B694050086A02F /* ChatViewController.swift in Sources */,

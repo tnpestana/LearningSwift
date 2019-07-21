@@ -37,9 +37,9 @@ class ChatViewController: UIViewController
         configureTableView()
         retrieveMessages()
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
-        tableMessages.isUserInteractionEnabled = true
-        tableMessages.addGestureRecognizer(tapGesture)
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
+//        tableMessages.isUserInteractionEnabled = true
+//        tableMessages.addGestureRecognizer(tapGesture)
         
         //txtNewMessage.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -72,10 +72,10 @@ class ChatViewController: UIViewController
         }
     }
     
-    @objc func tableViewTapped()
-    {
-        txtNewMessage.resignFirstResponder()
-    }
+//    @objc func tableViewTapped()
+//    {
+//        txtNewMessage.resignFirstResponder()
+//    }
     
     @IBAction func sendTapped(_ sender: Any)
     {
@@ -86,9 +86,15 @@ class ChatViewController: UIViewController
         txtNewMessage.isEnabled = false
         btnSend.isEnabled = false
         
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateString = formatter.string(from: date)
+        
         let messagesDB = Database.database().reference().child("Messages")
         let messageDictionary = ["Sender" : Auth.auth().currentUser?.email,
-                                 "Body" : body]
+                                 "Body" : body,
+                                 "Date" : dateString]
         
         messagesDB.childByAutoId().setValue(messageDictionary)
         { (error, reference) in
@@ -127,8 +133,9 @@ class ChatViewController: UIViewController
             let snapshotValue = snapshot.value as! Dictionary<String, String>
             let body = snapshotValue["Body"]
             let sender = snapshotValue["Sender"]
+            let date = snapshotValue["Date"]
             
-            let message = Message(sender: sender, body: body)
+            let message = Message(sender: sender, body: body, date: date)
             self.messageArray.append(message)
             
             self.configureTableView()
@@ -164,5 +171,12 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource
             cell.setup(message: messageArray[indexPath.row])
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        txtNewMessage.resignFirstResponder()
+        messageArray[indexPath.row].dateLblHidden = !messageArray[indexPath.row].dateLblHidden!
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }
