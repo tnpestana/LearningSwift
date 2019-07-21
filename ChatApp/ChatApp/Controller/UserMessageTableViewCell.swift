@@ -26,7 +26,7 @@ class UserMessageTableViewCell: UITableViewCell {
         viewMessage.layer.borderColor = UIColor(rgb: 0x007AFF, alphaVal: 1.0).cgColor
         viewMessage.layer.cornerRadius = 15
         imgSender.image = UIImage(named: "default_user")?.withRenderingMode(.alwaysTemplate)
-        imgSender.tintColor = UIColor(rgb: 0x007AFF, alphaVal: 1.0) // old blue: 0x8AA6FF
+        imgSender.tintColor = UIColor(rgb: 0x007AFF, alphaVal: 1.0)
     }
     
     func setup(message: Message)

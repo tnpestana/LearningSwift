@@ -26,7 +26,7 @@ class ChatViewController: UIViewController
     {
         super.viewDidLoad()
 
-        self.navigationItem.hidesBackButton = true
+//        self.navigationItem.hidesBackButton = true
         currentUser = Auth.auth().currentUser?.email
         
         tableMessages.register(UINib(nibName: "ChatMessageTableViewCell", bundle: nil), forCellReuseIdentifier: chatMessageCellId)
