@@ -18,6 +18,9 @@ class ChatsListViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        tableUsers.delegate = self
+        tableUsers.dataSource = self
+        retrieveChats()
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -37,8 +40,7 @@ class ChatsListViewController: UIViewController
             
             let user = User(username: username, email: email)
             self.usersArray.append(user)
-//            self.configureTableView()
-//            self.tableMessages.reloadData()
+            self.tableUsers.reloadData()
             SVProgressHUD.dismiss()
         }
     }

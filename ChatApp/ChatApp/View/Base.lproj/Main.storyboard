@@ -274,8 +274,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YoV-Ig-dFe">
-                                <rect key="frame" x="0.0" y="44" width="320" height="455"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YoV-Ig-dFe">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="userChatId" rowHeight="60" id="PYF-OH-3j7" customClass="UserChatTableCell" customModule="ChatApp" customModuleProvider="target">
@@ -320,7 +320,7 @@
                         <constraints>
                             <constraint firstItem="yT5-Oc-UUc" firstAttribute="bottom" secondItem="YoV-Ig-dFe" secondAttribute="bottom" id="D9O-QX-Tl0"/>
                             <constraint firstItem="YoV-Ig-dFe" firstAttribute="leading" secondItem="yT5-Oc-UUc" secondAttribute="leading" id="Enb-1v-bkb"/>
-                            <constraint firstItem="YoV-Ig-dFe" firstAttribute="top" secondItem="yT5-Oc-UUc" secondAttribute="top" id="Qet-zU-gnj"/>
+                            <constraint firstItem="YoV-Ig-dFe" firstAttribute="top" secondItem="Cup-Uh-6db" secondAttribute="top" id="Qet-zU-gnj"/>
                             <constraint firstItem="yT5-Oc-UUc" firstAttribute="trailing" secondItem="YoV-Ig-dFe" secondAttribute="trailing" id="xMM-5b-lj0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yT5-Oc-UUc"/>
@@ -344,19 +344,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="qDa-f3-dZV">
-                                <rect key="frame" x="103.5" y="226" width="113.5" height="116.5"/>
+                                <rect key="frame" x="75" y="148.5" width="170.5" height="271"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lblName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQ7-GA-Nmg">
-                                        <rect key="frame" x="0.0" y="0.0" width="113.5" height="38.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="170.5" height="38.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_user" translatesAutoresizingMaskIntoConstraints="NO" id="x3G-Qr-D9O">
-                                        <rect key="frame" x="0.0" y="54.5" width="113.5" height="16"/>
+                                        <rect key="frame" x="0.0" y="54.5" width="170.5" height="170.5"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EgP-g7-osP">
-                                        <rect key="frame" x="0.0" y="86.5" width="113.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="241" width="170.5" height="30"/>
                                         <state key="normal" title="Change Picture"/>
                                     </button>
                                 </subviews>
