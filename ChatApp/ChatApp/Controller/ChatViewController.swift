@@ -175,7 +175,14 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        txtNewMessage.resignFirstResponder()
+        if let firstResponder = view.window?.firstResponder
+        {
+            if firstResponder == txtNewMessage
+            {
+                txtNewMessage.resignFirstResponder()
+                return
+            }
+        }
         messageArray[indexPath.row].dateLblHidden = !messageArray[indexPath.row].dateLblHidden!
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }

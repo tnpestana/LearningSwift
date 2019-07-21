@@ -269,7 +269,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="yT5-Oc-UUc"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Messages" id="dhB-pj-SpD"/>
+                    <tabBarItem key="tabBarItem" title="Messages" image="tab_message" id="dhB-pj-SpD"/>
                     <connections>
                         <segue destination="e1O-m5-AoQ" kind="show" identifier="segueToChat" id="vZr-N1-Nls"/>
                     </connections>
@@ -312,7 +312,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8rX-yO-MHa"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" id="AEE-5l-Qde"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="tab_profile" id="AEE-5l-Qde"/>
                     <navigationItem key="navigationItem" title="Profile" id="BOp-mL-Oqj">
                         <barButtonItem key="rightBarButtonItem" title="Log Out" id="pjS-I4-vJ6"/>
                     </navigationItem>
@@ -345,6 +345,8 @@
     </scenes>
     <resources>
         <image name="default_user" width="170.5" height="170.5"/>
+        <image name="tab_message" width="10" height="10"/>
+        <image name="tab_profile" width="10" height="10"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="WbM-yi-DZz"/>

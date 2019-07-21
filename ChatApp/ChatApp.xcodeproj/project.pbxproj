@@ -105,12 +105,12 @@
 			children = (
 				59F656A522B68F390086A02F /* RegisterViewController.swift */,
 				59F656A322B68F2C0086A02F /* LoginViewController.swift */,
+				59C478A822E4EB9100BD5560 /* TabBarViewController.swift */,
+				59C478A622E4E42500BD5560 /* ProfileViewController.swift */,
+				59C478AA22E4F08200BD5560 /* ChatsListViewController.swift */,
 				59F656A722B694050086A02F /* ChatViewController.swift */,
 				59F656AB22B6B7B00086A02F /* ChatMessageTableViewCell.swift */,
 				59C0AAB022B95E9A007073C8 /* UserMessageTableViewCell.swift */,
-				59C478A622E4E42500BD5560 /* ProfileViewController.swift */,
-				59C478A822E4EB9100BD5560 /* TabBarViewController.swift */,
-				59C478AA22E4F08200BD5560 /* ChatsListViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
