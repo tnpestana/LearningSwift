@@ -6,12 +6,13 @@
 //  Copyright © 2019 Tiago Pestana. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class User
 {
     var username: String?
     var email: String?
+    var avatar: UIImage?
     
     internal init(username: String?, email: String?)
     {

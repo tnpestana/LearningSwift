@@ -23,11 +23,6 @@ class ChatsListViewController: UIViewController
         retrieveChats()
     }
     
-    override func viewDidAppear(_ animated: Bool)
-    {
-        //self.performSegue(withIdentifier: "segueToChat", sender: self)
-    }
-    
     func retrieveChats()
     {
         SVProgressHUD.show()
@@ -56,8 +51,22 @@ extension ChatsListViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userChatId") as! UserChatTableCell
-        cell.lblUsername.text = usersArray[indexPath.row].username
+        let user = usersArray[indexPath.row]
+        cell.lblUsername.text = user.username
+        if let image = user.avatar
+        {
+            cell.imgUser.image = image
+        }
+        else
+        {
+            cell.imgUser.image = UIImage(named: "default_user")
+        }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        self.performSegue(withIdentifier: "segueToChat", sender: self)
     }
 }
 
