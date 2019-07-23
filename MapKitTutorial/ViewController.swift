@@ -46,15 +46,34 @@ class ViewController: UIViewController
             mapView.showsUserLocation = true
             centerViewOnUserLocation()
             locationManager.startUpdatingLocation()
+            
         case .denied:
-            // prompt user to turn on location permissions
-            break
+            let alert = UIAlertController(title: "Location Permissions", message: "This app requires access to your location to function properly. You can set this up on the device's preferences by tapping below.", preferredStyle: .alert)
+            let settingsAction = UIAlertAction(title: "Settings", style: .default)
+            { _ in
+                guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+                if UIApplication.shared.canOpenURL(settingsUrl)
+                {
+                    UIApplication.shared.open(settingsUrl)
+                    { success in
+                        print("Settings opened: \(success)")
+                    }
+                }
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alert.addAction(settingsAction)
+            alert.addAction(cancelAction)
+            present(alert, animated: true, completion: nil)
+
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
+            
         case .restricted:
             break
+            
         case .authorizedAlways:
             break
+            
         default:
             break
         }
@@ -69,7 +88,7 @@ class ViewController: UIViewController
         }
         else
         {
-            // prompt user to turn on location permissions
+            // prompt user to turn on location services
         }
     }
 }
@@ -86,5 +105,6 @@ extension ViewController: CLLocationManagerDelegate
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
     {
+        checkLocationAuthorization()
     }
 }
