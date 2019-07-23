@@ -70,6 +70,7 @@ class ViewController: UIViewController
         mapView.showsUserLocation = true
         centerViewOnUserLocation()
         previousLocation = getCenterLocation(for: mapView)
+        if let location = previousLocation { updateAdressLbl(location: location) }
         locationManager.startUpdatingLocation()
     }
     
@@ -113,6 +114,24 @@ class ViewController: UIViewController
         
         return CLLocation(latitude: latitude, longitude: longitude)
     }
+    
+    func updateAdressLbl(location: CLLocation)
+    {
+        let geoCoder = CLGeocoder()
+        geoCoder.reverseGeocodeLocation(location)
+        { [weak self] (placemarks, error) in
+            guard let self = self else { return }
+            if let _ = error { return }
+            guard let placemark = placemarks?.first else { return }
+            
+            let streetName = placemark.thoroughfare ?? ""
+            let subLocality = placemark.subLocality ?? ""
+            DispatchQueue.main.async
+                {
+                    self.adressLbl.text = "\(streetName), \(subLocality)"
+            }
+        }
+    }
 }
 
 extension ViewController: CLLocationManagerDelegate
@@ -136,24 +155,9 @@ extension ViewController: MKMapViewDelegate
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool)
     {
         let center = getCenterLocation(for: mapView)
-        let geoCoder = CLGeocoder()
-        
         guard let _ = self.previousLocation else { return }
         guard center.distance(from: previousLocation!) > 50 else { return }
         previousLocation = center
-        
-        geoCoder.reverseGeocodeLocation(center)
-        { [weak self] (placemarks, error) in
-            guard let self = self else { return }
-            if let _ = error { return }
-            guard let placemark = placemarks?.first else { return }
-            
-            let streetName = placemark.thoroughfare ?? ""
-            let subLocality = placemark.subLocality ?? ""
-            DispatchQueue.main.async
-            {
-                self.adressLbl.text = "\(streetName), \(subLocality)"
-            }
-        }
+        updateAdressLbl(location: center)
     }
 }
