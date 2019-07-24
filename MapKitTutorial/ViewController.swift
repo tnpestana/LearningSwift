@@ -126,6 +126,7 @@ class ViewController: UIViewController
         guard let location = locationManager.location else { return }
         let request = createDirectionsRequest(from: location.coordinate)
         let directions = MKDirections(request: request)
+        mapView.removeOverlays(mapView.overlays) // clean map from older overlay
         directions.calculate
         { [unowned self] (response, error) in
             // insert error handling here
