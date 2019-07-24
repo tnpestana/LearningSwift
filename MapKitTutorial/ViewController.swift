@@ -31,19 +31,29 @@ class ViewController: UIViewController
         checkLocationServices()
     }
     
+    @IBAction func directionsBtnTapped(_ sender: Any)
+    {
+        getDirections()
+    }
+    
+    func checkLocationServices()
+    {
+        if CLLocationManager.locationServicesEnabled()
+        {
+            setupLocationManager()
+            checkLocationAuthorization()
+        }
+        else
+        {
+            // prompt user to turn on location services
+        }
+    }
+    
+    
     func setupLocationManager()
     {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    }
-    
-    func centerViewOnUserLocation()
-    {
-        if let location = locationManager.location?.coordinate
-        {
-            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
-            mapView.setRegion(region, animated: true)
-        }
     }
     
     func checkLocationAuthorization()
@@ -74,6 +84,23 @@ class ViewController: UIViewController
         locationManager.startUpdatingLocation()
     }
     
+    func centerViewOnUserLocation()
+    {
+        if let location = locationManager.location?.coordinate
+        {
+            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
+            mapView.setRegion(region, animated: true)
+        }
+    }
+    
+    func getCenterLocation(for mapView: MKMapView) -> CLLocation
+    {
+        let latitude = mapView.centerCoordinate.latitude
+        let longitude = mapView.centerCoordinate.longitude
+        
+        return CLLocation(latitude: latitude, longitude: longitude)
+    }
+    
     func requestLocationPermissionThroughSettings()
     {
         let alert = UIAlertController(title: "Location Permissions", message: "This app requires access to your location to function properly. You can set this up on the device's preferences by tapping below.", preferredStyle: .alert)
@@ -94,25 +121,34 @@ class ViewController: UIViewController
         present(alert, animated: true, completion: nil)
     }
     
-    func checkLocationServices()
+    func getDirections()
     {
-        if CLLocationManager.locationServicesEnabled()
-        {
-            setupLocationManager()
-            checkLocationAuthorization()
-        }
-        else
-        {
-            // prompt user to turn on location services
+        guard let location = locationManager.location else { return }
+        let request = createDirectionsRequest(from: location.coordinate)
+        let directions = MKDirections(request: request)
+        directions.calculate
+        { [unowned self] (response, error) in
+            // insert error handling here
+            guard let response = response else { return }
+            for route in response.routes
+            {
+                self.mapView.addOverlay(route.polyline)
+                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+            }
         }
     }
     
-    func getCenterLocation(for mapView: MKMapView) -> CLLocation
+    func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request
     {
-        let latitude = mapView.centerCoordinate.latitude
-        let longitude = mapView.centerCoordinate.longitude
-        
-        return CLLocation(latitude: latitude, longitude: longitude)
+        let destinationCoordinate = getCenterLocation(for: mapView).coordinate
+        let startingLocation = MKPlacemark(coordinate: coordinate)
+        let destination = MKPlacemark(coordinate: destinationCoordinate)
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: startingLocation)
+        request.destination = MKMapItem(placemark: destination)
+        request.transportType = .walking
+        request.requestsAlternateRoutes = true
+        return request
     }
     
     func updateAdressLbl(location: CLLocation)
@@ -159,5 +195,12 @@ extension ViewController: MKMapViewDelegate
         guard center.distance(from: previousLocation!) > 50 else { return }
         previousLocation = center
         updateAdressLbl(location: center)
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer
+    {
+        let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
+        renderer.strokeColor = .blue
+        return renderer
     }
 }
