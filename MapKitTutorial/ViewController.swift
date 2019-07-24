@@ -133,7 +133,7 @@ class ViewController: UIViewController
             for route in response.routes
             {
                 self.mapView.addOverlay(route.polyline)
-                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect.insetBy(dx: -100, dy: -100), animated: true)
             }
         }
     }
@@ -200,7 +200,9 @@ extension ViewController: MKMapViewDelegate
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer
     {
         let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
+        renderer.alpha = CGFloat(50)
         renderer.strokeColor = .blue
+        renderer.lineWidth = 5
         return renderer
     }
 }
