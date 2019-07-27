@@ -34,6 +34,8 @@ class ViewController: UIViewController
     @IBAction func directionsBtnTapped(_ sender: Any)
     {
         getDirections()
+        pinMarker()
+        pinImg.isHidden = true
     }
     
     func checkLocationServices()
@@ -45,7 +47,11 @@ class ViewController: UIViewController
         }
         else
         {
-            // prompt user to turn on location services
+            let alert = UIAlertController(
+                title: "Location Services",
+                message: "This app requires access to your device's location services. You can turn them on via the device's preferences.",
+                preferredStyle: .alert)
+            present(alert, animated: true, completion: nil)
         }
     }
     
@@ -103,7 +109,10 @@ class ViewController: UIViewController
     
     func requestLocationPermissionThroughSettings()
     {
-        let alert = UIAlertController(title: "Location Permissions", message: "This app requires access to your location to function properly. You can set this up on the device's preferences by tapping below.", preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "Location Permissions",
+            message: "This app requires access to your location to function properly. You can set this up on the device's preferences by tapping below.",
+            preferredStyle: .alert)
         let settingsAction = UIAlertAction(title: "Settings", style: .default)
         { _ in
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
@@ -137,6 +146,13 @@ class ViewController: UIViewController
                 self.mapView.setVisibleMapRect(route.polyline.boundingMapRect.insetBy(dx: -100, dy: -100), animated: true)
             }
         }
+    }
+    
+    func pinMarker()
+    {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = getCenterLocation(for: mapView).coordinate
+        mapView.addAnnotation(annotation)
     }
     
     func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request
