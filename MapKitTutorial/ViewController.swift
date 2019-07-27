@@ -15,10 +15,18 @@ class ViewController: UIViewController
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var adressLbl: UILabel!
     @IBOutlet weak var pinImg: UIImageView!
+    @IBOutlet weak var directionsBtn: UIButton!
+    
+    enum OperationMode: String
+    {
+        case SelectDestination = "Select Destination"
+        case ShowDirections = "Get Directions"
+    }
     
     let locationManager = CLLocationManager()
     let regionInMeters: Double = 1000
     var previousLocation: CLLocation?
+    var showingDirections: Bool = false
     
     override func viewDidLoad()
     {
@@ -27,15 +35,37 @@ class ViewController: UIViewController
         mapView.delegate = self
         pinImg.image = UIImage(named: "pin_icon")?.withRenderingMode(.alwaysTemplate)
         pinImg.tintColor = .red
+        adressLbl.text = "Choose location:"
         
         checkLocationServices()
+        setupView()
     }
     
     @IBAction func directionsBtnTapped(_ sender: Any)
     {
-        getDirections()
-        pinMarker()
-        pinImg.isHidden = true
+        showingDirections = !showingDirections
+        if showingDirections
+        {
+            pinMarker()
+            getDirections()
+        }
+        setupView()
+    }
+    
+    func setupView()
+    {
+        let btnTitle = showingDirections ? OperationMode.SelectDestination.rawValue : OperationMode.ShowDirections.rawValue
+        directionsBtn.setTitle(btnTitle, for: .normal)
+        if showingDirections
+        {
+            pinImg.isHidden = true
+        }
+        else
+        {
+            mapView.removeOverlays(mapView.overlays)
+            mapView.removeAnnotations(mapView.annotations)
+            pinImg.isHidden = false
+        }
     }
     
     func checkLocationServices()
@@ -135,7 +165,7 @@ class ViewController: UIViewController
         guard let location = locationManager.location else { return }
         let request = createDirectionsRequest(from: location.coordinate)
         let directions = MKDirections(request: request)
-        mapView.removeOverlays(mapView.overlays) // clean map from older overlay
+        //mapView.removeOverlays(mapView.overlays) // clean map from older overlay
         directions.calculate
         { [unowned self] (response, error) in
             // insert error handling here
@@ -143,7 +173,7 @@ class ViewController: UIViewController
             for route in response.routes
             {
                 self.mapView.addOverlay(route.polyline)
-                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect.insetBy(dx: -100, dy: -100), animated: true)
+                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect.insetBy(dx: -200, dy: -200), animated: true)
             }
         }
     }
@@ -207,11 +237,14 @@ extension ViewController: MKMapViewDelegate
 {
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool)
     {
-        let center = getCenterLocation(for: mapView)
-        guard let _ = self.previousLocation else { return }
-        guard center.distance(from: previousLocation!) > 50 else { return }
-        previousLocation = center
-        updateAdressLbl(location: center)
+        if !showingDirections
+        {
+            let center = getCenterLocation(for: mapView)
+            guard let _ = self.previousLocation else { return }
+            guard center.distance(from: previousLocation!) > 50 else { return }
+            previousLocation = center
+            updateAdressLbl(location: center)
+        }
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer
