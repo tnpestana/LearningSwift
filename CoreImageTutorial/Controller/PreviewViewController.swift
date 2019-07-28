@@ -31,6 +31,21 @@ class PreviewViewController: UIViewController
         imagePicker.mediaTypes = ["public.image"]
         present(imagePicker, animated: true, completion: nil)
     }
+    
+    func applyFilter(image: UIImage) -> CIImage?
+    {
+        //let context = CIContext()
+        guard let originalCIImage = CIImage(image: image) else { return CIImage() }
+        return sepiaFilter(originalCIImage, intensity: 1.0)
+    }
+    
+    func sepiaFilter(_ input: CIImage, intensity: Double) -> CIImage?
+    {
+        let sepiaFilter = CIFilter(name:"CISepiaTone")
+        sepiaFilter?.setValue(input, forKey: kCIInputImageKey)
+        sepiaFilter?.setValue(intensity, forKey: kCIInputIntensityKey)
+        return sepiaFilter?.outputImage
+    }
 }
 
 extension PreviewViewController: UIImagePickerControllerDelegate
@@ -39,7 +54,7 @@ extension PreviewViewController: UIImagePickerControllerDelegate
     {
         let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         imagePreview.contentMode = .scaleAspectFit
-        imagePreview.image = chosenImage
+        imagePreview.image = UIImage(ciImage: applyFilter(image: chosenImage)!)
         dismiss(animated: true, completion: nil)
     }
 }
