@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="MYi-CC-Ure">
-                                <rect key="frame" x="24" y="219" width="366" height="458"/>
+                                <rect key="frame" x="24" y="242" width="366" height="412"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="paint_logo" translatesAutoresizingMaskIntoConstraints="NO" id="7YM-ag-bGU">
                                         <rect key="frame" x="0.0" y="0.0" width="366" height="366"/>
@@ -33,14 +33,8 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="bks-56-GY0" kind="show" id="Apq-oI-XcU"/>
+                                            <action selector="choosePictureTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="812-qu-c7e"/>
                                         </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CLW-AB-r6y">
-                                        <rect key="frame" x="0.0" y="428" width="366" height="30"/>
-                                        <state key="normal" title="Apply Filter">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -54,6 +48,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="c8W-Vy-kae"/>
+                    <connections>
+                        <segue destination="bks-56-GY0" kind="show" identifier="goToFilterGallery" id="X4y-X9-IZR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

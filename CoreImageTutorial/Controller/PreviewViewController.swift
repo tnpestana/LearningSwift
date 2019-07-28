@@ -14,49 +14,28 @@ class PreviewViewController: UIViewController
     @IBOutlet weak var imagePreview: UIImageView!
     @IBOutlet weak var filtersCollection: UICollectionView!
     
-    var presentedImage: UIImage = UIImage(named: "default_img")!
-    var imagePicker: UIImagePickerController!
-    var captureSession: AVCaptureSession?
-    var videoPreviewLayer: AVCaptureVideoPreviewLayer?
-    var filters: [String] = CIFilter.filterNames(inCategory: "CICategoryColorEffect")
+    var presentedImage: UIImage!
+    var filters: [CIFilter] = []
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        filtersCollection.delegate = self
-        filtersCollection.dataSource = self
-        presentImagePicker()
-    }
-    
-    func presentImagePicker()
-    {
-        imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .camera
-        imagePicker.mediaTypes = ["public.image"]
-        present(imagePicker, animated: true, completion: nil)
-    }
-    
-    func applyFilter(name: String, image: UIImage) -> CIImage?
-    {
-        guard let originalCIImage = CIImage(image: image) else { return CIImage() }
-        let filter = CIFilter(name: name)
-        filter?.setValue(originalCIImage, forKey: kCIInputImageKey)
-        //filter?.setValue(1.0, forKey: kCIInputIntensityKey)
-        return filter?.outputImage
-    }
-}
-
-extension PreviewViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate
-{
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
-    {
-        let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-        presentedImage = chosenImage
+        
+        let filterNames: [String] = CIFilter.filterNames(inCategory: "CICategoryColorEffect")
+        for key in filterNames { filters.append(CIFilter(name: key)!) }
+        
         imagePreview.contentMode = .scaleAspectFit
         imagePreview.image = presentedImage
-        filtersCollection.reloadData()
-        dismiss(animated: true, completion: nil)
+        
+        filtersCollection.delegate = self
+        filtersCollection.dataSource = self
+    }
+    
+    func apply(filter: CIFilter, image: UIImage) -> CIImage?
+    {
+        guard let originalCIImage = CIImage(image: image) else { return CIImage() }
+        filter.setValue(originalCIImage, forKey: kCIInputImageKey)
+        return filter.outputImage
     }
 }
 
@@ -77,7 +56,7 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
         else
         {
-            if let image = applyFilter(name: filters[indexPath.row - 1], image: presentedImage)
+            if let image = apply(filter: filters[indexPath.row - 1], image: presentedImage)
             {
                 cell.imgView.image = UIImage(ciImage: image)
             }
@@ -85,7 +64,7 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
             {
                 cell.imgView.image = presentedImage
             }
-            cell.titleLbl.text = filters[indexPath.row - 1]
+            cell.titleLbl.text = filters[indexPath.row - 1].name
         }
         return cell
     }
@@ -98,7 +77,7 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
         else
         {
-            imagePreview.image = UIImage(ciImage: applyFilter(name: filters[indexPath.row - 1], image: presentedImage) ?? CIImage())
+            imagePreview.image = UIImage(ciImage: apply(filter: filters[indexPath.row - 1], image: presentedImage) ?? CIImage())
         }
     }
 }
