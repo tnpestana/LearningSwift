@@ -59,16 +59,32 @@
             </objects>
             <point key="canvasLocation" x="1572" y="-654"/>
         </scene>
-        <!--Camera View Controller-->
+        <!--Preview View Controller-->
         <scene sceneID="tej-UP-r9v">
             <objects>
-                <viewController id="bks-56-GY0" customClass="CameraViewController" customModule="CoreImageTutorial" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bks-56-GY0" customClass="PreviewViewController" customModule="CoreImageTutorial" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hb4-r4-tw1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aUd-IZ-jFT">
+                                <rect key="frame" x="16" y="104" width="382" height="382"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="aUd-IZ-jFT" secondAttribute="height" multiplier="1:1" id="gOt-WQ-Lin"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="UFr-97-ECa" firstAttribute="trailing" secondItem="aUd-IZ-jFT" secondAttribute="trailing" constant="16" id="35x-8d-Tdw"/>
+                            <constraint firstItem="aUd-IZ-jFT" firstAttribute="top" secondItem="UFr-97-ECa" secondAttribute="top" constant="16" id="FpG-UU-m7Z"/>
+                            <constraint firstItem="aUd-IZ-jFT" firstAttribute="leading" secondItem="UFr-97-ECa" secondAttribute="leading" constant="16" id="P39-wx-spM"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="UFr-97-ECa"/>
                     </view>
+                    <connections>
+                        <outlet property="imagePreview" destination="aUd-IZ-jFT" id="8CI-3P-TEO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dfs-BI-HK7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		595A525122EDF8A0007D4959 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595A525022EDF8A0007D4959 /* CameraViewController.swift */; };
+		595A525122EDF8A0007D4959 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595A525022EDF8A0007D4959 /* PreviewViewController.swift */; };
 		595A525622EE036B007D4959 /* KYShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595A525522EE036B007D4959 /* KYShutterButton.swift */; };
 		5983039522D5312700EFD00D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5983039422D5312700EFD00D /* AppDelegate.swift */; };
 		5983039722D5312700EFD00D /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5983039622D5312700EFD00D /* EntryViewController.swift */; };
@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		595A525022EDF8A0007D4959 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		595A525022EDF8A0007D4959 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		595A525522EE036B007D4959 /* KYShutterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYShutterButton.swift; sourceTree = "<group>"; };
 		5983039122D5312700EFD00D /* CoreImageTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreImageTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5983039422D5312700EFD00D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				5983039622D5312700EFD00D /* EntryViewController.swift */,
-				595A525022EDF8A0007D4959 /* CameraViewController.swift */,
+				595A525022EDF8A0007D4959 /* PreviewViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -183,7 +183,7 @@
 			files = (
 				5983039722D5312700EFD00D /* EntryViewController.swift in Sources */,
 				5983039522D5312700EFD00D /* AppDelegate.swift in Sources */,
-				595A525122EDF8A0007D4959 /* CameraViewController.swift in Sources */,
+				595A525122EDF8A0007D4959 /* PreviewViewController.swift in Sources */,
 				595A525622EE036B007D4959 /* KYShutterButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
