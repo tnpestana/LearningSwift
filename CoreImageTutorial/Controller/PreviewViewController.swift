@@ -61,14 +61,16 @@ class PreviewViewController: UIViewController
     
     func apply(filter: CIFilter, image: UIImage) -> UIImage
     {
-        let originalCIImage = CIImage(image: image)
+        let originalOrientation = image.imageOrientation
+        let originalScale = image.scale
+        let originalCIImage = CIImage(cgImage: image.cgImage!)
         filter.setValue(originalCIImage, forKey: kCIInputImageKey)
         if let ciImg = filter.outputImage
         {
             let context = CIContext(options: nil)
-            if let imageRef = context.createCGImage(ciImg, from: originalCIImage!.extent)
+            if let imageRef = context.createCGImage(ciImg, from: originalCIImage.extent)
             {
-                return UIImage(cgImage: imageRef)
+                return UIImage(cgImage: imageRef, scale: originalScale, orientation: originalOrientation)
             }
         }
         return originalImage
@@ -92,6 +94,7 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
         else
         {
+            //let image = apply(filter: filters[indexPath.row - 1], image: originalImage)
             cell.imgView.image = apply(filter: filters[indexPath.row - 1], image: originalImage)
             cell.titleLbl.text = filters[indexPath.row - 1].name
         }
