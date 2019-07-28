@@ -38,14 +38,15 @@ class PreviewViewController: UIViewController
     
     @IBAction func saveBtnTapped(_ sender: Any)
     {
-        UIImageWriteToSavedPhotosAlbum(presentedImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        guard let imgData = presentedImage.pngData() else { return }
+        guard let image = UIImage(data: imgData) else { return }
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer)
     {
         if let error = error
         {
-            // we got back an error!
             let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default))
             present(ac, animated: true)
@@ -60,16 +61,17 @@ class PreviewViewController: UIViewController
     
     func apply(filter: CIFilter, image: UIImage) -> UIImage
     {
-        guard let originalCIImage = CIImage(image: image) else { return originalImage }
+        let originalCIImage = CIImage(image: image)
         filter.setValue(originalCIImage, forKey: kCIInputImageKey)
-        if let ciImage = filter.outputImage
+        if let ciImg = filter.outputImage
         {
-            return UIImage(ciImage: ciImage)
+            let context = CIContext(options: nil)
+            if let imageRef = context.createCGImage(ciImg, from: originalCIImage!.extent)
+            {
+                return UIImage(cgImage: imageRef)
+            }
         }
-        else
-        {
-            return originalImage
-        }
+        return originalImage
     }
 }
 
