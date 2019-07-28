@@ -9,28 +9,36 @@
 import UIKit
 import AVFoundation
 
-class CameraViewController: UIViewController {
-
-    @IBOutlet weak var previewView: UIView!
+class CameraViewController: UIViewController
+{
+    var imagePicker: UIImagePickerController?
     var captureSession: AVCaptureSession?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-
-        guard let captureDevice = AVCaptureDevice.default(for: AVMediaType.video) else { return }
-        
-        guard let input = try? AVCaptureDeviceInput(device: captureDevice) else { return }
-        
-        captureSession = AVCaptureSession()
-        captureSession?.addInput(input)
-        
-        videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
-        videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        videoPreviewLayer?.frame = view.layer.bounds
-        previewView.layer.addSublayer(videoPreviewLayer!)
-        
-        captureSession?.startRunning()
+        setupPreview()
     }
+    
+    func setupPreview()
+    {
+        imagePicker =  UIImagePickerController()
+        imagePicker!.delegate = self
+        imagePicker!.sourceType = .camera
+        present(imagePicker!, animated: true, completion: nil)
+    }
+}
 
+extension CameraViewController: UIImagePickerControllerDelegate
+{
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
+    {
+        imagePicker?.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension CameraViewController: UINavigationControllerDelegate
+{
+    
 }
