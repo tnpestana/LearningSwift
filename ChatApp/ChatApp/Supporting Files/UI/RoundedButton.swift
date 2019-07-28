@@ -10,6 +10,8 @@ import UIKit
 
 class RoundedButton: UIButton
 {
+    var mainColor: UIColor = .lightGray //UIColor(red: 138, green: 166, blue: 255, alpha: 1.0)
+    
     override init(frame: CGRect)
     {
         super.init(frame: frame)
@@ -37,17 +39,19 @@ class RoundedButton: UIButton
     
     func setupButton()
     {
-        layer.cornerRadius = layer.frame.height / 8
-        //backgroundColor = .gray //UIColor(red: 138, green: 166, blue: 255, alpha: 1.0)
-        //tintColor = .white
+        layer.cornerRadius = layer.frame.height / 2
+        layer.borderWidth = 1
+        layer.borderColor = mainColor.cgColor
+        backgroundColor = mainColor
+        tintColor = .white
     }
     
     func setupShadow()
     {
-        layer.shadowColor = UIColor.gray.cgColor
-        layer.shadowOffset = CGSize(width: 2.0, height: 0.0)
-        layer.shadowRadius = 4
-        layer.shadowOpacity = 0.2
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+        layer.shadowRadius = 0.8
+        layer.shadowOpacity = 0.6
         clipsToBounds = true
         layer.masksToBounds = false
     }
