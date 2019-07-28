@@ -56,7 +56,7 @@
             </objects>
             <point key="canvasLocation" x="1572" y="-654"/>
         </scene>
-        <!--Preview View Controller-->
+        <!--Apply Filters-->
         <scene sceneID="tej-UP-r9v">
             <objects>
                 <viewController id="bks-56-GY0" customClass="PreviewViewController" customModule="CoreImageTutorial" customModuleProvider="target" sceneMemberID="viewController">
@@ -64,7 +64,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_img" translatesAutoresizingMaskIntoConstraints="NO" id="aUd-IZ-jFT">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aUd-IZ-jFT">
                                 <rect key="frame" x="16" y="104" width="382" height="541"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vFu-Pa-NXf">
@@ -139,6 +139,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UFr-97-ECa"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Apply Filters" id="Lps-TE-blN">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="yFs-u0-YDL">
+                            <connections>
+                                <action selector="saveBtnTapped:" destination="bks-56-GY0" id="ulD-ps-9iS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="filtersCollection" destination="vFu-Pa-NXf" id="6CT-ZJ-aDr"/>
                         <outlet property="imagePreview" destination="aUd-IZ-jFT" id="8CI-3P-TEO"/>
@@ -168,7 +175,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="default_img" width="240" height="135"/>
         <image name="paint_logo" width="533" height="467.5"/>
     </resources>
 </document>

@@ -14,6 +14,7 @@ class PreviewViewController: UIViewController
     @IBOutlet weak var imagePreview: UIImageView!
     @IBOutlet weak var filtersCollection: UICollectionView!
     
+    var originalImage: UIImage!
     var presentedImage: UIImage!
     var filters: [CIFilter] = []
     
@@ -22,20 +23,53 @@ class PreviewViewController: UIViewController
         super.viewDidLoad()
         
         let filterNames: [String] = CIFilter.filterNames(inCategory: "CICategoryColorEffect")
-        for key in filterNames { filters.append(CIFilter(name: key)!) }
+        for key in filterNames
+        {
+            filters.append(CIFilter(name: key)!)
+        }
         
         imagePreview.contentMode = .scaleAspectFit
-        imagePreview.image = presentedImage
+        imagePreview.image = originalImage
+        presentedImage = originalImage
         
         filtersCollection.delegate = self
         filtersCollection.dataSource = self
     }
     
-    func apply(filter: CIFilter, image: UIImage) -> CIImage?
+    @IBAction func saveBtnTapped(_ sender: Any)
     {
-        guard let originalCIImage = CIImage(image: image) else { return CIImage() }
+        UIImageWriteToSavedPhotosAlbum(presentedImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer)
+    {
+        if let error = error
+        {
+            // we got back an error!
+            let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
+        else
+        {
+            let ac = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
+    }
+    
+    func apply(filter: CIFilter, image: UIImage) -> UIImage
+    {
+        guard let originalCIImage = CIImage(image: image) else { return originalImage }
         filter.setValue(originalCIImage, forKey: kCIInputImageKey)
-        return filter.outputImage
+        if let ciImage = filter.outputImage
+        {
+            return UIImage(ciImage: ciImage)
+        }
+        else
+        {
+            return originalImage
+        }
     }
 }
 
@@ -51,19 +85,12 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "filterCell", for: indexPath) as! FilterCell
         if indexPath.row == 0
         {
-            cell.imgView.image = presentedImage
+            cell.imgView.image = originalImage
             cell.titleLbl.text = "Original"
         }
         else
         {
-            if let image = apply(filter: filters[indexPath.row - 1], image: presentedImage)
-            {
-                cell.imgView.image = UIImage(ciImage: image)
-            }
-            else
-            {
-                cell.imgView.image = presentedImage
-            }
+            cell.imgView.image = apply(filter: filters[indexPath.row - 1], image: originalImage)
             cell.titleLbl.text = filters[indexPath.row - 1].name
         }
         return cell
@@ -73,11 +100,12 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
     {
         if indexPath.row == 0
         {
-            imagePreview.image = presentedImage
+            presentedImage = originalImage
         }
         else
         {
-            imagePreview.image = UIImage(ciImage: apply(filter: filters[indexPath.row - 1], image: presentedImage) ?? CIImage())
+            presentedImage = apply(filter: filters[indexPath.row - 1], image: originalImage)
         }
+        imagePreview.image = presentedImage
     }
 }

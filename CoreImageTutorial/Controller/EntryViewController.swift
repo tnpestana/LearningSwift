@@ -25,7 +25,7 @@ class EntryViewController: UIViewController
         {
         case "goToFilterGallery":
             let destination = segue.destination as! PreviewViewController
-            destination.presentedImage = chosenImage
+            destination.originalImage = chosenImage
         default:
             break
         }
