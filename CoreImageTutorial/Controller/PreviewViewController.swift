@@ -14,7 +14,7 @@ class PreviewViewController: UIViewController
     @IBOutlet weak var imagePreview: UIImageView!
     @IBOutlet weak var filtersCollection: UICollectionView!
     
-    var presentedImage: UIImage?
+    var presentedImage: UIImage = UIImage(named: "default_img")!
     var imagePicker: UIImagePickerController!
     var captureSession: AVCaptureSession?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
@@ -77,21 +77,28 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
         else
         {
-            if let image = applyFilter(name: filters[indexPath.row - 1], image: presentedImage ?? UIImage())
+            if let image = applyFilter(name: filters[indexPath.row - 1], image: presentedImage)
             {
                 cell.imgView.image = UIImage(ciImage: image)
             }
             else
             {
-                cell.imgView.image = UIImage(named: "default_img")
+                cell.imgView.image = presentedImage
             }
             cell.titleLbl.text = filters[indexPath.row - 1]
         }
         return cell
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
-//    {
-//        imagePreview.image =
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    {
+        if indexPath.row == 0
+        {
+            imagePreview.image = presentedImage
+        }
+        else
+        {
+            imagePreview.image = UIImage(ciImage: applyFilter(name: filters[indexPath.row - 1], image: presentedImage) ?? CIImage())
+        }
+    }
 }
