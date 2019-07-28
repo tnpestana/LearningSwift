@@ -17,6 +17,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fpb-wA-kIr">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.53933993270000002" green="0.65032523310000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="D72-Sk-6zK"/>
@@ -37,16 +38,22 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="g2D-ra-NVP">
                                 <rect key="frame" x="32" y="246" width="256" height="76"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jv7-as-DFR">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o3I-NX-dMi" customClass="RoundedButton" customModule="ChatApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="256" height="30"/>
-                                        <state key="normal" title="Login"/>
+                                        <color key="backgroundColor" red="0.53933993270000002" green="0.65032523310000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Login">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
-                                            <segue destination="bKE-og-Yvq" kind="show" identifier="goToLogin" id="GQM-3W-Cy7"/>
+                                            <segue destination="bKE-og-Yvq" kind="show" id="Cwv-b4-VhZ"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngF-S2-oFI">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngF-S2-oFI" customClass="RoundedButton" customModule="ChatApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="46" width="256" height="30"/>
-                                        <state key="normal" title="Register"/>
+                                        <color key="backgroundColor" red="0.53933993270000002" green="0.65032523310000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Register">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <segue destination="MKl-NG-g5U" kind="show" identifier="goToRegister" id="Mep-8x-Xl0"/>
                                         </connections>
@@ -409,6 +416,6 @@
         <image name="tab_profile" width="10" height="10"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="04f-jg-pue"/>
+        <segue reference="WbM-yi-DZz"/>
     </inferredMetricsTieBreakers>
 </document>
