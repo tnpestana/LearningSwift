@@ -38,9 +38,9 @@ class PreviewViewController: UIViewController
     
     @IBAction func saveBtnTapped(_ sender: Any)
     {
-        guard let imgData = presentedImage.pngData() else { return }
+        guard let imgData = presentedImage.jpegData(compressionQuality: 1.0) else { return }
         guard let image = UIImage(data: imgData) else { return }
-        UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        UIImageWriteToSavedPhotosAlbum(rotateUp(image), self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer)
@@ -57,6 +57,15 @@ class PreviewViewController: UIViewController
             ac.addAction(UIAlertAction(title: "OK", style: .default))
             present(ac, animated: true)
         }
+    }
+    
+    func rotateUp(_ image: UIImage) -> UIImage
+    {
+        if image.imageOrientation == .up { return image }
+        UIGraphicsBeginImageContext(image.size)
+        defer { UIGraphicsEndImageContext() }
+        image.draw(in: CGRect(origin: .zero, size: image.size))
+        return UIGraphicsGetImageFromCurrentImageContext()!
     }
     
     func apply(filter: CIFilter, image: UIImage) -> UIImage
