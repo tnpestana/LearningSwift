@@ -8,14 +8,12 @@
 
 import UIKit
 
-class User
-{
+class User {
     var username: String?
     var email: String?
     var avatar: UIImage?
     
-    internal init(username: String?, email: String?)
-    {
+    internal init(username: String?, email: String?) {
         self.username = username
         self.email = email
     }

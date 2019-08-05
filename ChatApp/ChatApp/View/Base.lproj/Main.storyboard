@@ -17,6 +17,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fpb-wA-kIr">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <connections>
@@ -27,7 +28,7 @@
             </objects>
             <point key="canvasLocation" x="-629" y="94"/>
         </scene>
-        <!--View Controller-->
+        <!--Chat App-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -63,13 +64,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="V2b-xw-1Cz"/>
+                    <navigationItem key="navigationItem" title="Chat App" id="V2b-xw-1Cz"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="175" y="94"/>
         </scene>
-        <!--Login View Controller-->
+        <!--Login-->
         <scene sceneID="b34-pN-agr">
             <objects>
                 <viewController id="bKE-og-Yvq" customClass="LoginViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -110,6 +111,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5jd-ir-wjP"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Login" id="VtR-64-cCa"/>
                     <connections>
                         <outlet property="txtEmail" destination="9MV-ns-EPz" id="0pg-N0-Mit"/>
                         <outlet property="txtPassword" destination="N8R-Oz-jQl" id="i4q-rJ-qEu"/>
@@ -120,7 +122,7 @@
             </objects>
             <point key="canvasLocation" x="926" y="-205"/>
         </scene>
-        <!--Register View Controller-->
+        <!--Register-->
         <scene sceneID="sOR-3t-UOC">
             <objects>
                 <viewController id="MKl-NG-g5U" customClass="RegisterViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -167,6 +169,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yeZ-Nu-TiU"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Register" id="f8i-DI-jqY"/>
                     <connections>
                         <outlet property="txtEmail" destination="pmU-eU-76C" id="deA-Xm-VaE"/>
                         <outlet property="txtPassword" destination="xvn-G8-Gx0" id="qgN-iQ-vc4"/>
@@ -362,6 +365,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EgP-g7-osP" customClass="RoundedButton" customModule="ChatApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="241" width="170.5" height="30"/>
                                         <state key="normal" title="Change Picture"/>
+                                        <connections>
+                                            <action selector="changePictureTapped:" destination="fSz-ha-7p8" eventType="touchUpInside" id="9P9-Li-WZA"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -374,10 +380,9 @@
                         <viewLayoutGuide key="safeArea" id="8rX-yO-MHa"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" image="tab_profile" id="AEE-5l-Qde"/>
-                    <navigationItem key="navigationItem" title="Profile" id="BOp-mL-Oqj">
-                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="pjS-I4-vJ6"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Profile" id="gEY-WY-yXG"/>
                     <connections>
+                        <outlet property="imgProfile" destination="x3G-Qr-D9O" id="Lu6-JQ-F4N"/>
                         <outlet property="lblName" destination="xQ7-GA-Nmg" id="geT-Yv-Bxv"/>
                     </connections>
                 </viewController>
@@ -410,6 +415,6 @@
         <image name="tab_profile" width="10" height="10"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="WbM-yi-DZz"/>
+        <segue reference="04f-jg-pue"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -54,7 +54,6 @@ class RegisterViewController: UIViewController
                     if let error = error
                     {
                         self.showAlert(message: error.localizedDescription)
-                        SVProgressHUD.dismiss()
                     }
                     else
                     {
