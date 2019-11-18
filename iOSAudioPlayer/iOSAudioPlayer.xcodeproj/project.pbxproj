@@ -7,29 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		59A5532D2380A77E008B71CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A5532C2380A77E008B71CE /* AppDelegate.swift */; };
-		59A5532F2380A77E008B71CE /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A5532E2380A77E008B71CE /* DocumentBrowserViewController.swift */; };
-		59A553312380A77E008B71CE /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A553302380A77E008B71CE /* DocumentViewController.swift */; };
-		59A553332380A77E008B71CE /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A553322380A77E008B71CE /* Document.swift */; };
-		59A553362380A77E008B71CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59A553342380A77E008B71CE /* Main.storyboard */; };
-		59A553382380A77F008B71CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59A553372380A77F008B71CE /* Assets.xcassets */; };
-		59A5533B2380A77F008B71CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59A553392380A77F008B71CE /* LaunchScreen.storyboard */; };
+		596DC0F023832A21009BE031 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596DC0EF23832A21009BE031 /* AppDelegate.swift */; };
+		596DC0F223832A21009BE031 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596DC0F123832A21009BE031 /* SceneDelegate.swift */; };
+		596DC0F423832A21009BE031 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596DC0F323832A21009BE031 /* ViewController.swift */; };
+		596DC0F723832A21009BE031 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 596DC0F523832A21009BE031 /* Main.storyboard */; };
+		596DC0F923832A22009BE031 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 596DC0F823832A22009BE031 /* Assets.xcassets */; };
+		596DC0FC23832A22009BE031 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 596DC0FA23832A22009BE031 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		59A553292380A77E008B71CE /* iOSAudioPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSAudioPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		59A5532C2380A77E008B71CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		59A5532E2380A77E008B71CE /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
-		59A553302380A77E008B71CE /* DocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
-		59A553322380A77E008B71CE /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
-		59A553352380A77E008B71CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		59A553372380A77F008B71CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		59A5533A2380A77F008B71CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		59A5533C2380A77F008B71CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		596DC0EC23832A21009BE031 /* iOSAudioPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSAudioPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		596DC0EF23832A21009BE031 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		596DC0F123832A21009BE031 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		596DC0F323832A21009BE031 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		596DC0F623832A21009BE031 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		596DC0F823832A22009BE031 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		596DC0FB23832A22009BE031 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		596DC0FD23832A22009BE031 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		59A553262380A77E008B71CE /* Frameworks */ = {
+		596DC0E923832A21009BE031 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -39,33 +37,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		59A553202380A77E008B71CE = {
+		596DC0E323832A21009BE031 = {
 			isa = PBXGroup;
 			children = (
-				59A5532B2380A77E008B71CE /* iOSAudioPlayer */,
-				59A5532A2380A77E008B71CE /* Products */,
+				596DC0EE23832A21009BE031 /* iOSAudioPlayer */,
+				596DC0ED23832A21009BE031 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		59A5532A2380A77E008B71CE /* Products */ = {
+		596DC0ED23832A21009BE031 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				59A553292380A77E008B71CE /* iOSAudioPlayer.app */,
+				596DC0EC23832A21009BE031 /* iOSAudioPlayer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		59A5532B2380A77E008B71CE /* iOSAudioPlayer */ = {
+		596DC0EE23832A21009BE031 /* iOSAudioPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				59A5532C2380A77E008B71CE /* AppDelegate.swift */,
-				59A5532E2380A77E008B71CE /* DocumentBrowserViewController.swift */,
-				59A553302380A77E008B71CE /* DocumentViewController.swift */,
-				59A553322380A77E008B71CE /* Document.swift */,
-				59A553342380A77E008B71CE /* Main.storyboard */,
-				59A553372380A77F008B71CE /* Assets.xcassets */,
-				59A553392380A77F008B71CE /* LaunchScreen.storyboard */,
-				59A5533C2380A77F008B71CE /* Info.plist */,
+				596DC0EF23832A21009BE031 /* AppDelegate.swift */,
+				596DC0F123832A21009BE031 /* SceneDelegate.swift */,
+				596DC0F323832A21009BE031 /* ViewController.swift */,
+				596DC0F523832A21009BE031 /* Main.storyboard */,
+				596DC0F823832A22009BE031 /* Assets.xcassets */,
+				596DC0FA23832A22009BE031 /* LaunchScreen.storyboard */,
+				596DC0FD23832A22009BE031 /* Info.plist */,
 			);
 			path = iOSAudioPlayer;
 			sourceTree = "<group>";
@@ -73,13 +70,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		59A553282380A77E008B71CE /* iOSAudioPlayer */ = {
+		596DC0EB23832A21009BE031 /* iOSAudioPlayer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 59A5533F2380A77F008B71CE /* Build configuration list for PBXNativeTarget "iOSAudioPlayer" */;
+			buildConfigurationList = 596DC10023832A22009BE031 /* Build configuration list for PBXNativeTarget "iOSAudioPlayer" */;
 			buildPhases = (
-				59A553252380A77E008B71CE /* Sources */,
-				59A553262380A77E008B71CE /* Frameworks */,
-				59A553272380A77E008B71CE /* Resources */,
+				596DC0E823832A21009BE031 /* Sources */,
+				596DC0E923832A21009BE031 /* Frameworks */,
+				596DC0EA23832A21009BE031 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -87,25 +84,25 @@
 			);
 			name = iOSAudioPlayer;
 			productName = iOSAudioPlayer;
-			productReference = 59A553292380A77E008B71CE /* iOSAudioPlayer.app */;
+			productReference = 596DC0EC23832A21009BE031 /* iOSAudioPlayer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		59A553212380A77E008B71CE /* Project object */ = {
+		596DC0E423832A21009BE031 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "Tiago Pestana";
 				TargetAttributes = {
-					59A553282380A77E008B71CE = {
+					596DC0EB23832A21009BE031 = {
 						CreatedOnToolsVersion = 11.0;
 					};
 				};
 			};
-			buildConfigurationList = 59A553242380A77E008B71CE /* Build configuration list for PBXProject "iOSAudioPlayer" */;
+			buildConfigurationList = 596DC0E723832A21009BE031 /* Build configuration list for PBXProject "iOSAudioPlayer" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -113,56 +110,55 @@
 				en,
 				Base,
 			);
-			mainGroup = 59A553202380A77E008B71CE;
-			productRefGroup = 59A5532A2380A77E008B71CE /* Products */;
+			mainGroup = 596DC0E323832A21009BE031;
+			productRefGroup = 596DC0ED23832A21009BE031 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				59A553282380A77E008B71CE /* iOSAudioPlayer */,
+				596DC0EB23832A21009BE031 /* iOSAudioPlayer */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		59A553272380A77E008B71CE /* Resources */ = {
+		596DC0EA23832A21009BE031 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59A5533B2380A77F008B71CE /* LaunchScreen.storyboard in Resources */,
-				59A553382380A77F008B71CE /* Assets.xcassets in Resources */,
-				59A553362380A77E008B71CE /* Main.storyboard in Resources */,
+				596DC0FC23832A22009BE031 /* LaunchScreen.storyboard in Resources */,
+				596DC0F923832A22009BE031 /* Assets.xcassets in Resources */,
+				596DC0F723832A21009BE031 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		59A553252380A77E008B71CE /* Sources */ = {
+		596DC0E823832A21009BE031 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59A553332380A77E008B71CE /* Document.swift in Sources */,
-				59A553312380A77E008B71CE /* DocumentViewController.swift in Sources */,
-				59A5532F2380A77E008B71CE /* DocumentBrowserViewController.swift in Sources */,
-				59A5532D2380A77E008B71CE /* AppDelegate.swift in Sources */,
+				596DC0F423832A21009BE031 /* ViewController.swift in Sources */,
+				596DC0F023832A21009BE031 /* AppDelegate.swift in Sources */,
+				596DC0F223832A21009BE031 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		59A553342380A77E008B71CE /* Main.storyboard */ = {
+		596DC0F523832A21009BE031 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				59A553352380A77E008B71CE /* Base */,
+				596DC0F623832A21009BE031 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		59A553392380A77F008B71CE /* LaunchScreen.storyboard */ = {
+		596DC0FA23832A22009BE031 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				59A5533A2380A77F008B71CE /* Base */,
+				596DC0FB23832A22009BE031 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -170,7 +166,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		59A5533D2380A77F008B71CE /* Debug */ = {
+		596DC0FE23832A22009BE031 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -230,7 +226,7 @@
 			};
 			name = Debug;
 		};
-		59A5533E2380A77F008B71CE /* Release */ = {
+		596DC0FF23832A22009BE031 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -284,7 +280,7 @@
 			};
 			name = Release;
 		};
-		59A553402380A77F008B71CE /* Debug */ = {
+		596DC10123832A22009BE031 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -302,7 +298,7 @@
 			};
 			name = Debug;
 		};
-		59A553412380A77F008B71CE /* Release */ = {
+		596DC10223832A22009BE031 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -323,25 +319,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		59A553242380A77E008B71CE /* Build configuration list for PBXProject "iOSAudioPlayer" */ = {
+		596DC0E723832A21009BE031 /* Build configuration list for PBXProject "iOSAudioPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				59A5533D2380A77F008B71CE /* Debug */,
-				59A5533E2380A77F008B71CE /* Release */,
+				596DC0FE23832A22009BE031 /* Debug */,
+				596DC0FF23832A22009BE031 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		59A5533F2380A77F008B71CE /* Build configuration list for PBXNativeTarget "iOSAudioPlayer" */ = {
+		596DC10023832A22009BE031 /* Build configuration list for PBXNativeTarget "iOSAudioPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				59A553402380A77F008B71CE /* Debug */,
-				59A553412380A77F008B71CE /* Release */,
+				596DC10123832A22009BE031 /* Debug */,
+				596DC10223832A22009BE031 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 59A553212380A77E008B71CE /* Project object */;
+	rootObject = 596DC0E423832A21009BE031 /* Project object */;
 }
