@@ -12,16 +12,40 @@ import MobileCoreServices
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var sliderPlayback: UISlider!
     @IBOutlet weak var btnPlay: UIButton!
     @IBOutlet weak var btnPause: UIButton!
     @IBOutlet weak var btnOpenFile: UIButton!
     
+    var timerPlayback: Timer?
     var audioPlayer: AVAudioPlayer?
     var selectedFileURL: URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        timerPlayback = Timer.scheduledTimer(
+            timeInterval: 0.5,
+            target: self,
+            selector: #selector(updateTimer),
+            userInfo: nil,
+            repeats: true)
+    }
+    
+    func setupSliderPlayback() {
+        guard let fileURL = selectedFileURL else { return }
+        sliderPlayback?.minimumValue = 0
+        let asset = AVURLAsset(url: fileURL, options: nil)
+        let audioDuration = asset.duration
+        let audioDurationSeconds = CMTimeGetSeconds(audioDuration)
+        sliderPlayback?.maximumValue = Float(audioDurationSeconds)
+        sliderPlayback?.isContinuous = true
+    }
+    
+    @objc func updateTimer() {
+        guard let audioPlayer = audioPlayer else { return }
+        let currentTime = Float(audioPlayer.currentTime).truncatingRemainder(dividingBy: 60)
+        sliderPlayback.value = currentTime
     }
     
     @IBAction func btnOpenFileTapped(_ sender: Any) {
@@ -34,14 +58,11 @@ class ViewController: UIViewController {
     @IBAction func btnPlayTapped(_ sender: Any) {
         guard let fileURL = selectedFileURL else { return }
         if let audioPlayer = audioPlayer, audioPlayer.isPlaying { audioPlayer.stop() }
-//        guard let path = Bundle.main.path(forResource: "Untitled", ofType: "mp3") else {
-//            print("file not found")
-//            return
-//        }
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: fileURL)
             audioPlayer?.play()
-        } catch {
+        }
+        catch {
             print("couldn't load file")
         }
     }
@@ -53,7 +74,12 @@ class ViewController: UIViewController {
 
 extension ViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        selectedFileURL = urls[0]
+        selectedFileURL = urls.first
+        setupSliderPlayback()
     }
+}
+
+extension ViewController: AVAudioPlayerDelegate {
+    
 }
 
