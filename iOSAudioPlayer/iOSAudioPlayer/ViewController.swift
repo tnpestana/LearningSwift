@@ -12,6 +12,7 @@ import MobileCoreServices
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var lblFileTitle: UILabel!
     @IBOutlet weak var sliderPlayback: UISlider!
     @IBOutlet weak var btnPlay: UIButton!
     @IBOutlet weak var btnPause: UIButton!
@@ -23,7 +24,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        lblFileTitle.text = "No file selected"
+        sliderPlayback?.minimumValue = 0
+        sliderPlayback?.value = 0
         timerPlayback = Timer.scheduledTimer(
             timeInterval: 0.5,
             target: self,
@@ -34,7 +37,6 @@ class ViewController: UIViewController {
     
     func setupSliderPlayback() {
         guard let fileURL = selectedFileURL else { return }
-        sliderPlayback?.minimumValue = 0
         let asset = AVURLAsset(url: fileURL, options: nil)
         let audioDuration = asset.duration
         let audioDurationSeconds = CMTimeGetSeconds(audioDuration)
@@ -75,6 +77,7 @@ class ViewController: UIViewController {
 extension ViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         selectedFileURL = urls.first
+        lblFileTitle.text = (selectedFileURL!.path as NSString).lastPathComponent
         setupSliderPlayback()
     }
 }
