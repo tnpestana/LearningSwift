@@ -28,7 +28,7 @@ class AudioPlayerViewController: UIViewController {
         lblFileTitle.text = "No file selected"
         progressPlayback.progress = 0.0
         timerPlayback = Timer.scheduledTimer(
-            timeInterval: 0.5,
+            timeInterval: 0.2,
             target: self,
             selector: #selector(updateProgressView),
             userInfo: nil,
@@ -55,7 +55,7 @@ class AudioPlayerViewController: UIViewController {
     }
     
     @objc func updateProgressView() {
-        if let audioPlayer = audioPlayer, audioPlayer.isPlaying {
+        if let audioPlayer = audioPlayer {
             progressPlayback.setProgress(Float(audioPlayer.currentTime / audioPlayer.duration), animated: true)
         }
     }
@@ -82,6 +82,7 @@ class AudioPlayerViewController: UIViewController {
     
     @IBAction func btnStopTapped(_ sender: Any) {
         audioPlayer?.stop()
+        audioPlayer?.currentTime = 0.0
     }
 }
 
