@@ -25,19 +25,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         lblFileTitle.text = "No file selected"
+        progressPlayback.progress = 0.0
         timerPlayback = Timer.scheduledTimer(
             timeInterval: 0.5,
             target: self,
-            selector: #selector(updateTimer),
+            selector: #selector(updateProgressView),
             userInfo: nil,
             repeats: true)
-    }
-    
-    func setupSliderPlayback() {
-        guard let fileURL = selectedFileURL else { return }
-        let asset = AVURLAsset(url: fileURL, options: nil)
-        let audioDuration = asset.duration
-        let audioDurationSeconds = CMTimeGetSeconds(audioDuration)
     }
     
     func playSelectedAudioFile() {
@@ -59,7 +53,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @objc func updateTimer() {
+    @objc func updateProgressView() {
         if let audioPlayer = audioPlayer, audioPlayer.isPlaying {
             progressPlayback.setProgress(Float(audioPlayer.currentTime/audioPlayer.duration), animated: true)
         }
@@ -85,7 +79,6 @@ extension ViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         selectedFileURL = urls.first
         lblFileTitle.text = (selectedFileURL!.path as NSString).lastPathComponent
-        setupSliderPlayback()
     }
 }
 
