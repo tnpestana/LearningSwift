@@ -44,6 +44,25 @@ class ViewController: UIViewController {
         sliderPlayback?.isContinuous = true
     }
     
+    func playSelectedAudioFile() {
+        guard let fileURL = selectedFileURL else {
+            let alert = UIAlertController(title: "Uh oh", message: "No file selected", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        if let audioPlayer = audioPlayer, audioPlayer.isPlaying { audioPlayer.stop() }
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: fileURL)
+            audioPlayer?.play()
+        }
+        catch {
+            print("Couldn't load file")
+        }
+    }
+    
     @objc func updateTimer() {
         guard let audioPlayer = audioPlayer else { return }
         let currentTime = Float(audioPlayer.currentTime).truncatingRemainder(dividingBy: 60)
@@ -58,15 +77,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func btnPlayTapped(_ sender: Any) {
-        guard let fileURL = selectedFileURL else { return }
-        if let audioPlayer = audioPlayer, audioPlayer.isPlaying { audioPlayer.stop() }
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: fileURL)
-            audioPlayer?.play()
-        }
-        catch {
-            print("couldn't load file")
-        }
+        playSelectedAudioFile()
     }
     
     @IBAction func btnPauseTapped(_ sender: Any) {
