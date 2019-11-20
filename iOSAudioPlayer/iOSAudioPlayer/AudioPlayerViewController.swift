@@ -10,12 +10,13 @@ import UIKit
 import AVFoundation
 import MobileCoreServices
 
-class ViewController: UIViewController {
+class AudioPlayerViewController: UIViewController {
 
     @IBOutlet weak var lblFileTitle: UILabel!
     @IBOutlet weak var progressPlayback: UIProgressView!
     @IBOutlet weak var btnPlay: UIButton!
     @IBOutlet weak var btnPause: UIButton!
+    @IBOutlet weak var btnStop: UIButton!
     @IBOutlet weak var btnOpenFile: UIButton!
     
     var timerPlayback: Timer?
@@ -55,7 +56,7 @@ class ViewController: UIViewController {
     
     @objc func updateProgressView() {
         if let audioPlayer = audioPlayer, audioPlayer.isPlaying {
-            progressPlayback.setProgress(Float(audioPlayer.currentTime/audioPlayer.duration), animated: true)
+            progressPlayback.setProgress(Float(audioPlayer.currentTime / audioPlayer.duration), animated: true)
         }
     }
     
@@ -67,22 +68,33 @@ class ViewController: UIViewController {
     }
     
     @IBAction func btnPlayTapped(_ sender: Any) {
-        playSelectedAudioFile()
+        if audioPlayer != nil {
+            audioPlayer?.play()
+        }
+        else {
+            playSelectedAudioFile()
+        }
     }
     
     @IBAction func btnPauseTapped(_ sender: Any) {
         audioPlayer?.pause()
     }
+    
+    @IBAction func btnStopTapped(_ sender: Any) {
+        audioPlayer?.stop()
+    }
 }
 
-extension ViewController: UIDocumentPickerDelegate {
+//MARK: UIDocumentPicker Delegate
+extension AudioPlayerViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         selectedFileURL = urls.first
         lblFileTitle.text = (selectedFileURL!.path as NSString).lastPathComponent
     }
 }
 
-extension ViewController: AVAudioPlayerDelegate {
+//MARK: AVAudioPlayer Delegate
+extension AudioPlayerViewController: AVAudioPlayerDelegate {
     
 }
 
