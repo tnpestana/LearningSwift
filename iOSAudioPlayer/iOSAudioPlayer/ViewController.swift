@@ -13,7 +13,7 @@ import MobileCoreServices
 class ViewController: UIViewController {
 
     @IBOutlet weak var lblFileTitle: UILabel!
-    @IBOutlet weak var sliderPlayback: UISlider!
+    @IBOutlet weak var progressPlayback: UIProgressView!
     @IBOutlet weak var btnPlay: UIButton!
     @IBOutlet weak var btnPause: UIButton!
     @IBOutlet weak var btnOpenFile: UIButton!
@@ -25,8 +25,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         lblFileTitle.text = "No file selected"
-        sliderPlayback?.minimumValue = 0
-        sliderPlayback?.value = 0
         timerPlayback = Timer.scheduledTimer(
             timeInterval: 0.5,
             target: self,
@@ -40,8 +38,6 @@ class ViewController: UIViewController {
         let asset = AVURLAsset(url: fileURL, options: nil)
         let audioDuration = asset.duration
         let audioDurationSeconds = CMTimeGetSeconds(audioDuration)
-        sliderPlayback?.maximumValue = Float(audioDurationSeconds)
-        sliderPlayback?.isContinuous = true
     }
     
     func playSelectedAudioFile() {
@@ -64,9 +60,9 @@ class ViewController: UIViewController {
     }
     
     @objc func updateTimer() {
-        guard let audioPlayer = audioPlayer else { return }
-        let currentTime = Float(audioPlayer.currentTime).truncatingRemainder(dividingBy: 60)
-        sliderPlayback.value = currentTime
+        if let audioPlayer = audioPlayer, audioPlayer.isPlaying {
+            progressPlayback.setProgress(Float(audioPlayer.currentTime/audioPlayer.duration), animated: true)
+        }
     }
     
     @IBAction func btnOpenFileTapped(_ sender: Any) {

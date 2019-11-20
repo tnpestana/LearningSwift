@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="Usf-r2-y9N">
-                                <rect key="frame" x="24" y="349" width="366" height="208.5"/>
+                                <rect key="frame" x="24" y="363" width="366" height="180.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lblFileTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CfK-XH-eqB">
                                         <rect key="frame" x="145" y="0.0" width="76" height="20.5"/>
@@ -24,11 +24,11 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="5O5-33-glK">
-                                        <rect key="frame" x="-2" y="46.5" width="370" height="31"/>
-                                    </slider>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BfM-jx-qG5">
+                                        <rect key="frame" x="8" y="46.5" width="350" height="2"/>
+                                    </progressView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Qce-ku-rgU">
-                                        <rect key="frame" x="121" y="102.5" width="124" height="50"/>
+                                        <rect key="frame" x="121" y="74.5" width="124" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GBP-Fa-bIJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -55,7 +55,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rqX-AZ-3iS">
-                                        <rect key="frame" x="150.5" y="178.5" width="65" height="30"/>
+                                        <rect key="frame" x="150.5" y="150.5" width="65" height="30"/>
                                         <state key="normal" title="Open File"/>
                                         <connections>
                                             <action selector="btnOpenFileTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c2i-mn-FxC"/>
@@ -63,8 +63,8 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="5O5-33-glK" secondAttribute="trailing" id="204-YA-cSx"/>
-                                    <constraint firstItem="5O5-33-glK" firstAttribute="leading" secondItem="Usf-r2-y9N" secondAttribute="leading" id="HCi-Wx-4jC"/>
+                                    <constraint firstItem="BfM-jx-qG5" firstAttribute="leading" secondItem="Usf-r2-y9N" secondAttribute="leading" constant="8" id="67t-gU-Suc"/>
+                                    <constraint firstAttribute="trailing" secondItem="BfM-jx-qG5" secondAttribute="trailing" constant="8" id="dzs-2s-dAk"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -82,7 +82,7 @@
                         <outlet property="btnPause" destination="s9A-us-i8W" id="Ys4-8X-x7y"/>
                         <outlet property="btnPlay" destination="GBP-Fa-bIJ" id="efC-Gb-LSu"/>
                         <outlet property="lblFileTitle" destination="CfK-XH-eqB" id="U4k-Mv-DRw"/>
-                        <outlet property="sliderPlayback" destination="5O5-33-glK" id="DBC-Uv-cr8"/>
+                        <outlet property="progressPlayback" destination="BfM-jx-qG5" id="kjT-Fq-TMU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
