@@ -27,15 +27,24 @@ class AudioPlayerViewController: UIViewController {
         super.viewDidLoad()
         lblFileTitle.text = "No file selected"
         progressPlayback.progress = 0.0
+    }
+    
+    func generateTimer() {
         timerPlayback = Timer.scheduledTimer(
-            timeInterval: 0.2,
+            timeInterval: 1,
             target: self,
             selector: #selector(updateProgressView),
             userInfo: nil,
             repeats: true)
     }
     
-    func playSelectedAudioFile() {
+    func startPlayback() {
+        if audioPlayer != nil {
+            generateTimer()
+            audioPlayer?.play()
+            return
+        }
+        
         guard let fileURL = selectedFileURL else {
             let alert = UIAlertController(title: "Uh oh", message: "No file selected", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
@@ -44,9 +53,11 @@ class AudioPlayerViewController: UIViewController {
             present(alert, animated: true, completion: nil)
             return
         }
+        
         if let audioPlayer = audioPlayer, audioPlayer.isPlaying { audioPlayer.stop() }
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: fileURL)
+            generateTimer()
             audioPlayer?.play()
         }
         catch {
@@ -54,9 +65,18 @@ class AudioPlayerViewController: UIViewController {
         }
     }
     
+    func stopPlayback() {
+        audioPlayer?.stop()
+        audioPlayer?.currentTime = 0.0
+        updateProgressView()
+        timerPlayback?.invalidate()
+    }
+    
     @objc func updateProgressView() {
         if let audioPlayer = audioPlayer {
-            progressPlayback.setProgress(Float(audioPlayer.currentTime / audioPlayer.duration), animated: true)
+            UIView.animate(withDuration: 1) {
+                self.progressPlayback.setProgress(Float(audioPlayer.currentTime / audioPlayer.duration), animated: true)
+            }
         }
     }
     
@@ -68,21 +88,16 @@ class AudioPlayerViewController: UIViewController {
     }
     
     @IBAction func btnPlayTapped(_ sender: Any) {
-        if audioPlayer != nil {
-            audioPlayer?.play()
-        }
-        else {
-            playSelectedAudioFile()
-        }
+        startPlayback()
     }
     
     @IBAction func btnPauseTapped(_ sender: Any) {
         audioPlayer?.pause()
+        timerPlayback?.invalidate()
     }
     
     @IBAction func btnStopTapped(_ sender: Any) {
-        audioPlayer?.stop()
-        audioPlayer?.currentTime = 0.0
+        stopPlayback()
     }
 }
 
@@ -96,6 +111,8 @@ extension AudioPlayerViewController: UIDocumentPickerDelegate {
 
 //MARK: AVAudioPlayer Delegate
 extension AudioPlayerViewController: AVAudioPlayerDelegate {
-    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        stopPlayback()
+    }
 }
 
