@@ -111,8 +111,12 @@ extension AudioPlayerViewController {
             for i in 0..<directoryFilesURLs.count {
                 if directoryFilesURLs[i].path == selectedFileURL?.path {
                     stopPlayback()
-                    #warning("possible bug if last file is picked")
-                    selectedFileURL = directoryFilesURLs[i + 1]
+                    if i + 1 == directoryFilesURLs.count {
+                       selectedFileURL = directoryFilesURLs[0]
+                    }
+                    else {
+                        selectedFileURL = directoryFilesURLs[i + 1]
+                    }
                     lblFileTitle.text = (selectedFileURL!.path as NSString).lastPathComponent
                     startPlayback()
                     break
