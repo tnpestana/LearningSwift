@@ -126,7 +126,7 @@ extension AudioPlayerViewController {
     }
 }
 
-//MARK: UIDocumentPicker Delegate
+//MARK: Document Picker Delegate
 extension AudioPlayerViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         selectedFileURL = urls.first
@@ -141,13 +141,18 @@ extension AudioPlayerViewController: UIDocumentPickerDelegate {
         let documentsURL = URL(fileURLWithPath: path, isDirectory: true)
         do {
             directoryFilesURLs = try fileManager.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
+            print(directoryFilesURLs as Any)
+            directoryFilesURLs = directoryFilesURLs?.sorted(by: {
+                ($0.path as NSString).lastPathComponent.lowercased() < ($1.path as NSString).lastPathComponent.lowercased()
+            })
+            print(directoryFilesURLs as Any)
         } catch {
             print("Error while enumerating files \(documentsURL.path): \(error.localizedDescription)")
         }
     }
 }
 
-//MARK: AVAudioPlayer Delegate
+//MARK: Audio Player Delegate
 extension AudioPlayerViewController: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         stopPlayback()
