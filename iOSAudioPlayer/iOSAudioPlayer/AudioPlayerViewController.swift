@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  AudioPlayerViewController.swift
 //  iOSAudioPlayer
 //
 //  Created by Tiago Pestana on 18/11/2019.
@@ -18,10 +18,12 @@ class AudioPlayerViewController: UIViewController {
     @IBOutlet weak var btnPause: UIButton!
     @IBOutlet weak var btnStop: UIButton!
     @IBOutlet weak var btnOpenFile: UIButton!
+    @IBOutlet weak var btnNext: UIButton!
     
     var timerPlayback: Timer?
     var audioPlayer: AVAudioPlayer?
     var selectedFileURL: URL?
+    var directoryFilesURLs: [URL]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,11 +41,11 @@ class AudioPlayerViewController: UIViewController {
     }
     
     func startPlayback() {
-        if audioPlayer != nil {
-            generateTimer()
-            audioPlayer?.play()
-            return
-        }
+//        if audioPlayer != nil {
+//            generateTimer()
+//            audioPlayer?.play()
+//            return
+//        }
         
         guard let fileURL = selectedFileURL else {
             let alert = UIAlertController(title: "Uh oh", message: "No file selected", preferredStyle: .alert)
@@ -79,7 +81,10 @@ class AudioPlayerViewController: UIViewController {
             }
         }
     }
-    
+}
+
+//MARK: Button Actions
+extension AudioPlayerViewController {
     @IBAction func btnOpenFileTapped(_ sender: Any) {
         let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeMP3 as String], in: .import)
         documentPicker.delegate = self
@@ -99,13 +104,42 @@ class AudioPlayerViewController: UIViewController {
     @IBAction func btnStopTapped(_ sender: Any) {
         stopPlayback()
     }
+    
+    @IBAction func btnNextTapped(_ sender: Any) {
+        guard let directoryFilesURLs = directoryFilesURLs else { return }
+        if directoryFilesURLs.count > 0 {
+            for i in 0..<directoryFilesURLs.count {
+                if directoryFilesURLs[i].path == selectedFileURL?.path {
+                    stopPlayback()
+                    #warning("possible bug if last file is picked")
+                    selectedFileURL = directoryFilesURLs[i + 1]
+                    lblFileTitle.text = (selectedFileURL!.path as NSString).lastPathComponent
+                    startPlayback()
+                    break
+                }
+            }
+        }
+    }
 }
 
 //MARK: UIDocumentPicker Delegate
 extension AudioPlayerViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         selectedFileURL = urls.first
-        lblFileTitle.text = (selectedFileURL!.path as NSString).lastPathComponent
+        let fileName = (selectedFileURL!.path as NSString).lastPathComponent
+        let folderPath = (selectedFileURL!.path as NSString).replacingOccurrences(of: fileName, with: String())
+        getFilesFromDirectory(path: folderPath)
+        lblFileTitle.text = fileName
+    }
+    
+    func getFilesFromDirectory(path: String) {
+        let fileManager = FileManager.default
+        let documentsURL = URL(fileURLWithPath: path, isDirectory: true)
+        do {
+            directoryFilesURLs = try fileManager.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
+        } catch {
+            print("Error while enumerating files \(documentsURL.path): \(error.localizedDescription)")
+        }
     }
 }
 

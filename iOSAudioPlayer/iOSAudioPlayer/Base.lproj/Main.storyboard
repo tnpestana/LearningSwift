@@ -28,7 +28,7 @@
                                         <rect key="frame" x="8" y="46.5" width="350" height="2"/>
                                     </progressView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Qce-ku-rgU">
-                                        <rect key="frame" x="84" y="74.5" width="198" height="50"/>
+                                        <rect key="frame" x="47" y="74.5" width="272" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GBP-Fa-bIJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -63,9 +63,23 @@
                                                     <action selector="btnStopTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S7h-ua-zPa"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zRC-JF-ZHK">
+                                                <rect key="frame" x="222" y="0.0" width="50" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="AMS-Zg-C9f"/>
+                                                    <constraint firstAttribute="width" secondItem="zRC-JF-ZHK" secondAttribute="height" multiplier="1:1" id="aoF-Cw-56X"/>
+                                                </constraints>
+                                                <state key="normal" image="forward" catalog="system"/>
+                                                <connections>
+                                                    <action selector="btnNextTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BKJ-3U-gg0"/>
+                                                    <action selector="btnStopTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aaO-ao-gnP"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="zRC-JF-ZHK" firstAttribute="width" secondItem="zRC-JF-ZHK" secondAttribute="height" multiplier="1:1" id="8f9-gb-gzh"/>
                                             <constraint firstItem="oem-31-zgH" firstAttribute="width" secondItem="oem-31-zgH" secondAttribute="height" multiplier="1:1" id="rYp-XH-zsv"/>
+                                            <constraint firstItem="zRC-JF-ZHK" firstAttribute="width" secondItem="zRC-JF-ZHK" secondAttribute="height" multiplier="1:1" id="yVV-1N-m7W"/>
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rqX-AZ-3iS">
@@ -92,6 +106,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="btnNext" destination="zRC-JF-ZHK" id="8e5-xb-rPK"/>
                         <outlet property="btnOpenFile" destination="rqX-AZ-3iS" id="eTV-nn-mts"/>
                         <outlet property="btnPause" destination="s9A-us-i8W" id="Ys4-8X-x7y"/>
                         <outlet property="btnPlay" destination="GBP-Fa-bIJ" id="efC-Gb-LSu"/>
@@ -106,6 +121,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="forward" catalog="system" width="64" height="38"/>
         <image name="pause.circle" catalog="system" width="64" height="60"/>
         <image name="play" catalog="system" width="60" height="64"/>
         <image name="stop" catalog="system" width="64" height="56"/>
