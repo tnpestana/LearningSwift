@@ -35,6 +35,7 @@ class AudioPlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupAudioSession()
         if let selectedFileUrlPath = UserDefaults.standard.object(forKey:"selectedFileUrl") as? NSString {
             selectedFileURL = URL(fileURLWithPath: selectedFileUrlPath as String)
             lblFileTitle.text = selectedFileUrlPath.lastPathComponent
@@ -44,6 +45,15 @@ class AudioPlayerViewController: UIViewController {
             lblFileTitle.text = "No file selected"
         }
         progressPlayback.progress = 0.0
+    }
+    
+    func setupAudioSession() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+        }
+        catch {
+            print("Couldn't setup audio session")
+        }
     }
     
     func generateTimer() {
