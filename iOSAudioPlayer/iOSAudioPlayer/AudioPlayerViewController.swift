@@ -21,15 +21,28 @@ class AudioPlayerViewController: UIViewController {
     @IBOutlet weak var btnNext: UIButton!
     
     var timerPlayback: Timer?
-    //var audioPlayer: AVQueuePlayer?
     var playersQueue: [AVAudioPlayer]?
     var audioPlayer: AVAudioPlayer?
-    var selectedFileURL: URL?
     var directoryFilesURLs: [URL]?
+    
+    var selectedFileURL: URL? {
+        didSet {
+            if let url = selectedFileURL {
+                UserDefaults().set(url.path as NSString, forKey: "selectedFileUrl")
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        lblFileTitle.text = "No file selected"
+        if let selectedFileUrlPath = UserDefaults.standard.object(forKey:"selectedFileUrl") as? NSString {
+            selectedFileURL = URL(fileURLWithPath: selectedFileUrlPath as String)
+            lblFileTitle.text = selectedFileUrlPath.lastPathComponent
+            getFilesFromDirectory(path: selectedFileUrlPath.replacingOccurrences(of: selectedFileUrlPath.lastPathComponent, with: String()))
+        }
+        else {
+            lblFileTitle.text = "No file selected"
+        }
         progressPlayback.progress = 0.0
     }
     
@@ -62,6 +75,9 @@ class AudioPlayerViewController: UIViewController {
         }
         catch {
             print("Couldn't load file")
+            audioPlayer = nil
+            selectedFileURL = nil
+            lblFileTitle.text = "No file selected"
         }
     }
     
