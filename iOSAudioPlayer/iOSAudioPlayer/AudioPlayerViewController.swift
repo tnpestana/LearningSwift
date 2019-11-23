@@ -21,6 +21,8 @@ class AudioPlayerViewController: UIViewController {
     @IBOutlet weak var btnNext: UIButton!
     
     var timerPlayback: Timer?
+    //var audioPlayer: AVQueuePlayer?
+    var playersQueue: [AVAudioPlayer]?
     var audioPlayer: AVAudioPlayer?
     var selectedFileURL: URL?
     var directoryFilesURLs: [URL]?
@@ -41,12 +43,6 @@ class AudioPlayerViewController: UIViewController {
     }
     
     func startPlayback() {
-//        if audioPlayer != nil {
-//            generateTimer()
-//            audioPlayer?.play()
-//            return
-//        }
-        
         guard let fileURL = selectedFileURL else {
             let alert = UIAlertController(title: "Uh oh", message: "No file selected", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
@@ -56,11 +52,13 @@ class AudioPlayerViewController: UIViewController {
             return
         }
         
-        if let audioPlayer = audioPlayer, audioPlayer.isPlaying { audioPlayer.stop() }
+        if let audioPlayer = audioPlayer, audioPlayer.isPlaying { stopPlayback() }
         do {
-            audioPlayer = try AVAudioPlayer(contentsOf: fileURL)
+            let newAudioPlayer = try AVAudioPlayer(contentsOf: fileURL)
+            newAudioPlayer.prepareToPlay()
             generateTimer()
-            audioPlayer?.play()
+            newAudioPlayer.play()
+            audioPlayer = newAudioPlayer
         }
         catch {
             print("Couldn't load file")
@@ -72,6 +70,29 @@ class AudioPlayerViewController: UIViewController {
         audioPlayer?.currentTime = 0.0
         updateProgressView()
         timerPlayback?.invalidate()
+    }
+    
+    func playNextFile() {
+        guard let directoryFilesURLs = directoryFilesURLs else { return }
+        if directoryFilesURLs.count > 0 {
+            for i in 0..<directoryFilesURLs.count {
+                if directoryFilesURLs[i].path == selectedFileURL?.path {
+                    if i + 1 == directoryFilesURLs.count {
+                       selectedFileURL = directoryFilesURLs[0]
+                    }
+                    else {
+                        selectedFileURL = directoryFilesURLs[i + 1]
+                    }
+                    lblFileTitle.text = (selectedFileURL!.path as NSString).lastPathComponent
+                    if (audioPlayer?.isPlaying ?? false) {
+                        stopPlayback()
+                        startPlayback()
+                    }
+                    
+                    break
+                }
+            }
+        }
     }
     
     @objc func updateProgressView() {
@@ -93,6 +114,11 @@ extension AudioPlayerViewController {
     }
     
     @IBAction func btnPlayTapped(_ sender: Any) {
+        if audioPlayer != nil && audioPlayer!.currentTime != 0.0 {
+            generateTimer()
+            audioPlayer!.play()
+            return
+        }
         startPlayback()
     }
     
@@ -106,23 +132,7 @@ extension AudioPlayerViewController {
     }
     
     @IBAction func btnNextTapped(_ sender: Any) {
-        guard let directoryFilesURLs = directoryFilesURLs else { return }
-        if directoryFilesURLs.count > 0 {
-            for i in 0..<directoryFilesURLs.count {
-                if directoryFilesURLs[i].path == selectedFileURL?.path {
-                    stopPlayback()
-                    if i + 1 == directoryFilesURLs.count {
-                       selectedFileURL = directoryFilesURLs[0]
-                    }
-                    else {
-                        selectedFileURL = directoryFilesURLs[i + 1]
-                    }
-                    lblFileTitle.text = (selectedFileURL!.path as NSString).lastPathComponent
-                    startPlayback()
-                    break
-                }
-            }
-        }
+        playNextFile()
     }
 }
 
@@ -141,11 +151,9 @@ extension AudioPlayerViewController: UIDocumentPickerDelegate {
         let documentsURL = URL(fileURLWithPath: path, isDirectory: true)
         do {
             directoryFilesURLs = try fileManager.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
-            print(directoryFilesURLs as Any)
             directoryFilesURLs = directoryFilesURLs?.sorted(by: {
                 ($0.path as NSString).lastPathComponent.lowercased() < ($1.path as NSString).lastPathComponent.lowercased()
             })
-            print(directoryFilesURLs as Any)
         } catch {
             print("Error while enumerating files \(documentsURL.path): \(error.localizedDescription)")
         }
