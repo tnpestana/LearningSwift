@@ -170,6 +170,7 @@ extension AudioPlayerViewController: UIDocumentPickerDelegate {
         let folderPath = (selectedFileURL!.path as NSString).replacingOccurrences(of: fileName, with: String())
         getFilesFromDirectory(path: folderPath)
         lblFileTitle.text = fileName
+        if let audioPlayer = audioPlayer, audioPlayer.isPlaying { startPlayback() }
     }
     
     func getFilesFromDirectory(path: String) {
