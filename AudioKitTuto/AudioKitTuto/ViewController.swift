@@ -14,8 +14,8 @@ class ViewController: UIViewController {
     var keyboard: AKKeyboardView!
     var oscillator: AKOscillator?
     var delay: AKDelay?
-    var oscillators: [AKOscillator] = []
-    
+    var reverb: AKReverb?
+
     let square = AKTable(.square, count: 256)
     let triangle = AKTable(.triangle, count: 256)
     let sine = AKTable(.sine, count: 256)
@@ -28,6 +28,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         loadKeyboard()
         initOscillator()
+        initReverb()
         initDelay()
         initAuydioKit()
     }
@@ -59,8 +60,12 @@ class ViewController: UIViewController {
         oscillator?.amplitude = currentAmplitude
     }
     
+    func initReverb() {
+        reverb = AKReverb(oscillator)
+    }
+    
     func initDelay() {
-        delay = AKDelay(oscillator)
+        delay = AKDelay(reverb)
         delay?.time = 0.1 // seconds
         delay?.feedback = 0.8 // Normalized Value 0 - 1
         delay?.dryWetMix = 0.2 // Normalized Value 0 - 1
