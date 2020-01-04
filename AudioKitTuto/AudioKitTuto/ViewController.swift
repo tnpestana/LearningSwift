@@ -13,6 +13,8 @@ import AudioKitUI
 class ViewController: UIViewController {
     var keyboard: AKKeyboardView!
     var oscillator: AKOscillator?
+    var delay: AKDelay?
+    var oscillators: [AKOscillator] = []
     
     let square = AKTable(.square, count: 256)
     let triangle = AKTable(.triangle, count: 256)
@@ -25,7 +27,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadKeyboard()
-        loadOscillator()
+        initOscillator()
+        initDelay()
+        initAuydioKit()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -49,21 +53,33 @@ class ViewController: UIViewController {
         }
     }
     
-    func loadOscillator() {
-        oscillator = AKOscillator(waveform: triangle)
+    func initOscillator() {
+        oscillator = AKOscillator(waveform: sine)
         oscillator?.rampDuration = currentRampDuration
         oscillator?.amplitude = currentAmplitude
-        AudioKit.output = oscillator
+    }
+    
+    func initDelay() {
+        delay = AKDelay(oscillator)
+        delay?.time = 0.1 // seconds
+        delay?.feedback = 0.8 // Normalized Value 0 - 1
+        delay?.dryWetMix = 0.2 // Normalized Value 0 - 1
+        //delay?.bypass()
+    }
+    
+    func initAuydioKit() {
+        guard delay != nil, oscillator != nil else { return }
+        AudioKit.output = delay
         do {
             try AudioKit.start()
         }
         catch {
-            print("oscillator playback failed: " + error.localizedDescription)
+            print("Audio Kit init failed: \(error.localizedDescription)")
         }
-        
     }
 }
 
+//MARK: Keyboard Delegate
 extension ViewController: AKKeyboardDelegate {
     func noteOn(note: MIDINoteNumber) {
         currentMIDINote = note
@@ -76,6 +92,7 @@ extension ViewController: AKKeyboardDelegate {
         // Still use rampDuration for volume
         oscillator?.rampDuration = currentRampDuration
         oscillator?.amplitude = currentAmplitude
+        
         oscillator?.play()
     }
     
