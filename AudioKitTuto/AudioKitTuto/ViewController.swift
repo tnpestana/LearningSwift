@@ -27,6 +27,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadKeyboard()
+        loadButtons()
         initOscillator()
         initReverb()
         initDelay()
@@ -36,6 +37,7 @@ class ViewController: UIViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         updateKeyboardFrame(CGRect(size: size))
+        
     }
     
     func loadKeyboard() {
@@ -44,6 +46,47 @@ class ViewController: UIViewController {
                 / 2, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2))
             self.view.addSubview(keyboard)
             keyboard.delegate = self
+        }
+    }
+    
+    func loadButtons() {
+        let stack = UIStackView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2))
+        stack.axis = .vertical
+        stack.alignment = .center
+        stack.distribution = .fillEqually
+        
+        let btnDelay = UIButton(frame: CGRect(width: 200, height: 100))
+        btnDelay.setTitle("Delay", for: .normal)
+        btnDelay.layer.borderWidth = 1
+        btnDelay.addTarget(self, action: #selector(btnDelayTapped), for: .touchUpInside)
+        
+        let btnReverb = UIButton(frame: CGRect(width: 200, height: 100))
+        btnReverb.setTitle("Reverb", for: .normal)
+        btnReverb.layer.borderWidth = 1
+        btnReverb.addTarget(self, action: #selector(btnReverbTapped), for: .touchUpInside)
+        
+        stack.addArrangedSubview(btnDelay)
+        stack.addArrangedSubview(btnReverb)
+        self.view.addSubview(stack)
+    }
+    
+    @objc func btnDelayTapped() {
+        guard let delay = delay else { return }
+        if delay.isBypassed {
+            delay.start()
+        }
+        else {
+            delay.bypass()
+        }
+    }
+    
+    @objc func btnReverbTapped() {
+        guard let reverb = reverb else { return }
+        if reverb.isBypassed {
+            reverb.start()
+        }
+        else {
+            reverb.bypass()
         }
     }
     
@@ -62,6 +105,7 @@ class ViewController: UIViewController {
     
     func initReverb() {
         reverb = AKReverb(oscillator)
+        reverb?.bypass()
     }
     
     func initDelay() {
@@ -69,7 +113,7 @@ class ViewController: UIViewController {
         delay?.time = 0.1 // seconds
         delay?.feedback = 0.8 // Normalized Value 0 - 1
         delay?.dryWetMix = 0.2 // Normalized Value 0 - 1
-        //delay?.bypass()
+        delay?.bypass()
     }
     
     func initAuydioKit() {
