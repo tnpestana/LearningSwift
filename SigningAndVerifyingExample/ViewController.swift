@@ -29,8 +29,12 @@ class ViewController: UIViewController {
         privateKey = CryptoHandler.loadKey(name: CryptoHandler.signingPrivateKeyTag)
         if privateKey == nil {
             privateKey = CryptoHandler.generateSingningKey()
+            if privateKey == nil {
+                CryptoHandler.storeKeyInKeyChain(key: privateKey!)
+            }
         }
-        guard let result = CryptoHandler.signMessage(message: message) else {
+        guard privateKey != nil else { return }
+        guard let result = CryptoHandler.signMessage(message: message, privateKey: privateKey!) else {
             lblSignature.text = "Unable to perform operation"
             return
         }

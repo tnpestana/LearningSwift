@@ -39,35 +39,28 @@ class CryptoHandler {
         return privateKey
     }
     
-    static func signMessage(message: String) -> (signature: String?, data: String?)? {
-        let access = SecAccessControlCreateWithFlags(
-            kCFAllocatorDefault,
-            kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
-            .privateKeyUsage,
-            nil)!
-        
-        let attributes: [String: Any] = [
-          kSecAttrKeyType as String: kSecAttrKeyTypeECSECPrimeRandom,
-          kSecAttrKeySizeInBits as String: 256,
-          kSecAttrTokenID as String: kSecAttrTokenIDSecureEnclave,
-          kSecPrivateKeyAttrs as String: [
-            kSecAttrIsPermanent as String: true,
+    static func storeKeyInKeyChain(key: SecKey) {
+        let addQuery: [String: Any] = [
+            kSecClass as String: kSecClassKey,
             kSecAttrApplicationTag as String: CryptoHandler.signingPrivateKeyTag,
-            kSecAttrAccessControl as String: access
-          ]
+            kSecValueRef as String: key
         ]
         
-        var error: Unmanaged<CFError>?
-        guard let privateKey = SecKeyCreateRandomKey(attributes as CFDictionary, &error) else {
-            print("error creating key")
-            return nil
+        let status = SecItemAdd(addQuery as CFDictionary, nil)
+        guard status == errSecSuccess else {
+            print("error storing key")
+            return
         }
+    }
+    
+    static func signMessage(message: String, privateKey: SecKey) -> (signature: String?, data: String?)? {
         
         guard SecKeyIsAlgorithmSupported(privateKey, .sign, algorithm) else {
             print("private key signing algorithm not supported")
             return nil
         }
         
+        var error: Unmanaged<CFError>?
         let data = message.data(using: .utf8)!
         guard let signature = SecKeyCreateSignature(
             privateKey,
