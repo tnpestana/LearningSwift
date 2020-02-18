@@ -17,6 +17,9 @@ class ViewController: UIViewController {
     var reverb: AKReverb?
     var chorus: AKChorus?
     var phaser: AKPhaser?
+    
+    var mainStack: UIStackView?
+    var btnStack: UIStackView?
 
     let square = AKTable(.square, count: 256)
     let triangle = AKTable(.triangle, count: 256)
@@ -28,8 +31,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadKeyboard()
+        setupStackView()
         loadButtons()
+        loadKeyboard()
         initOscillator()
         initReverb()
         initDelay()
@@ -40,23 +44,41 @@ class ViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        updateKeyboardFrame(CGRect(size: size))
+        mainStack?.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        btnStack?.axis = (size.width > size.height) ? .horizontal : .vertical
+    }
+    
+    func setupStackView() {
+        mainStack = UIStackView(frame: self.view.frame)
+        mainStack?.axis = .vertical
+        mainStack?.distribution = .fillEqually
+        mainStack?.alignment = .fill
+        self.view.addSubview(mainStack!)
     }
     
     func loadKeyboard() {
         if keyboard == nil {
-            keyboard = AKKeyboardView(frame: CGRect(x: 0, y: UIScreen.main.bounds.height
-                / 2, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2))
-            self.view.addSubview(keyboard)
+            keyboard = AKKeyboardView(frame: CGRect(width: 0, height: 0))
             keyboard.delegate = self
+            mainStack?.addArrangedSubview(keyboard)
         }
     }
     
     func loadButtons() {
-        let stack = UIStackView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2))
-        stack.axis = .vertical
-        stack.alignment = .fill
-        stack.distribution = .fillEqually
+        btnStack = UIStackView(frame: CGRect(width: 0, height: 0))
+        btnStack?.axis = (view.frame.width > view.frame.height) ? .horizontal : .vertical
+        btnStack?.alignment = .fill
+        btnStack?.distribution = .fillEqually
+        
+        let leftStack = UIStackView(frame: CGRect(width: 0, height: 0))
+        leftStack.axis = .vertical
+        leftStack.alignment = .fill
+        leftStack.distribution = .fillEqually
+        
+        let rightStack = UIStackView(frame: CGRect(width: 0, height: 0))
+        rightStack.axis = .vertical
+        rightStack.alignment = .fill
+        rightStack.distribution = .fillEqually
         
         let btnDelay = UIButton(frame: CGRect(width: 200, height: 100))
         btnDelay.setTitle("Delay", for: .normal)
@@ -82,11 +104,15 @@ class ViewController: UIViewController {
         btnPhaser.layer.borderWidth = 1
         btnPhaser.addTarget(self, action: #selector(btnPhaserTapped), for: .touchUpInside)
         
-        stack.addArrangedSubview(btnDelay)
-        stack.addArrangedSubview(btnReverb)
-        stack.addArrangedSubview(btnChorus)
-        stack.addArrangedSubview(btnPhaser)
-        self.view.addSubview(stack)
+        leftStack.addArrangedSubview(btnDelay)
+        leftStack.addArrangedSubview(btnReverb)
+        rightStack.addArrangedSubview(btnChorus)
+        rightStack.addArrangedSubview(btnPhaser)
+        
+        btnStack?.addArrangedSubview(leftStack)
+        btnStack?.addArrangedSubview(rightStack)
+        
+        mainStack?.addArrangedSubview(btnStack!)
     }
     
     @objc func btnDelayTapped() {
@@ -128,14 +154,7 @@ class ViewController: UIViewController {
             phaser.bypass()
         }
     }
-    
-    func updateKeyboardFrame(_ rect: CGRect) {
-        if keyboard != nil {
-            keyboard.frame = CGRect(x: 0, y: rect.height
-                / 2, width: rect.width, height: rect.height / 2)
-        }
-    }
-    
+
     func initOscillator() {
         oscillator = AKOscillator(waveform: sine)
         oscillator?.rampDuration = currentRampDuration
