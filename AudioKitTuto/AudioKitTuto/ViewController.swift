@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     var oscillator: AKOscillator?
     var delay: AKDelay?
     var reverb: AKReverb?
+    var chorus: AKChorus?
 
     let square = AKTable(.square, count: 256)
     let triangle = AKTable(.triangle, count: 256)
@@ -31,6 +32,7 @@ class ViewController: UIViewController {
         initOscillator()
         initReverb()
         initDelay()
+        initChorus()
         initAuydioKit()
     }
     
@@ -52,21 +54,30 @@ class ViewController: UIViewController {
     func loadButtons() {
         let stack = UIStackView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2))
         stack.axis = .vertical
-        stack.alignment = .center
+        stack.alignment = .fill
         stack.distribution = .fillEqually
         
         let btnDelay = UIButton(frame: CGRect(width: 200, height: 100))
         btnDelay.setTitle("Delay", for: .normal)
+        btnDelay.setTitleColor(.blue, for: .normal)
         btnDelay.layer.borderWidth = 1
         btnDelay.addTarget(self, action: #selector(btnDelayTapped), for: .touchUpInside)
         
         let btnReverb = UIButton(frame: CGRect(width: 200, height: 100))
         btnReverb.setTitle("Reverb", for: .normal)
+        btnReverb.setTitleColor(.blue, for: .normal)
         btnReverb.layer.borderWidth = 1
         btnReverb.addTarget(self, action: #selector(btnReverbTapped), for: .touchUpInside)
         
+        let btnChorus = UIButton(frame: CGRect(width: 200, height: 100))
+        btnChorus.setTitle("Chorus", for: .normal)
+        btnChorus.setTitleColor(.blue, for: .normal)
+        btnChorus.layer.borderWidth = 1
+        btnChorus.addTarget(self, action: #selector(btnChorusTapped), for: .touchUpInside)
+        
         stack.addArrangedSubview(btnDelay)
         stack.addArrangedSubview(btnReverb)
+        stack.addArrangedSubview(btnChorus)
         self.view.addSubview(stack)
     }
     
@@ -90,6 +101,16 @@ class ViewController: UIViewController {
         }
     }
     
+    @objc func btnChorusTapped() {
+        guard let chorus = chorus else { return }
+        if chorus.isBypassed {
+            chorus.start()
+        }
+        else {
+            chorus.bypass()
+        }
+    }
+    
     func updateKeyboardFrame(_ rect: CGRect) {
         if keyboard != nil {
             keyboard.frame = CGRect(x: 0, y: rect.height
@@ -107,7 +128,7 @@ class ViewController: UIViewController {
         reverb = AKReverb(oscillator)
         reverb?.bypass()
     }
-    
+
     func initDelay() {
         delay = AKDelay(reverb)
         delay?.time = 0.1 // seconds
@@ -116,9 +137,17 @@ class ViewController: UIViewController {
         delay?.bypass()
     }
     
+    func initChorus() {
+        chorus = AKChorus(delay)
+        chorus?.dryWetMix = 0.5
+        //chorus?.frequency = 200.0
+        chorus?.rampDuration = currentRampDuration
+        chorus?.bypass()
+    }
+    
     func initAuydioKit() {
-        guard delay != nil, oscillator != nil else { return }
-        AudioKit.output = delay
+        guard chorus != nil, oscillator != nil else { return }
+        AudioKit.output = chorus
         do {
             try AudioKit.start()
         }
