@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     var delay: AKDelay?
     var reverb: AKReverb?
     var chorus: AKChorus?
+    var phaser: AKPhaser?
 
     let square = AKTable(.square, count: 256)
     let triangle = AKTable(.triangle, count: 256)
@@ -33,13 +34,13 @@ class ViewController: UIViewController {
         initReverb()
         initDelay()
         initChorus()
+        initPhaser()
         initAuydioKit()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         updateKeyboardFrame(CGRect(size: size))
-        
     }
     
     func loadKeyboard() {
@@ -75,9 +76,16 @@ class ViewController: UIViewController {
         btnChorus.layer.borderWidth = 1
         btnChorus.addTarget(self, action: #selector(btnChorusTapped), for: .touchUpInside)
         
+        let btnPhaser = UIButton(frame: CGRect(width: 200, height: 100))
+        btnPhaser.setTitle("Phaser", for: .normal)
+        btnPhaser.setTitleColor(.blue, for: .normal)
+        btnPhaser.layer.borderWidth = 1
+        btnPhaser.addTarget(self, action: #selector(btnPhaserTapped), for: .touchUpInside)
+        
         stack.addArrangedSubview(btnDelay)
         stack.addArrangedSubview(btnReverb)
         stack.addArrangedSubview(btnChorus)
+        stack.addArrangedSubview(btnPhaser)
         self.view.addSubview(stack)
     }
     
@@ -108,6 +116,16 @@ class ViewController: UIViewController {
         }
         else {
             chorus.bypass()
+        }
+    }
+    
+    @objc func btnPhaserTapped() {
+        guard let phaser = phaser else { return }
+        if phaser.isBypassed {
+            phaser.start()
+        }
+        else {
+            phaser.bypass()
         }
     }
     
@@ -145,9 +163,16 @@ class ViewController: UIViewController {
         chorus?.bypass()
     }
     
+    func initPhaser() {
+        phaser = AKPhaser(chorus)
+        phaser?.depth = 0.5
+        phaser?.feedback = 0.5
+        phaser?.bypass()
+    }
+    
     func initAuydioKit() {
-        guard chorus != nil, oscillator != nil else { return }
-        AudioKit.output = chorus
+        guard phaser != nil, oscillator != nil else { return }
+        AudioKit.output = phaser
         do {
             try AudioKit.start()
         }
