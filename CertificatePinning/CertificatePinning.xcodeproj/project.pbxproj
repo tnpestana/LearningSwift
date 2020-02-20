@@ -13,6 +13,9 @@
 		591DEAF123FF1A3800B4F8DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 591DEAEF23FF1A3800B4F8DA /* Main.storyboard */; };
 		591DEAF323FF1A3900B4F8DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 591DEAF223FF1A3900B4F8DA /* Assets.xcassets */; };
 		591DEAF623FF1A3900B4F8DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 591DEAF423FF1A3900B4F8DA /* LaunchScreen.storyboard */; };
+		591DEAFE23FF1CF400B4F8DA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591DEAFD23FF1CF400B4F8DA /* Constants.swift */; };
+		591DEB0023FF1E8800B4F8DA /* URLSessionPinningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591DEAFF23FF1E8800B4F8DA /* URLSessionPinningDelegate.swift */; };
+		591DEB0223FF227400B4F8DA /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591DEB0123FF227400B4F8DA /* Network.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		591DEAF223FF1A3900B4F8DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		591DEAF523FF1A3900B4F8DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		591DEAF723FF1A3900B4F8DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		591DEAFD23FF1CF400B4F8DA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		591DEAFF23FF1E8800B4F8DA /* URLSessionPinningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionPinningDelegate.swift; sourceTree = "<group>"; };
+		591DEB0123FF227400B4F8DA /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,13 +62,16 @@
 		591DEAE823FF1A3800B4F8DA /* CertificatePinning */ = {
 			isa = PBXGroup;
 			children = (
+				591DEAF723FF1A3900B4F8DA /* Info.plist */,
+				591DEAF223FF1A3900B4F8DA /* Assets.xcassets */,
+				591DEAF423FF1A3900B4F8DA /* LaunchScreen.storyboard */,
+				591DEAEF23FF1A3800B4F8DA /* Main.storyboard */,
 				591DEAE923FF1A3800B4F8DA /* AppDelegate.swift */,
 				591DEAEB23FF1A3800B4F8DA /* SceneDelegate.swift */,
 				591DEAED23FF1A3800B4F8DA /* ViewController.swift */,
-				591DEAEF23FF1A3800B4F8DA /* Main.storyboard */,
-				591DEAF223FF1A3900B4F8DA /* Assets.xcassets */,
-				591DEAF423FF1A3900B4F8DA /* LaunchScreen.storyboard */,
-				591DEAF723FF1A3900B4F8DA /* Info.plist */,
+				591DEAFF23FF1E8800B4F8DA /* URLSessionPinningDelegate.swift */,
+				591DEB0123FF227400B4F8DA /* Network.swift */,
+				591DEAFD23FF1CF400B4F8DA /* Constants.swift */,
 			);
 			path = CertificatePinning;
 			sourceTree = "<group>";
@@ -140,7 +149,10 @@
 			files = (
 				591DEAEE23FF1A3800B4F8DA /* ViewController.swift in Sources */,
 				591DEAEA23FF1A3800B4F8DA /* AppDelegate.swift in Sources */,
+				591DEB0223FF227400B4F8DA /* Network.swift in Sources */,
 				591DEAEC23FF1A3800B4F8DA /* SceneDelegate.swift in Sources */,
+				591DEAFE23FF1CF400B4F8DA /* Constants.swift in Sources */,
+				591DEB0023FF1E8800B4F8DA /* URLSessionPinningDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +228,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -270,7 +282,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -287,6 +299,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6QB7F9QKR9;
 				INFOPLIST_FILE = CertificatePinning/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -305,6 +318,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6QB7F9QKR9;
 				INFOPLIST_FILE = CertificatePinning/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
