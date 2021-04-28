@@ -11,35 +11,32 @@ import AudioKit
 import AudioKitUI
 
 class ViewController: UIViewController {
-    var keyboard: AKKeyboardView!
-    var oscillator: AKOscillator?
-    var delay: AKDelay?
-    var reverb: AKReverb?
-    var chorus: AKChorus?
-    var phaser: AKPhaser?
+    var keyboard: KeyboardView!
+    var oscillator: Oscillator?
+    var delay: Delay?
+    var reverb: Reverb?
+    var chorus: Chorus?
+    var phaser: Phaser?
     
     var mainStack: UIStackView?
     var btnStack: UIStackView?
 
-    let square = AKTable(.square, count: 256)
-    let triangle = AKTable(.triangle, count: 256)
-    let sine = AKTable(.sine, count: 256)
-    let sawtooth = AKTable(.sawtooth, count: 256)
+    let square = Table(.square, count: 256)
+    let triangle = Table(.triangle, count: 256)
+    let sine = Table(.sine, count: 256)
+    let sawtooth = Table(.sawtooth, count: 256)
     var currentMIDINote: MIDINoteNumber = 0
-    var currentAmplitude = 0.2
-    var currentRampDuration = 0.05
+    var currentAmplitude: Float = 0.2
+    var currentRampDuration: Float = 0.05
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupStackView()
         loadButtons()
         loadKeyboard()
-        initOscillator()
-        initReverb()
-        initDelay()
-        initChorus()
-        initPhaser()
-        initAuydioKit()
+        
+        initComponents()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -48,8 +45,9 @@ class ViewController: UIViewController {
         btnStack?.axis = (size.width > size.height) ? .horizontal : .vertical
     }
     
+    // MARK: - Setup
     func setupStackView() {
-        mainStack = UIStackView(frame: self.view.frame)
+        mainStack = UIStackView(frame: self.view.safeAreaLayoutGuide.layoutFrame)
         mainStack?.axis = .vertical
         mainStack?.distribution = .fillEqually
         mainStack?.alignment = .fill
@@ -58,7 +56,7 @@ class ViewController: UIViewController {
     
     func loadKeyboard() {
         if keyboard == nil {
-            keyboard = AKKeyboardView(frame: CGRect(width: 0, height: 0))
+            keyboard = KeyboardView(frame: CGRect(width: 0, height: 0))
             keyboard.delegate = self
             mainStack?.addArrangedSubview(keyboard)
         }
@@ -114,7 +112,42 @@ class ViewController: UIViewController {
         
         mainStack?.addArrangedSubview(btnStack!)
     }
+
+    func initComponents() {
+        oscillator = Oscillator(waveform: sine)
+        oscillator?.$amplitude.ramp(to: AUValue(currentAmplitude), duration: currentRampDuration)
+        oscillator?.start()
+        
+        reverb = Reverb(oscillator!)
+        reverb?.bypass()
+        
+        delay = Delay(reverb!)
+        delay?.time = 0.1 // seconds
+        delay?.feedback = 0.8 // Normalized Value 0 - 1
+        delay?.dryWetMix = 0.2 // Normalized Value 0 - 1
+        delay?.bypass()
+        
+        chorus = Chorus(delay!)
+        chorus?.dryWetMix = 0.5
+        chorus?.$depth.ramp(to: AUValue(1), duration: currentRampDuration)
+        chorus?.bypass()
+        
+        phaser = Phaser(chorus!)
+        phaser?.depth = 0.5
+        phaser?.feedback = 0.5
+        phaser?.bypass()
+        
+        let engine = AudioEngine()
+        engine.output = phaser
+        do {
+            try engine.start()
+        }
+        catch {
+            print("Audio Kit init failed: \(error.localizedDescription)")
+        }
+    }
     
+    // MARK: - Actions
     @objc func btnDelayTapped() {
         guard let delay = delay else { return }
         if delay.isBypassed {
@@ -154,67 +187,20 @@ class ViewController: UIViewController {
             phaser.bypass()
         }
     }
-
-    func initOscillator() {
-        oscillator = AKOscillator(waveform: sine)
-        oscillator?.rampDuration = currentRampDuration
-        oscillator?.amplitude = currentAmplitude
-    }
-    
-    func initReverb() {
-        reverb = AKReverb(oscillator)
-        reverb?.bypass()
-    }
-
-    func initDelay() {
-        delay = AKDelay(reverb)
-        delay?.time = 0.1 // seconds
-        delay?.feedback = 0.8 // Normalized Value 0 - 1
-        delay?.dryWetMix = 0.2 // Normalized Value 0 - 1
-        delay?.bypass()
-    }
-    
-    func initChorus() {
-        chorus = AKChorus(delay)
-        chorus?.dryWetMix = 0.5
-        //chorus?.frequency = 200.0
-        chorus?.rampDuration = currentRampDuration
-        chorus?.bypass()
-    }
-    
-    func initPhaser() {
-        phaser = AKPhaser(chorus)
-        phaser?.depth = 0.5
-        phaser?.feedback = 0.5
-        phaser?.bypass()
-    }
-    
-    func initAuydioKit() {
-        guard phaser != nil, oscillator != nil else { return }
-        AudioKit.output = phaser
-        do {
-            try AudioKit.start()
-        }
-        catch {
-            print("Audio Kit init failed: \(error.localizedDescription)")
-        }
-    }
 }
 
 //MARK: Keyboard Delegate
-extension ViewController: AKKeyboardDelegate {
+extension ViewController: KeyboardDelegate {
     func noteOn(note: MIDINoteNumber) {
         currentMIDINote = note
-        // start from the correct note if amplitude is zero
-        if oscillator?.amplitude == 0 {
-            oscillator?.rampDuration = 0
-        }
+//        // start from the correct note if amplitude is zero
+//        if oscillator?.amplitude == 0 {
+//            oscillator?.$amplitude.ramp(to: AUValue(0), duration: Float(currentRampDuration))
+//        } else {
+//            oscillator?.$amplitude.ramp(to: AUValue(currentAmplitude), duration: Float(currentRampDuration))
+//        }
         oscillator?.frequency = note.midiNoteToFrequency()
-
-        // Still use rampDuration for volume
-        oscillator?.rampDuration = currentRampDuration
-        oscillator?.amplitude = currentAmplitude
-        
+        oscillator?.$amplitude.ramp(to: AUValue(currentAmplitude), duration: Float(currentRampDuration))
         oscillator?.play()
     }
     

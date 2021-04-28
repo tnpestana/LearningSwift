@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,8 @@
 		595418DE23BFAB99005ACDAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 595418DC23BFAB99005ACDAE /* Main.storyboard */; };
 		595418E023BFAB9C005ACDAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 595418DF23BFAB9C005ACDAE /* Assets.xcassets */; };
 		595418E323BFAB9C005ACDAE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 595418E123BFAB9C005ACDAE /* LaunchScreen.storyboard */; };
+		59F1D6092639973E003B200B /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 59F1D6082639973E003B200B /* AudioKit */; };
+		59F1D60C26399780003B200B /* AudioKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = 59F1D60B26399780003B200B /* AudioKitUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,7 +31,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		287D6833635BE238278EF276 /* Pods-AudioKitTuto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioKitTuto.debug.xcconfig"; path = "Target Support Files/Pods-AudioKitTuto/Pods-AudioKitTuto.debug.xcconfig"; sourceTree = "<group>"; };
 		595418D323BFAB99005ACDAE /* AudioKitTuto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioKitTuto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		595418D623BFAB99005ACDAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		595418D823BFAB99005ACDAE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -38,7 +39,6 @@
 		595418DF23BFAB9C005ACDAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		595418E223BFAB9C005ACDAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		595418E423BFAB9C005ACDAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		86C4E62988D2F66AB6B2249E /* Pods-AudioKitTuto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioKitTuto.release.xcconfig"; path = "Target Support Files/Pods-AudioKitTuto/Pods-AudioKitTuto.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,27 +46,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59F1D60C26399780003B200B /* AudioKitUI in Frameworks */,
+				59F1D6092639973E003B200B /* AudioKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2E79276E16F7B787B7E6D250 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				287D6833635BE238278EF276 /* Pods-AudioKitTuto.debug.xcconfig */,
-				86C4E62988D2F66AB6B2249E /* Pods-AudioKitTuto.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		595418CA23BFAB99005ACDAE = {
 			isa = PBXGroup;
 			children = (
 				595418D523BFAB99005ACDAE /* AudioKitTuto */,
 				595418D423BFAB99005ACDAE /* Products */,
-				2E79276E16F7B787B7E6D250 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,7 +91,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 595418E723BFAB9C005ACDAE /* Build configuration list for PBXNativeTarget "AudioKitTuto" */;
 			buildPhases = (
-				987BCA0E1A0138DA72C07682 /* [CP] Check Pods Manifest.lock */,
 				595418CF23BFAB99005ACDAE /* Sources */,
 				595418D023BFAB99005ACDAE /* Frameworks */,
 				595418D123BFAB99005ACDAE /* Resources */,
@@ -110,6 +101,10 @@
 			dependencies = (
 			);
 			name = AudioKitTuto;
+			packageProductDependencies = (
+				59F1D6082639973E003B200B /* AudioKit */,
+				59F1D60B26399780003B200B /* AudioKitUI */,
+			);
 			productName = AudioKitTuto;
 			productReference = 595418D323BFAB99005ACDAE /* AudioKitTuto.app */;
 			productType = "com.apple.product-type.application";
@@ -138,6 +133,10 @@
 				Base,
 			);
 			mainGroup = 595418CA23BFAB99005ACDAE;
+			packageReferences = (
+				59F1D6072639973E003B200B /* XCRemoteSwiftPackageReference "AudioKit" */,
+				59F1D60A26399780003B200B /* XCRemoteSwiftPackageReference "AudioKitUI" */,
+			);
 			productRefGroup = 595418D423BFAB99005ACDAE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -159,31 +158,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		987BCA0E1A0138DA72C07682 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AudioKitTuto-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		595418CF23BFAB99005ACDAE /* Sources */ = {
@@ -268,7 +242,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -322,7 +296,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -334,7 +308,6 @@
 		};
 		595418E823BFAB9C005ACDAE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 287D6833635BE238278EF276 /* Pods-AudioKitTuto.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -354,7 +327,6 @@
 		};
 		595418E923BFAB9C005ACDAE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 86C4E62988D2F66AB6B2249E /* Pods-AudioKitTuto.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -394,6 +366,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		59F1D6072639973E003B200B /* XCRemoteSwiftPackageReference "AudioKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/AudioKit";
+			requirement = {
+				branch = "v5-develop";
+				kind = branch;
+			};
+		};
+		59F1D60A26399780003B200B /* XCRemoteSwiftPackageReference "AudioKitUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/AudioKitUI";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		59F1D6082639973E003B200B /* AudioKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 59F1D6072639973E003B200B /* XCRemoteSwiftPackageReference "AudioKit" */;
+			productName = AudioKit;
+		};
+		59F1D60B26399780003B200B /* AudioKitUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 59F1D60A26399780003B200B /* XCRemoteSwiftPackageReference "AudioKitUI" */;
+			productName = AudioKitUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 595418CB23BFAB99005ACDAE /* Project object */;
 }
