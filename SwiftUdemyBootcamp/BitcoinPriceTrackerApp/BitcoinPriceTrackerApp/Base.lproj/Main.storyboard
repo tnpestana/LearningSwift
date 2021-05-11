@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="BitcoinPriceTrackerApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vqc-Xo-g8K">
+                                <rect key="frame" x="32" y="614" width="350" height="216"/>
+                            </pickerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GZs-VE-0lD">
+                                <rect key="frame" x="32" y="76" width="350" height="506"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="9vN-dt-0v5">
+                                        <rect key="frame" x="0.0" y="51" width="350" height="404.5"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btc_icon" translatesAutoresizingMaskIntoConstraints="NO" id="W47-6s-ORs">
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="350"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="W47-6s-ORs" secondAttribute="height" multiplier="1:1" id="nM3-n3-0Mx"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edP-46-pu6">
+                                                <rect key="frame" x="0.0" y="366" width="350" height="38.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                                <color key="textColor" red="1" green="0.74340241699999998" blue="0.25879508750000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" red="1" green="0.74340241702649867" blue="0.25879508751868929" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstItem="9vN-dt-0v5" firstAttribute="leading" secondItem="GZs-VE-0lD" secondAttribute="leading" id="1oe-BU-rRv"/>
+                                    <constraint firstAttribute="trailing" secondItem="9vN-dt-0v5" secondAttribute="trailing" id="awE-ZO-3Jn"/>
+                                    <constraint firstItem="9vN-dt-0v5" firstAttribute="centerY" secondItem="GZs-VE-0lD" secondAttribute="centerY" id="vRz-r3-uZt"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.53933993270000002" green="0.65032523310000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="Vqc-Xo-g8K" firstAttribute="top" secondItem="GZs-VE-0lD" secondAttribute="bottom" constant="32" id="87g-g4-KYU"/>
+                            <constraint firstItem="GZs-VE-0lD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="Kbx-A8-vtY"/>
+                            <constraint firstItem="Vqc-Xo-g8K" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="MGK-rJ-uyg"/>
+                            <constraint firstItem="GZs-VE-0lD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="WoT-84-iEA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Vqc-Xo-g8K" secondAttribute="bottom" constant="32" id="cmC-3G-evM"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="GZs-VE-0lD" secondAttribute="trailing" constant="32" id="jgw-Jt-7O6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Vqc-Xo-g8K" secondAttribute="trailing" constant="32" id="tUa-EN-hRJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="lblPriceValue" destination="edP-46-pu6" id="qeo-5r-JXv"/>
+                        <outlet property="pickerCurrency" destination="Vqc-Xo-g8K" id="eEK-hz-6ev"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="btc_icon" width="322.5" height="322.5"/>
+    </resources>
+</document>
